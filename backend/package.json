@@ -14,6 +14,7 @@
     "typescript": "^4.0.3"
   },
   "scripts": {
+    "client:start": "nodemon",
     "start": "npm run build && node build/app.local.js",
     "build": "tsc && npm run build-dependencies",
     "build-dependencies": "cp package*.json build/ && npm i --only=prod --prefix=build",
