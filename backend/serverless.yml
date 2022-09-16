@@ -1,6 +1,7 @@
-app: express-starter
+org: si2222
+app: uni-connector
 component: express
-name: express-starter-typescript-tsc
+name: backend
 
 inputs:
   src:
