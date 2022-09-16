@@ -7,3 +7,5 @@ inputs:
     src: ./
     hook: npm run build
     dist: build
+  roleName: serverRole
+  region: ap-southeast-2
