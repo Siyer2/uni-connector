@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy-cloud": "aws cloudformation deploy --template-file cloud/template.yml --profile uni-connector --stack-name uni-connector-stack --capabilities CAPABILITY_NAMED_IAM",
-    "postinstall": "cd frontend && npm install && cd ../backend && npm install"
+    "postinstall": "cd frontend && npm install && cd ../backend && npm install",
+    "start": "concurrently \"cd backend && npm run client:start\" \"cd frontend && npm start\""
   },
   "keywords": [],
   "author": "",
