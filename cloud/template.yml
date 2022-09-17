@@ -1,5 +1,5 @@
-AWSTemplateFormatVersion: "2010-09-09"
-Transform: "AWS::Serverless-2016-10-31"
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
 
 Resources:
   # IAM Roles
@@ -16,18 +16,18 @@ Resources:
               Service:
                 - lambda.amazonaws.com
             Action:
-              - "sts:AssumeRole"
+              - 'sts:AssumeRole'
       Policies:
-        - PolicyName: "ReadWriteDynamoPolicy"
+        - PolicyName: 'ReadWriteDynamoPolicy'
           PolicyDocument:
             Version: 2012-10-17
             Statement:
               - Effect: Allow
                 Action:
-                  - "dynamodb:PutItem"
-                  - "dynamodb:ReadItem"
-                  - "dynamodb:GetItem"
-                  - "dynamodb:Scan"
-                  - "dynamodb:Query"
-                Resource: "*"
+                  - 'dynamodb:PutItem'
+                  - 'dynamodb:ReadItem'
+                  - 'dynamodb:GetItem'
+                  - 'dynamodb:Scan'
+                  - 'dynamodb:Query'
+                Resource: '*'
   # End IAM Roles
