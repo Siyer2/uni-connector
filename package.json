@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy-cloud": "aws cloudformation deploy --template-file cloud/template.yml --profile uni-connector --stack-name uni-connector-stack --capabilities CAPABILITY_NAMED_IAM",
+    "deploy-backend": "cd backend && components deploy",
     "postinstall": "cd frontend && npm install && cd ../backend && npm install",
     "start": "concurrently \"cd backend && npm run client:start\" \"cd frontend && npm start\""
   },
@@ -14,6 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^7.4.0",
-    "prettier": "2.7.1"
+    "prettier": "2.7.1",
+    "@serverless/components": "^3.18.2"
   }
 }
