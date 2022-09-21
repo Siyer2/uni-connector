@@ -1,11 +1,58 @@
-version: '3.8'
+version: '3'
 services:
-  dynamodb-local:
-    command: '-jar DynamoDBLocal.jar -sharedDb -dbPath ./data'
-    image: 'amazon/dynamodb-local:latest'
-    container_name: dynamodb-local
+  dynamodb:
+    image: amazon/dynamodb-local
+    container_name: app-dynamodb
+    hostname: app-dynamodb
+    volumes:
+      - app_dynamodb:/home/dynamodblocal
+    working_dir: /home/dynamodblocal
     ports:
       - '8000:8000'
-    volumes:
-      - './docker/dynamodb:/home/dynamodblocal/data'
+    command: '-jar DynamoDBLocal.jar -sharedDb -dbPath .'
+    restart: unless-stopped
+
+  dynamodb_admin:
+    image: aaronshaf/dynamodb-admin
+    container_name: app-dynamodb_admin
+    ports:
+      - '8001:8001'
+    environment:
+      - DYNAMO_ENDPOINT=http://dynamodb:8000
+    depends_on:
+      - dynamodb
+    restart: unless-stopped
+
+  dynamodb_migrator:
+    image: banst/awscli
+    container_name: app-dynamodb_migrator
     working_dir: /home/dynamodblocal
+    command: dynamodb create-table --cli-input-json file://product.json --endpoint-url http://dynamodb:8000
+    volumes:
+      - ./backend/database:/home/dynamodblocal
+    environment:
+      - AWS_ACCESS_KEY_ID=unicorn_user
+      - AWS_SECRET_ACCESS_KEY=magical_password
+      - AWS_DEFAULT_REGION=ap-southeast-1
+    depends_on:
+      - dynamodb
+
+  dynamodb_seeder:
+    image: banst/awscli
+    container_name: app-dynamodb_seeder
+    working_dir: /home/dynamodblocal
+    command: dynamodb batch-write-item --request-items file://product_seeder.json --endpoint-url http://dynamodb:8000
+    volumes:
+      - ./backend/database:/home/dynamodblocal
+    environment:
+      - AWS_ACCESS_KEY_ID=unicorn_user
+      - AWS_SECRET_ACCESS_KEY=magical_password
+      - AWS_DEFAULT_REGION=ap-southeast-1
+    depends_on:
+      - dynamodb_migrator
+      - dynamodb
+    restart: on-failure
+
+volumes:
+  app_dynamodb:
+    driver: local

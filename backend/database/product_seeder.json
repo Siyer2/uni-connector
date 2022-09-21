@@ -1,0 +1,40 @@
+{
+  "product": [
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "1"
+          },
+          "created_at": {
+            "S": "20210101"
+          },
+          "name": {
+            "S": "gold"
+          },
+          "is_deleted": {
+            "BOOL": false
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "2"
+          },
+          "created_at": {
+            "S": "20210101"
+          },
+          "name": {
+            "S": "copper"
+          },
+          "is_deleted": {
+            "BOOL": false
+          }
+        }
+      }
+    }
+  ]
+}

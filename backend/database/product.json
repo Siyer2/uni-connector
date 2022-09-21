@@ -1,0 +1,15 @@
+{
+  "TableName": "product",
+  "KeySchema": [
+    { "AttributeName": "id", "KeyType": "HASH" },
+    { "AttributeName": "created_at", "KeyType": "RANGE" }
+  ],
+  "AttributeDefinitions": [
+    { "AttributeName": "id", "AttributeType": "S" },
+    { "AttributeName": "created_at", "AttributeType": "S" }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 10,
+    "WriteCapacityUnits": 5
+  }
+}
