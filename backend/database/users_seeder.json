@@ -1,5 +1,5 @@
 {
-  "product": [
+  "users": [
     {
       "PutRequest": {
         "Item": {
@@ -10,7 +10,10 @@
             "S": "20210101"
           },
           "name": {
-            "S": "gold"
+            "S": "John"
+          },
+          "faculty": {
+            "S": "Engineering"
           },
           "is_deleted": {
             "BOOL": false
@@ -28,7 +31,10 @@
             "S": "20210101"
           },
           "name": {
-            "S": "copper"
+            "S": "Cooper"
+          },
+          "faculty": {
+            "S": "Science"
           },
           "is_deleted": {
             "BOOL": false

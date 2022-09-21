@@ -1,5 +1,5 @@
 {
-  "TableName": "product",
+  "TableName": "users",
   "KeySchema": [
     { "AttributeName": "id", "KeyType": "HASH" },
     { "AttributeName": "created_at", "KeyType": "RANGE" }
