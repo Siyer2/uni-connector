@@ -28,6 +28,27 @@
             "S": "2"
           },
           "created_at": {
+            "S": "20210104"
+          },
+          "name": {
+            "S": "Mike"
+          },
+          "faculty": {
+            "S": "Commerce"
+          },
+          "is_deleted": {
+            "BOOL": false
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "3"
+          },
+          "created_at": {
             "S": "20210101"
           },
           "name": {
