@@ -9,7 +9,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload. A website by Syam,
-          Victor, Muhammed
+          Victor, Muhammed, Vivian
         </p>
         <a
           className="App-link"
