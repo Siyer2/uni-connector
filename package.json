@@ -8,7 +8,7 @@
     "deploy-cloud": "aws cloudformation deploy --template-file cloud/template.yml --profile uni-connector --stack-name uni-connector-stack --capabilities CAPABILITY_NAMED_IAM",
     "deploy-backend": "cd backend && components deploy",
     "postinstall": "cd frontend && npm install && cd ../backend && npm install",
-    "start": "concurrently \"docker-compose up\" \"cd backend && npm run client:start\" \"cd frontend && npm start\""
+    "start": "concurrently \"docker-compose up\" \"cd backend && npm run client:start\" \"cd frontend && PORT=3001 npm start\""
   },
   "keywords": [],
   "author": "",
