@@ -14,20 +14,16 @@ Connect uni students from different faculties
    1. Mac instructions
       1. [Click here](https://nodejs.org/dist/v16.15.1/node-v16.15.1.pkg)
       2. Follow the installation wizard
-      3. Open your Terminal and type in `node --version` and hit ENTER. You should see something like this:
+   2. Windows instructions
+      1. [Click here](https://nodejs.org/dist/v16.15.1/node-v16.15.1-x86.msi)
+      2. Follow the installation wizard
+   3. Open your Terminal (if Mac) or Command Prompt (if Windows) and type in `node --version` and hit ENTER. You should see something like this:
 
 ```
 v18.3.0
 ```
 
-2.  Windows instructions
-    1. [Click here](https://nodejs.org/dist/v16.15.1/node-v16.15.1-x86.msi)
-    2. Follow the installation wizard
-    3. Open your Command Prompt and type in `node --version` and hit ENTER. You should see something like this:
-
-```
-v18.3.0
-```
+4. Install [VSCode](https://code.visualstudio.com/download)
 
 With all of that, you are now ready to get and run the code!
 
