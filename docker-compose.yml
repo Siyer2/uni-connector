@@ -63,7 +63,7 @@ services:
       - AWS_SECRET_ACCESS_KEY=magical_password
       - AWS_DEFAULT_REGION=ap-southeast-1
     depends_on:
-      - dynamodb_migrator
+      - dynamodb_users_migrator
       - dynamodb
     restart: on-failure
 
@@ -79,7 +79,7 @@ services:
       - AWS_SECRET_ACCESS_KEY=magical_password
       - AWS_DEFAULT_REGION=ap-southeast-1
     depends_on:
-      - dynamodb_migrator
+      - dynamodb_connection_history_migrator
       - dynamodb
     restart: on-failure
 
