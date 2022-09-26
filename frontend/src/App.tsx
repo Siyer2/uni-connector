@@ -1,6 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { PageLayout } from './components/PageLayout';
+import { AuthenticatedTemplate } from '@azure/msal-react';
+import { ProfileContent } from './components/ProfileContent';
 
 function App() {
   return (
@@ -19,6 +22,12 @@ function App() {
         >
           Learn React
         </a>
+
+        <PageLayout>
+          <AuthenticatedTemplate>
+            <ProfileContent />
+          </AuthenticatedTemplate>
+        </PageLayout>
       </header>
     </div>
   );
