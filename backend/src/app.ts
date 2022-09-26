@@ -1,9 +1,11 @@
 import * as express from 'express';
+import { authenticateUser } from './middleware/authenticateUser';
 
 const app = express();
 
 // Routes
-app.get('/*', (req, res) => {
+app.get('/', authenticateUser, (req, res) => {
+  console.log(req.user);
   res.send(`Request received: ${req.method} - ${req.path}`);
 });
 
