@@ -1,10 +1,14 @@
-import { AccountInfo, IPublicClientApplication } from '@azure/msal-browser';
+import {
+  AccountInfo,
+  AuthenticationResult,
+  IPublicClientApplication,
+} from '@azure/msal-browser';
 import { loginRequest } from '../authConfig';
 
 export async function requestMSAuthResult(
   instance: IPublicClientApplication,
   account: AccountInfo
-) {
+): Promise<AuthenticationResult> {
   const request = {
     ...loginRequest,
     account,
