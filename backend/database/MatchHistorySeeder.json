@@ -1,0 +1,364 @@
+{
+  "MatchHistory": [
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "1"
+          },
+          "date": {
+            "S": "20210101"
+          },
+          "user2ID": {
+            "S": "2"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "2"
+          },
+          "date": {
+            "S": "20210101"
+          },
+          "user2ID": {
+            "S": "1"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "3"
+          },
+          "date": {
+            "S": "20210101"
+          },
+          "user2ID": {
+            "S": "4"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "4"
+          },
+          "date": {
+            "S": "20210101"
+          },
+          "user2ID": {
+            "S": "3"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "5"
+          },
+          "date": {
+            "S": "20210101"
+          },
+          "user2ID": {
+            "S": "6"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "6"
+          },
+          "date": {
+            "S": "20210101"
+          },
+          "user2ID": {
+            "S": "5"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "1"
+          },
+          "date": {
+            "S": "20210102"
+          },
+          "user2ID": {
+            "S": "6"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "6"
+          },
+          "date": {
+            "S": "20210102"
+          },
+          "user2ID": {
+            "S": "1"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "2"
+          },
+          "date": {
+            "S": "20210102"
+          },
+          "user2ID": {
+            "S": "5"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "5"
+          },
+          "date": {
+            "S": "20210102"
+          },
+          "user2ID": {
+            "S": "2"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "3"
+          },
+          "date": {
+            "S": "20210102"
+          },
+          "user2ID": {
+            "S": "4"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "4"
+          },
+          "date": {
+            "S": "20210102"
+          },
+          "user2ID": {
+            "S": "3"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "1"
+          },
+          "date": {
+            "S": "20210103"
+          },
+          "user2ID": {
+            "S": "2"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "2"
+          },
+          "date": {
+            "S": "20210103"
+          },
+          "user2ID": {
+            "S": "1"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "3"
+          },
+          "date": {
+            "S": "20210103"
+          },
+          "user2ID": {
+            "S": "6"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "6"
+          },
+          "date": {
+            "S": "20210103"
+          },
+          "user2ID": {
+            "S": "3"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "5"
+          },
+          "date": {
+            "S": "20210103"
+          },
+          "user2ID": {
+            "S": "4"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "4"
+          },
+          "date": {
+            "S": "20210103"
+          },
+          "user2ID": {
+            "S": "5"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "1"
+          },
+          "date": {
+            "S": "20210104"
+          },
+          "user2ID": {
+            "S": "5"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "5"
+          },
+          "date": {
+            "S": "20210104"
+          },
+          "user2ID": {
+            "S": "1"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "2"
+          },
+          "date": {
+            "S": "20210104"
+          },
+          "user2ID": {
+            "S": "6"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "6"
+          },
+          "date": {
+            "S": "20210104"
+          },
+          "user2ID": {
+            "S": "2"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "3"
+          },
+          "date": {
+            "S": "20210104"
+          },
+          "user2ID": {
+            "S": "4"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "user1ID": {
+            "S": "4"
+          },
+          "date": {
+            "S": "20210104"
+          },
+          "user2ID": {
+            "S": "3"
+          }
+        }
+      }
+    }
+  ]
+}
