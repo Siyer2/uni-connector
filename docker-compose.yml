@@ -23,11 +23,11 @@ services:
       - dynamodb
     restart: unless-stopped
 
-  dynamodb_users_migrator:
+  dynamodb_User_migrator:
     image: banst/awscli
-    container_name: app-dynamodb_users_migrator
+    container_name: app-dynamodb_User_migrator
     working_dir: /home/dynamodblocal
-    command: dynamodb create-table --cli-input-json file://users.json --endpoint-url http://dynamodb:8000
+    command: dynamodb create-table --cli-input-json file://User.json --endpoint-url http://dynamodb:8000
     volumes:
       - ./backend/database:/home/dynamodblocal
     environment:
@@ -37,11 +37,11 @@ services:
     depends_on:
       - dynamodb
 
-  dynamodb_connection_history_migrator:
+  dynamodb_MatchHistory_migrator:
     image: banst/awscli
-    container_name: app-dynamodb_connection_history_migrator
+    container_name: app-dynamodb_MatchHistory_migrator
     working_dir: /home/dynamodblocal
-    command: dynamodb create-table --cli-input-json file://connection_history.json --endpoint-url http://dynamodb:8000
+    command: dynamodb create-table --cli-input-json file://MatchHistory.json --endpoint-url http://dynamodb:8000
     volumes:
       - ./backend/database:/home/dynamodblocal
     environment:
@@ -51,11 +51,11 @@ services:
     depends_on:
       - dynamodb
 
-  dynamodb_users_seeder:
+  dynamodb_MatchHistorySeeder:
     image: banst/awscli
-    container_name: app-dynamodb_users_seeder
+    container_name: app-dynamodb_MatchHistorySeeder
     working_dir: /home/dynamodblocal
-    command: dynamodb batch-write-item --request-items file://users_seeder.json --endpoint-url http://dynamodb:8000
+    command: dynamodb batch-write-item --request-items file://MatchHistorySeeder.json --endpoint-url http://dynamodb:8000
     volumes:
       - ./backend/database:/home/dynamodblocal
     environment:
@@ -63,15 +63,15 @@ services:
       - AWS_SECRET_ACCESS_KEY=magical_password
       - AWS_DEFAULT_REGION=ap-southeast-1
     depends_on:
-      - dynamodb_users_migrator
+      - dynamodb_MatchHistory_migrator
       - dynamodb
     restart: on-failure
 
-  dynamodb_connection_history_seeder:
+  dynamodb_UserSeeder:
     image: banst/awscli
-    container_name: app-dynamodb_connection_history_seeder
+    container_name: app-dynamodb_UserSeeder
     working_dir: /home/dynamodblocal
-    command: dynamodb batch-write-item --request-items file://connection_history_seeder.json --endpoint-url http://dynamodb:8000
+    command: dynamodb batch-write-item --request-items file://UserSeeder.json --endpoint-url http://dynamodb:8000
     volumes:
       - ./backend/database:/home/dynamodblocal
     environment:
@@ -79,7 +79,7 @@ services:
       - AWS_SECRET_ACCESS_KEY=magical_password
       - AWS_DEFAULT_REGION=ap-southeast-1
     depends_on:
-      - dynamodb_connection_history_migrator
+      - dynamodb_User_migrator
       - dynamodb
     restart: on-failure
 

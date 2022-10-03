@@ -1,0 +1,49 @@
+{
+  "TableName": "MatchHistory",
+  "KeySchema": [
+    {
+      "AttributeName": "user1ID",
+      "KeyType": "HASH"
+    },
+    {
+      "AttributeName": "date",
+      "KeyType": "RANGE"
+    }
+  ],
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "user1ID",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "date",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "user2ID",
+      "AttributeType": "S"
+    }
+  ],
+  "LocalSecondaryIndexes": [
+    {
+      "IndexName": "User2Index",
+      "KeySchema": [
+        {
+          "AttributeName": "user1ID",
+          "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "user2ID",
+          "KeyType": "RANGE"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      }
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+  }
+}

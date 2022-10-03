@@ -1,0 +1,124 @@
+{
+  "User": [
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "1"
+          },
+          "faculty": {
+            "S": "engineering"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "2"
+          },
+          "faculty": {
+            "S": "science"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "3"
+          },
+          "faculty": {
+            "S": "law"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "4"
+          },
+          "faculty": {
+            "S": "engineering"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "5"
+          },
+          "faculty": {
+            "S": "engineering"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "6"
+          },
+          "faculty": {
+            "S": "business"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "7"
+          },
+          "faculty": {
+            "S": "law"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "8"
+          },
+          "faculty": {
+            "S": "engineering"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "9"
+          },
+          "faculty": {
+            "S": "arts"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "10"
+          },
+          "faculty": {
+            "S": "business"
+          }
+        }
+      }
+    }
+  ]
+}
