@@ -23,9 +23,7 @@ export const ProfileContent = () => {
         // Use the idToken to make verified calls
         console.log('logging in', response.idToken);
       } else {
-        setErrorMessage(
-          () => 'Please log out and log in with a valid UNSW email'
-        );
+        setErrorMessage('Please log out and log in with a valid UNSW email');
       }
     }
     fetchData();
