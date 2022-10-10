@@ -6,7 +6,7 @@ import { Alert, AlertTitle } from '@mui/material';
 export const ProfileContent = () => {
   const { accounts, instance } = useMsal();
   const name = accounts[0] && accounts[0].name;
-  const [errorMessage, setErrorMessage] = useState<string>('false');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   useEffect(() => {
     async function fetchData() {
