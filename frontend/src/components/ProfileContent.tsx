@@ -6,23 +6,26 @@ import { Alert, AlertTitle } from '@mui/material';
 export const ProfileContent = () => {
   const { accounts, instance } = useMsal();
   const name = accounts[0] && accounts[0].name;
-  const isValidEmail =
-    /^[A-Za-z0-9._%+-]+@(unsw.edu.au|unswalumni.com|ad.unsw.edu.au|zmail.unsw.edu.au|student.unsw.edu.au)$/.test(
-      accounts[0].username
-    );
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('false');
 
   useEffect(() => {
     async function fetchData() {
-      // TODO: Make sure that the user's email is a UNSW or UNSW Alumni email
+      // Make sure that the user's email is a UNSW or UNSW Alumni email
       // The user's email is accounts[0].username
       // If not a valid email, don't log the user in
+      const isValidEmail =
+        /^[A-Za-z0-9._%+-]+@(unsw.edu.au|unswalumni.com|ad.unsw.edu.au|zmail.unsw.edu.au|student.unsw.edu.au)$/.test(
+          accounts[0].username
+        );
+
       if (isValidEmail) {
         const response = await requestMSAuthResult(instance, accounts[0]);
         // Use the idToken to make verified calls
         console.log('logging in', response.idToken);
       } else {
-        setErrorMessage(() => 'Please input a valid UNSW email.');
+        setErrorMessage(
+          () => 'Please log out and log in with a valid UNSW email'
+        );
       }
     }
     fetchData();
