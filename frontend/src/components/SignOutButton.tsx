@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import { IPublicClientApplication } from '@azure/msal-browser';
 
 function handleLogout(instance: IPublicClientApplication) {
-  instance.logoutPopup().catch((e) => {
+  instance.logoutRedirect().catch((e) => {
     console.error(e);
   });
 }

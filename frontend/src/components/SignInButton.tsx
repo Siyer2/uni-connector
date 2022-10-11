@@ -14,7 +14,7 @@ export const SignInButton = () => {
   async function handleLogin(instance: IPublicClientApplication) {
     try {
       setIsLoading(true);
-      await instance.loginPopup(loginRequest);
+      await instance.loginRedirect(loginRequest);
       setIsLoading(false);
     } catch (error) {
       console.log('error', error);
