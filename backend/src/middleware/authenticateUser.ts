@@ -34,7 +34,7 @@ export async function authenticateUser(
     }
 
     const msKeys = await axios.get(
-      'https://login.microsoftonline.com/common/discovery/keys'
+      'https://login.microsoftonline.com/common/discovery/v2.0/keys'
     );
     const keys = msKeys.data.keys as Key[];
     const keyToUse = keys.find((key) => key.kid === kid);
