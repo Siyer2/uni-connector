@@ -62,7 +62,7 @@ export const middleware = {
     if (process.env.ENVIRONMENT === 'local') {
       dbConfig = {
         region: 'us-east-1',
-        endpoint: 'http://localhost:8000',
+        endpoint: 'http://localhost:8002',
         credentials: {
           accessKeyId: 'localKey',
           secretAccessKey: 'localSecret',
