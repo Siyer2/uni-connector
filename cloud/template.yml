@@ -32,57 +32,57 @@ Resources:
                 Resource: '*'
   # End IAM Roles
 
-  # userTable:
-  #   Type: AWS::DynamoDB::Table
-  #   Properties:
-  #     AttributeDefinitions:
-  #       - AttributeName: 'id'
-  #         AttributeType: 'S'
-  #       - AttributeName: 'faculty'
-  #         AttributeType: 'S'
-  #     KeySchema:
-  #       - AttributeName: 'id'
-  #         KeyType: 'HASH'
-  #     ProvisionedThroughput:
-  #       ReadCapacityUnits: '10'
-  #       WriteCapacityUnits: '5'
-  #     TableName: 'User'
-  #     GlobalSecondaryIndexes:
-  #       - IndexName: 'FacultyIndex'
-  #         KeySchema:
-  #           - AttributeName: 'faculty'
-  #             KeyType: 'HASH'
-  #         Projection:
-  #           ProjectionType: 'ALL'
-  #         ProvisionedThroughput:
-  #           ReadCapacityUnits: '3'
-  #           WriteCapacityUnits: '3'
+  userTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: 'id'
+          AttributeType: 'S'
+        - AttributeName: 'faculty'
+          AttributeType: 'S'
+      KeySchema:
+        - AttributeName: 'id'
+          KeyType: 'HASH'
+      ProvisionedThroughput:
+        ReadCapacityUnits: '10'
+        WriteCapacityUnits: '5'
+      TableName: 'User'
+      GlobalSecondaryIndexes:
+        - IndexName: 'FacultyIndex'
+          KeySchema:
+            - AttributeName: 'faculty'
+              KeyType: 'HASH'
+          Projection:
+            ProjectionType: 'ALL'
+          ProvisionedThroughput:
+            ReadCapacityUnits: '3'
+            WriteCapacityUnits: '3'
 
-  # matchHistoryTable:
-  #   Type: AWS::DynamoDB::Table
-  #   Properties:
-  #     AttributeDefinitions:
-  #       - AttributeName: 'user1ID'
-  #         AttributeType: 'S'
-  #       - AttributeName: 'date'
-  #         AttributeType: 'S'
-  #       - AttributeName: 'user2ID'
-  #         AttributeType: 'S'
-  #     KeySchema:
-  #       - AttributeName: 'user1ID'
-  #         KeyType: 'HASH'
-  #       - AttributeName: 'date'
-  #         KeyType: 'RANGE'
-  #     ProvisionedThroughput:
-  #       ReadCapacityUnits: '5'
-  #       WriteCapacityUnits: '5'
-  #     TableName: 'MatchHistory'
-  #     LocalSecondaryIndexes:
-  #       - IndexName: 'User2Index'
-  #         KeySchema:
-  #           - AttributeName: 'user1ID'
-  #             KeyType: 'HASH'
-  #           - AttributeName: 'user2ID'
-  #             KeyType: 'RANGE'
-  #         Projection:
-  #           ProjectionType: 'ALL'
+  matchHistoryTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: 'user1ID'
+          AttributeType: 'S'
+        - AttributeName: 'date'
+          AttributeType: 'S'
+        - AttributeName: 'user2ID'
+          AttributeType: 'S'
+      KeySchema:
+        - AttributeName: 'user1ID'
+          KeyType: 'HASH'
+        - AttributeName: 'date'
+          KeyType: 'RANGE'
+      ProvisionedThroughput:
+        ReadCapacityUnits: '5'
+        WriteCapacityUnits: '5'
+      TableName: 'MatchHistory'
+      LocalSecondaryIndexes:
+        - IndexName: 'User2Index'
+          KeySchema:
+            - AttributeName: 'user1ID'
+              KeyType: 'HASH'
+            - AttributeName: 'user2ID'
+              KeyType: 'RANGE'
+          Projection:
+            ProjectionType: 'ALL'
