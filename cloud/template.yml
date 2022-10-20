@@ -31,3 +31,53 @@ Resources:
                   - 'dynamodb:Query'
                 Resource: '*'
   # End IAM Roles
+
+  # DynamoDB Tables
+  userTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: 'id'
+          AttributeType: 'S'
+        - AttributeName: 'faculty'
+          AttributeType: 'S'
+      BillingMode: 'PAY_PER_REQUEST'
+      KeySchema:
+        - AttributeName: 'id'
+          KeyType: 'HASH'
+      TableName: 'User'
+      GlobalSecondaryIndexes:
+        - IndexName: 'FacultyIndex'
+          KeySchema:
+            - AttributeName: 'faculty'
+              KeyType: 'HASH'
+          Projection:
+            ProjectionType: 'ALL'
+
+  matchHistoryTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: 'user1ID'
+          AttributeType: 'S'
+        - AttributeName: 'date'
+          AttributeType: 'S'
+        - AttributeName: 'user2ID'
+          AttributeType: 'S'
+      BillingMode: 'PAY_PER_REQUEST'
+      KeySchema:
+        - AttributeName: 'user1ID'
+          KeyType: 'HASH'
+        - AttributeName: 'date'
+          KeyType: 'RANGE'
+      TableName: 'MatchHistory'
+      LocalSecondaryIndexes:
+        - IndexName: 'User2Index'
+          KeySchema:
+            - AttributeName: 'user1ID'
+              KeyType: 'HASH'
+            - AttributeName: 'user2ID'
+              KeyType: 'RANGE'
+          Projection:
+            ProjectionType: 'ALL'
+  # End DynamoDB Tables
