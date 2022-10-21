@@ -30,4 +30,5 @@ yarn-error.log*
 coverage
 */build/
 .env
+cloud/last-deployment.yml
 #### End Backend ####
