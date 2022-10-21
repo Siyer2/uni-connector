@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy-cloud": "aws cloudformation deploy --template-file cloud/template.yml --profile uni-connector --stack-name uni-connector-stack --capabilities CAPABILITY_NAMED_IAM",
+    "build-cloud": "cd cloud && npm run build && cd ..",
+    "deploy-cloud": "npm run build-cloud && aws cloudformation deploy --template-file cloud/dist/last-deployment.yml --profile uni-connector --stack-name uni-connector-stack --capabilities CAPABILITY_NAMED_IAM",
     "deploy-backend": "cd backend && components deploy",
     "postinstall": "cd frontend && npm install && cd ../backend && npm install && cd ../cloud && npm install",
     "start": "concurrently \"docker-compose up\" \"cd backend && npm run client:start\" \"cd frontend && cross-env PORT=3001 npm start\""

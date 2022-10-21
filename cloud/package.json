@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx ts-node connecting-algorithm/handler-local.ts"
+    "start": "npx ts-node connecting-algorithm/handler-local.ts",
+    "prebuild": "rm -rf dist",
+    "build": "esbuild connecting-algorithm/index.ts --bundle --minify --sourcemap --platform=node --target=es2020 --outfile=dist/index.js",
+    "postbuild": "cd dist && zip -r index.zip index.js* && cd .. && aws cloudformation package --template-file template.yml --s3-bucket connecting-algorithm --profile uni-connector --output-template-file dist/last-deployment.yml"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +17,8 @@
     "aws-lambda": "^1.0.7"
   },
   "devDependencies": {
-    "ts-node": "^10.9.1",
-    "@types/aws-lambda": "^8.10.108"
+    "@types/aws-lambda": "^8.10.108",
+    "esbuild": "^0.15.12",
+    "ts-node": "^10.9.1"
   }
 }
