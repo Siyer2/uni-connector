@@ -41,6 +41,5 @@ npm start
 ## Running the Connecting Algorithm
 
 ```
-cd cloud
-npm run start
+npm run start-connecting
 ```
