@@ -2,6 +2,25 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 
 Resources:
+  # IAM Policies
+  ReadWriteDynamoPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: ReadWriteDynamoPolicy
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - 'dynamodb:PutItem'
+              - 'dynamodb:ReadItem'
+              - 'dynamodb:GetItem'
+              - 'dynamodb:Scan'
+              - 'dynamodb:Query'
+            Resource: '*'
+
+  # End IAM Policies
+
   # IAM Roles
   serverRole:
     Type: AWS::IAM::Role
@@ -17,19 +36,8 @@ Resources:
                 - lambda.amazonaws.com
             Action:
               - 'sts:AssumeRole'
-      Policies:
-        - PolicyName: 'ReadWriteDynamoPolicy'
-          PolicyDocument:
-            Version: 2012-10-17
-            Statement:
-              - Effect: Allow
-                Action:
-                  - 'dynamodb:PutItem'
-                  - 'dynamodb:ReadItem'
-                  - 'dynamodb:GetItem'
-                  - 'dynamodb:Scan'
-                  - 'dynamodb:Query'
-                Resource: '*'
+      ManagedPolicyArns:
+        - !Ref ReadWriteDynamoPolicy
   # End IAM Roles
 
   # DynamoDB Tables
@@ -81,3 +89,37 @@ Resources:
           Projection:
             ProjectionType: 'ALL'
   # End DynamoDB Tables
+
+  # Start Connecting Algorithm Lambda
+  ConnectingAlgorithmFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: connecting-algorithm/
+      Handler: app.lambdaHandler
+      Runtime: nodejs16.x
+      Role: !GetAtt ConnectingAlgorithmExecutionRole.Arn
+      Architectures:
+        - x86_64
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: 'es2020'
+        # Sourcemap: true # Enabling source maps will create the required NODE_OPTIONS environment variables on your lambda function during sam build
+        EntryPoints:
+          - app.ts
+
+  ConnectingAlgorithmExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      ManagedPolicyArns:
+        - !Ref ReadWriteDynamoPolicy
+  # End Connecting Algorithm Lambda

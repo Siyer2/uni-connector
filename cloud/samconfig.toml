@@ -1,0 +1,12 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "uni-connector"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-ah2r09sfdvt8"
+s3_prefix = "connecting-algorithm"
+region = "ap-southeast-2"
+profile = "uni-connector"
+confirm_changeset = false
+capabilities = "CAPABILITY_NAMED_IAM"
+image_repositories = []

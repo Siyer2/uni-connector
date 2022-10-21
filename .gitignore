@@ -31,3 +31,8 @@ coverage
 */build/
 .env
 #### End Backend ####
+
+#### Start Cloud ####
+cloud/dist
+cloud/.aws-sam
+#### End Cloud ####
