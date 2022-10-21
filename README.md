@@ -43,3 +43,8 @@ npm start
 ```
 npm run start-connecting
 ```
+
+## Deploying to the Cloud
+
+1. [Install AWS SAM](https://aws.amazon.com/serverless/sam/)
+2. `npm run deploy-cloud`
