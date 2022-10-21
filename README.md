@@ -37,3 +37,10 @@ npm start
 ```
 
 `npm start` will take a long time the first time you run it (up to 5 mins) but it will be super quick after the first time.
+
+## Running the Connecting Algorithm
+
+```
+cd cloud
+npm run start
+```
