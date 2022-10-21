@@ -5,12 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-cloud": "cd cloud && npm run build && cd ..",
-    "deploy-cloud": "npm run build-cloud && aws cloudformation deploy --template-file cloud/dist/last-deployment.yml --profile uni-connector --stack-name uni-connector-stack --capabilities CAPABILITY_NAMED_IAM",
+    "deploy-cloud": "cd cloud && sam deploy --profile uni-connector --capabilities CAPABILITY_NAMED_IAM",
     "deploy-backend": "cd backend && components deploy",
     "postinstall": "cd frontend && npm install && cd ../backend && npm install && cd ../cloud && npm install",
     "start": "concurrently \"docker-compose up\" \"cd backend && npm run client:start\" \"cd frontend && cross-env PORT=3001 npm start\"",
-    "start-connecting": "cd cloud && npm run start"
+    "start-connecting": "cd cloud/connecting-algorithm && npm run start"
   },
   "keywords": [],
   "author": "",
