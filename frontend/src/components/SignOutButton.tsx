@@ -1,10 +1,9 @@
-import React from 'react';
 import { useMsal } from '@azure/msal-react';
 import { Button } from '@mui/material';
 import { IPublicClientApplication } from '@azure/msal-browser';
 
 function handleLogout(instance: IPublicClientApplication) {
-  instance.logoutPopup().catch((e) => {
+  instance.logoutRedirect().catch((e) => {
     console.error(e);
   });
 }
@@ -17,8 +16,11 @@ export const SignOutButton = () => {
 
   return (
     <Button
-      variant="outlined"
+      variant="contained"
       className="ml-auto"
+      size="large"
+      sx={{ mx: 'auto' }}
+      color="secondary"
       onClick={() => handleLogout(instance)}
     >
       Sign out

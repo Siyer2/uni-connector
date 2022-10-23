@@ -37,3 +37,14 @@ npm start
 ```
 
 `npm start` will take a long time the first time you run it (up to 5 mins) but it will be super quick after the first time.
+
+## Running the Connecting Algorithm
+
+```
+npm run start-connecting
+```
+
+## Deploying to the Cloud
+
+1. [Install AWS SAM](https://aws.amazon.com/serverless/sam/)
+2. `npm run deploy-cloud`
