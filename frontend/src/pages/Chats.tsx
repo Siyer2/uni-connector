@@ -4,7 +4,6 @@ import { SignOutButton } from '../components/SignOutButton';
 export const Chats = () => {
   return (
     <div>
-      <Box>This is the Chats Page!</Box>
       <ButtonAppBar />
     </div>
   );
