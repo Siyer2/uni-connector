@@ -14,7 +14,7 @@ export const SignInButton = () => {
   async function handleLogin(instance: IPublicClientApplication) {
     try {
       setIsLoading(true);
-      await instance.loginPopup(loginRequest);
+      await instance.loginRedirect(loginRequest);
       setIsLoading(false);
     } catch (error) {
       console.log('error', error);
@@ -24,8 +24,11 @@ export const SignInButton = () => {
 
   return (
     <Button
-      variant="outlined"
+      variant="contained"
       className="ml-auto"
+      size="large"
+      sx={{ mx: 'auto' }}
+      color="secondary"
       onClick={() => handleLogin(instance)}
       disabled={isLoading}
     >
