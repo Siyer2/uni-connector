@@ -37,6 +37,50 @@ app.get(
   }
 );
 
+/**
+ * Endpoint to update a user's profile
+ */
+app.post(
+  '/updateUser',
+  [middleware.authenticateUser, middleware.getDB],
+  async (req: express.Request, res: express.Response) => {
+    // Ensure that faculty is provided
+    if (typeof req.body.faculty !== 'string') {
+      res.status(400).json({
+        error: 'MISSING_FACULTY',
+        message: 'Faculty is required body param',
+      });
+    }
+
+    // Construct the updated user
+    const updatedUser = {
+      id: req.user.oid,
+      ...req.body,
+    };
+
+    const params: DocumentClient.PutItemInput = {
+      TableName: 'User',
+      Item: updatedUser,
+    };
+
+    // Update it in the database
+    await req.db.put(params).promise();
+
+    // Get the updated user from the database
+    const user = await req.db
+      .get({
+        TableName: 'User',
+        Key: {
+          id: req.user.oid,
+        },
+      })
+      .promise();
+
+    // Return it
+    res.json(user.Item);
+  }
+);
+
 // Error handler
 app.use(
   (
