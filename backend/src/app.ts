@@ -48,7 +48,7 @@ app.post(
   async (req: express.Request, res: express.Response) => {
     // Ensure that faculty is provided
     if (typeof req.body.faculty !== 'string') {
-      res.status(400).json({
+      return res.status(400).json({
         error: 'MISSING_FACULTY',
         message: 'Faculty is required body param',
       });
@@ -67,7 +67,7 @@ app.post(
     const user = await getUser(req.db, req.user.oid);
 
     // Return it
-    res.json(user);
+    return res.json(user);
   }
 );
 
