@@ -3,6 +3,8 @@ import * as cors from 'cors';
 import * as dotenv from 'dotenv';
 import { middleware } from './middleware';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
+import { User } from './user/types';
+import { getUser, updateUser } from './user';
 
 dotenv.config({ path: __dirname + '/../.env.local' });
 const app = express();
@@ -53,31 +55,19 @@ app.post(
     }
 
     // Construct the updated user
-    const updatedUser = {
+    const updatedUser: User = {
       id: req.user.oid,
       ...req.body,
     };
 
-    const params: DocumentClient.PutItemInput = {
-      TableName: 'User',
-      Item: updatedUser,
-    };
-
     // Update it in the database
-    await req.db.put(params).promise();
+    await updateUser(req.db, updatedUser);
 
     // Get the updated user from the database
-    const user = await req.db
-      .get({
-        TableName: 'User',
-        Key: {
-          id: req.user.oid,
-        },
-      })
-      .promise();
+    const user = await getUser(req.db, req.user.oid);
 
     // Return it
-    res.json(user.Item);
+    res.json(user);
   }
 );
 
