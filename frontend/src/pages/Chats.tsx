@@ -1,21 +1,10 @@
-import { Box, AppBar, Toolbar } from '@mui/material';
 import { SignOutButton } from '../components/SignOutButton';
+import { TopAppBar } from '../components/TopAppBar';
 
 export const Chats = () => {
   return (
-    <div>
-      <ButtonAppBar />
-    </div>
+    <TopAppBar>
+      <div>Chat Messages</div>
+    </TopAppBar>
   );
 };
-
-export default function ButtonAppBar() {
-  return (
-    <AppBar position="static">
-      <Toolbar>
-        <Box display="flex" flexGrow={1}></Box>
-        <SignOutButton />
-      </Toolbar>
-    </AppBar>
-  );
-}
