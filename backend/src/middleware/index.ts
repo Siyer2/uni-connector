@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { NextFunction, Request, Response } from 'express';
 import { decode, verify } from 'jsonwebtoken';
-import { Key } from './types';
+import { Key, MicrosoftUser } from './types';
 import { DynamoDB } from 'aws-sdk';
 import * as dotenv from 'dotenv';
 
@@ -41,7 +41,7 @@ export const middleware = {
 
       const certificate = `-----BEGIN CERTIFICATE-----\n${keyToUse.x5c[0]}\n-----END CERTIFICATE-----`;
 
-      const user = verify(idToken, certificate);
+      const user = verify(idToken, certificate) as MicrosoftUser;
       req.user = user;
 
       next();

@@ -3,6 +3,8 @@ import * as cors from 'cors';
 import * as dotenv from 'dotenv';
 import { middleware } from './middleware';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
+import { User } from './user/types';
+import { getUser, updateUser } from './user';
 
 dotenv.config({ path: __dirname + '/../.env.local' });
 const app = express();
@@ -34,6 +36,38 @@ app.get(
     const userInDb = await req.db.query(params).promise();
     console.log(userInDb);
     res.send(`Request received: ${req.method} - ${req.path}`);
+  }
+);
+
+/**
+ * Endpoint to update a user's profile
+ */
+app.post(
+  '/updateUser',
+  [middleware.authenticateUser, middleware.getDB],
+  async (req: express.Request, res: express.Response) => {
+    // Ensure that faculty is provided
+    if (typeof req.body.faculty !== 'string') {
+      return res.status(400).json({
+        error: 'MISSING_FACULTY',
+        message: 'Faculty is required body param',
+      });
+    }
+
+    // Construct the updated user
+    const updatedUser: User = {
+      id: req.user.oid,
+      ...req.body,
+    };
+
+    // Update it in the database
+    await updateUser(req.db, updatedUser);
+
+    // Get the updated user from the database
+    const user = await getUser(req.db, req.user.oid);
+
+    // Return it
+    return res.json(user);
   }
 );
 
