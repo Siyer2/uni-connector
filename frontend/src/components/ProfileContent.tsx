@@ -1,29 +1,20 @@
 import { useMsal } from '@azure/msal-react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { requestMSAuthResult } from '../functions/requestMSAuthResult';
-import { Alert, AlertTitle } from '@mui/material';
 
 export const ProfileContent = () => {
   const { accounts, instance } = useMsal();
   const name = accounts[0] && accounts[0].name;
-  const isValidEmail =
-    /^[A-Za-z0-9._%+-]+@(unsw.edu.au|unswalumni.com|ad.unsw.edu.au|zmail.unsw.edu.au|student.unsw.edu.au)$/.test(
-      accounts[0].username
-    );
-  const [errorMessage, setErrorMessage] = useState<string>('');
 
   useEffect(() => {
     async function fetchData() {
       // TODO: Make sure that the user's email is a UNSW or UNSW Alumni email
       // The user's email is accounts[0].username
       // If not a valid email, don't log the user in
-      if (isValidEmail) {
-        const response = await requestMSAuthResult(instance, accounts[0]);
-        // Use the idToken to make verified calls
-        console.log('logging in', response.idToken);
-      } else {
-        setErrorMessage(() => 'Please input a valid UNSW email.');
-      }
+      const response = await requestMSAuthResult(instance, accounts[0]);
+
+      // Use the idToken to make verified calls
+      console.log('logging in', response.idToken);
     }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -31,14 +22,7 @@ export const ProfileContent = () => {
 
   return (
     <>
-      {errorMessage ? (
-        <Alert severity="error">
-          <AlertTitle>Error</AlertTitle>
-          {errorMessage}
-        </Alert>
-      ) : (
-        <h5 className="card-title">Welcome {name}</h5>
-      )}
+      <h5 className="card-title">Welcome {name}</h5>
     </>
   );
 };
