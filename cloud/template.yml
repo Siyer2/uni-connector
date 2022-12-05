@@ -53,6 +53,8 @@ Resources:
       KeySchema:
         - AttributeName: 'primaryKey'
           KeyType: 'HASH'
+        - AttributeName: 'sortKey'
+          KeyType: 'RANGE'
       TableName: 'TuesHey'
   # End DynamoDB Tables
 
