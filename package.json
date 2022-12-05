@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy-cloud": "cd cloud && sam build && sam deploy --profile uni-connector --capabilities CAPABILITY_NAMED_IAM",
     "deploy-backend": "cd backend && components deploy",
-    "postinstall": "cd frontend && npm install && cd ../backend && npm install && cd ../cloud && npm install",
+    "postinstall": "cd frontend && npm install && cd ../backend && npm install && cd ../cloud/connecting-algorithm && npm install",
     "start": "concurrently \"docker-compose up\" \"cd backend && npm run client:start\" \"cd frontend && cross-env PORT=3001 npm start\"",
     "start-connecting": "cd cloud/connecting-algorithm && npm run start"
   },
