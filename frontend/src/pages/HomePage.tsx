@@ -3,14 +3,22 @@ import { AuthenticatedTemplate } from '@azure/msal-react';
 import { ProfileContent } from '../components/ProfileContent';
 import { Typography, Container, Box } from '@mui/material';
 //import { useTheme } from '@mui/material/styles';
+import { useState, useEffect } from 'react';
 
 export const HomePage = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   //const theme = useTheme();
 
   // TODO: figure out how to use theme for backgroundColor of a Box rather
   // than hard coding the value
 
-  // NOTE: border and spacing starts to go funny below 523px
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, [windowWidth]);
 
   return (
     <Box bgcolor="#2185ef">
@@ -29,11 +37,16 @@ export const HomePage = () => {
           variant="h1"
           textAlign={'center'}
           gutterBottom
-          //sx={{ fontSize: { lg: '3em', sm: '10em' } }}
+          sx={windowWidth < 550 ? { fontSize: '4em', mt: 3 } : {}}
         >
           Lorem ipsum dolor sit amet consectetur.
         </Typography>
-        <Typography variant="h4" textAlign={'center'} mb={10}>
+        <Typography
+          variant="h4"
+          textAlign={'center'}
+          mb={10}
+          sx={windowWidth < 550 ? { fontSize: '2em', mt: 3 } : {}}
+        >
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui neque
           quos enim praese
         </Typography>
