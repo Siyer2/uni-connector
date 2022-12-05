@@ -41,7 +41,7 @@ Resources:
   # End IAM Roles
 
   # DynamoDB Tables
-  uniConnectorTable:
+  tuesHeyTable:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
@@ -53,7 +53,7 @@ Resources:
       KeySchema:
         - AttributeName: 'primaryKey'
           KeyType: 'HASH'
-      TableName: 'UniConnector'
+      TableName: 'TuesHey'
   # End DynamoDB Tables
 
   # Start Connecting Algorithm Lambda
