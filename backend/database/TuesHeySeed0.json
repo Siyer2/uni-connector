@@ -1,0 +1,454 @@
+{
+  "TuesHey": [
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#c8345096-448d-4939-8691-c62259470667"
+          },
+          "sortKey": {
+            "S": "METADATA#c8345096-448d-4939-8691-c62259470667"
+          },
+          "faculty": {
+            "S": "artsDesignAndArchitecture"
+          },
+          "name": {
+            "S": "John Smith"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
+          },
+          "sortKey": {
+            "S": "METADATA#17d2f33d-67e0-40ab-977e-73d1580e990d"
+          },
+          "faculty": {
+            "S": "medicineAndHealth"
+          },
+          "name": {
+            "S": "Jane Doe"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
+          },
+          "sortKey": {
+            "S": "METADATA#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
+          },
+          "faculty": {
+            "S": "business"
+          },
+          "name": {
+            "S": "Bob Jones"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
+          },
+          "sortKey": {
+            "S": "METADATA#aac4759e-5e40-4479-a9ea-0bdc0647e655"
+          },
+          "faculty": {
+            "S": "engineering"
+          },
+          "name": {
+            "S": "Alice Smith"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
+          },
+          "sortKey": {
+            "S": "METADATA#83afa77d-4209-49bb-853c-6010f555c6dd"
+          },
+          "faculty": {
+            "S": "science"
+          },
+          "name": {
+            "S": "Bob Smith"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
+          },
+          "sortKey": {
+            "S": "METADATA#a6a4588c-224f-400a-b7eb-ac64b32732dc"
+          },
+          "faculty": {
+            "S": "lawAndJustice"
+          },
+          "name": {
+            "S": "Alice Jones"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#c8345096-448d-4939-8691-c62259470667"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-10-21T16:39:05.026Z#7a493da1-67f6-4eb2-a2a8-abac252f58f2"
+          },
+          "user2Id": {
+            "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
+          },
+          "user2Faculty": {
+            "S": "medicineAndHealth"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-10-21T16:39:05.026Z#7a493da1-67f6-4eb2-a2a8-abac252f58f2"
+          },
+          "user2Id": {
+            "S": "USER#c8345096-448d-4939-8691-c62259470667"
+          },
+          "user2Faculty": {
+            "S": "artsDesignAndArchitecture"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#c8345096-448d-4939-8691-c62259470667"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-10-31T10:42:30.798Z#17d2f33d-67e0-40ab-977e-73d1580e990d"
+          },
+          "user2Id": {
+            "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
+          },
+          "user2Faculty": {
+            "S": "business"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-10-31T10:42:30.798Z#17d2f33d-67e0-40ab-977e-73d1580e990d"
+          },
+          "user2Id": {
+            "S": "USER#c8345096-448d-4939-8691-c62259470667"
+          },
+          "user2Faculty": {
+            "S": "artsDesignAndArchitecture"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#c8345096-448d-4939-8691-c62259470667"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-10-29T09:14:05.938Z#355bb60a-8ed7-496e-85b6-4c509b7ccd85"
+          },
+          "user2Id": {
+            "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
+          },
+          "user2Faculty": {
+            "S": "engineering"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-10-29T09:14:05.938Z#355bb60a-8ed7-496e-85b6-4c509b7ccd85"
+          },
+          "user2Id": {
+            "S": "USER#c8345096-448d-4939-8691-c62259470667"
+          },
+          "user2Faculty": {
+            "S": "artsDesignAndArchitecture"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#c8345096-448d-4939-8691-c62259470667"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-08-22T11:07:54.659Z#0f7b0da3-3eac-4c69-821e-5e00609b6f72"
+          },
+          "user2Id": {
+            "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
+          },
+          "user2Faculty": {
+            "S": "science"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-08-22T11:07:54.659Z#0f7b0da3-3eac-4c69-821e-5e00609b6f72"
+          },
+          "user2Id": {
+            "S": "USER#c8345096-448d-4939-8691-c62259470667"
+          },
+          "user2Faculty": {
+            "S": "artsDesignAndArchitecture"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#c8345096-448d-4939-8691-c62259470667"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-09-26T00:21:56.461Z#269f7ad7-edbf-4322-b6c0-b3a0995ea88c"
+          },
+          "user2Id": {
+            "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
+          },
+          "user2Faculty": {
+            "S": "lawAndJustice"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-09-26T00:21:56.461Z#269f7ad7-edbf-4322-b6c0-b3a0995ea88c"
+          },
+          "user2Id": {
+            "S": "USER#c8345096-448d-4939-8691-c62259470667"
+          },
+          "user2Faculty": {
+            "S": "artsDesignAndArchitecture"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-09-20T03:25:14.614Z#e7a00657-3b43-4a24-b5a0-06b4c4a2aafa"
+          },
+          "user2Id": {
+            "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
+          },
+          "user2Faculty": {
+            "S": "business"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-09-20T03:25:14.614Z#e7a00657-3b43-4a24-b5a0-06b4c4a2aafa"
+          },
+          "user2Id": {
+            "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
+          },
+          "user2Faculty": {
+            "S": "medicineAndHealth"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-11-17T13:37:08.986Z#aac4759e-5e40-4479-a9ea-0bdc0647e655"
+          },
+          "user2Id": {
+            "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
+          },
+          "user2Faculty": {
+            "S": "engineering"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-11-17T13:37:08.986Z#aac4759e-5e40-4479-a9ea-0bdc0647e655"
+          },
+          "user2Id": {
+            "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
+          },
+          "user2Faculty": {
+            "S": "medicineAndHealth"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-08-27T22:37:11.851Z#1042e7bb-e72e-42d5-84bb-9fb845e73d7b"
+          },
+          "user2Id": {
+            "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
+          },
+          "user2Faculty": {
+            "S": "science"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-08-27T22:37:11.851Z#1042e7bb-e72e-42d5-84bb-9fb845e73d7b"
+          },
+          "user2Id": {
+            "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
+          },
+          "user2Faculty": {
+            "S": "medicineAndHealth"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-08-18T03:57:50.361Z#5dbac26a-a82b-4460-ab23-c08f429ac0c2"
+          },
+          "user2Id": {
+            "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
+          },
+          "user2Faculty": {
+            "S": "lawAndJustice"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-08-18T03:57:50.361Z#5dbac26a-a82b-4460-ab23-c08f429ac0c2"
+          },
+          "user2Id": {
+            "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
+          },
+          "user2Faculty": {
+            "S": "medicineAndHealth"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-10-23T14:20:15.830Z#ff88e6ed-9b65-4449-8e00-c75bb83cc60b"
+          },
+          "user2Id": {
+            "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
+          },
+          "user2Faculty": {
+            "S": "engineering"
+          }
+        }
+      }
+    }
+  ]
+}

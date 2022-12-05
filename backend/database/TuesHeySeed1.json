@@ -1,0 +1,202 @@
+{
+  "TuesHey": [
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-10-23T14:20:15.830Z#ff88e6ed-9b65-4449-8e00-c75bb83cc60b"
+          },
+          "user2Id": {
+            "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
+          },
+          "user2Faculty": {
+            "S": "business"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-10-01T02:39:48.386Z#2b07050b-c2a5-42fe-81c7-30f93877b572"
+          },
+          "user2Id": {
+            "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
+          },
+          "user2Faculty": {
+            "S": "science"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-10-01T02:39:48.386Z#2b07050b-c2a5-42fe-81c7-30f93877b572"
+          },
+          "user2Id": {
+            "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
+          },
+          "user2Faculty": {
+            "S": "business"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-08-12T19:21:07.865Z#e736fe21-f5bf-47f9-8296-5778c0130b73"
+          },
+          "user2Id": {
+            "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
+          },
+          "user2Faculty": {
+            "S": "lawAndJustice"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-08-12T19:21:07.865Z#e736fe21-f5bf-47f9-8296-5778c0130b73"
+          },
+          "user2Id": {
+            "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
+          },
+          "user2Faculty": {
+            "S": "business"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-11-14T06:02:06.290Z#3b15147c-e3b5-4c3d-bdef-6ff352bd778d"
+          },
+          "user2Id": {
+            "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
+          },
+          "user2Faculty": {
+            "S": "science"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-11-14T06:02:06.290Z#3b15147c-e3b5-4c3d-bdef-6ff352bd778d"
+          },
+          "user2Id": {
+            "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
+          },
+          "user2Faculty": {
+            "S": "engineering"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-11-15T23:31:16.242Z#23c16889-aef7-453d-a07c-696cf556b0dd"
+          },
+          "user2Id": {
+            "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
+          },
+          "user2Faculty": {
+            "S": "lawAndJustice"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-11-15T23:31:16.242Z#23c16889-aef7-453d-a07c-696cf556b0dd"
+          },
+          "user2Id": {
+            "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
+          },
+          "user2Faculty": {
+            "S": "engineering"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-11-16T04:54:17.955Z#aac4759e-5e40-4479-a9ea-0bdc0647e655"
+          },
+          "user2Id": {
+            "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
+          },
+          "user2Faculty": {
+            "S": "lawAndJustice"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "primaryKey": {
+            "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
+          },
+          "sortKey": {
+            "S": "MATCH#2022-11-16T04:54:17.955Z#aac4759e-5e40-4479-a9ea-0bdc0647e655"
+          },
+          "user2Id": {
+            "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
+          },
+          "user2Faculty": {
+            "S": "science"
+          }
+        }
+      }
+    }
+  ]
+}

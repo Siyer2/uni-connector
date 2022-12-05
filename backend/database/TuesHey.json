@@ -1,0 +1,27 @@
+{
+  "TableName": "TuesHey",
+  "KeySchema": [
+    {
+      "AttributeName": "primaryKey",
+      "KeyType": "HASH"
+    },
+    {
+      "AttributeName": "sortKey",
+      "KeyType": "RANGE"
+    }
+  ],
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "primaryKey",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "sortKey",
+      "AttributeType": "S"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+  }
+}
