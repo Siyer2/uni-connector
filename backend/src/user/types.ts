@@ -1,11 +1,15 @@
-export type User = {
-  id: string;
+interface TuesHeyDBEntry {
+  primaryKey: string;
+  sortKey: string;
+}
+
+export interface User extends TuesHeyDBEntry {
   faculty: Faculty;
   imInto: string;
   [key: string]: string;
-};
+}
 
-enum Faculty {
+export enum Faculty {
   ArtsDesignAndArchitecture = 'artsDesignAndArchitecture',
   MedicineAndHealth = 'medicineAndHealth',
   Business = 'business',
