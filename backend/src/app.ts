@@ -3,7 +3,7 @@ import * as cors from 'cors';
 import * as dotenv from 'dotenv';
 import { middleware } from './middleware';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
-import { User } from './user/types';
+import { Faculty, User } from './user/types';
 import { getUser, updateUser } from './user';
 
 dotenv.config({ path: __dirname + '/../.env.local' });
@@ -46,10 +46,13 @@ app.post(
   '/updateUser',
   [middleware.authenticateUser, middleware.getDB],
   async (req: express.Request, res: express.Response) => {
-    // Ensure that faculty is provided
-    if (typeof req.body.faculty !== 'string') {
+    // Ensure that faculty is provided and is a valid faculty
+    if (
+      typeof req.body.faculty !== 'string' ||
+      !Object.values(Faculty).includes(req.body.faculty)
+    ) {
       return res.status(400).json({
-        error: 'MISSING_FACULTY',
+        error: 'INVALID_FACULTY',
         message: 'Faculty is required body param',
       });
     }

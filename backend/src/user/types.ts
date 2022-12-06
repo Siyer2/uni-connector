@@ -5,7 +5,7 @@ export type User = {
   [key: string]: string;
 };
 
-enum Faculty {
+export enum Faculty {
   ArtsDesignAndArchitecture = 'artsDesignAndArchitecture',
   MedicineAndHealth = 'medicineAndHealth',
   Business = 'business',
