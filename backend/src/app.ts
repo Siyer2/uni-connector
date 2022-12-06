@@ -59,7 +59,8 @@ app.post(
 
     // Construct the updated user
     const updatedUser: User = {
-      id: req.user.oid,
+      primaryKey: `USER#${req.user.oid}`,
+      sortKey: `METADATA#${req.user.oid}`,
       ...req.body,
     };
 
