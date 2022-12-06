@@ -21,24 +21,6 @@ app.use(cors(options));
 app.use(express.json());
 
 // Routes
-app.get(
-  '/',
-  [middleware.authenticateUser, middleware.getDB],
-  async (req: express.Request, res: express.Response) => {
-    const params: DocumentClient.QueryInput = {
-      TableName: 'User',
-      KeyConditionExpression: 'id = :value',
-      ExpressionAttributeValues: {
-        ':value': req.user.oid,
-      },
-    };
-
-    const userInDb = await req.db.query(params).promise();
-    console.log(userInDb);
-    res.send(`Request received: ${req.method} - ${req.path}`);
-  }
-);
-
 /**
  * Endpoint to update a user's profile
  */
