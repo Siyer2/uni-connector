@@ -35,6 +35,7 @@ type User = {
   sortKey: { S: string };
   faculty: { S: Faculty };
   name: { S: string };
+  isUser: { BOOL: boolean };
 };
 
 // Create a user from each faculty
@@ -46,6 +47,7 @@ for (const faculty of Object.values(Faculty)) {
     sortKey: { S: `METADATA#${uuids[i]}` },
     faculty: { S: faculty },
     name: { S: names[i] },
+    isUser: { BOOL: true },
   });
 
   i++;
