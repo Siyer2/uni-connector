@@ -35,6 +35,7 @@ type User = {
   sortKey: { S: string };
   faculty: { S: Faculty };
   name: { S: string };
+  entityType: { S: 'user' | 'match' };
 };
 
 // Create a user from each faculty
@@ -46,6 +47,7 @@ for (const faculty of Object.values(Faculty)) {
     sortKey: { S: `METADATA#${uuids[i]}` },
     faculty: { S: faculty },
     name: { S: names[i] },
+    entityType: { S: 'user' },
   });
 
   i++;
@@ -56,6 +58,7 @@ type Match = {
   sortKey: { S: string };
   user2Id: { S: string };
   user2Faculty: { S: Faculty };
+  entityType: { S: 'user' | 'match' };
 };
 
 const matches: Match[] = [];
@@ -74,12 +77,14 @@ for (let usersIndex = 0; usersIndex < users.length; usersIndex++) {
       sortKey: { S: `MATCH#${randomDate}#${randomUuid}` },
       user2Id: { S: users[matchesIndex].primaryKey.S },
       user2Faculty: { S: users[matchesIndex].faculty.S },
+      entityType: { S: 'match' },
     };
     const match2: Match = {
       primaryKey: { S: users[matchesIndex].primaryKey.S },
       sortKey: { S: `MATCH#${randomDate}#${randomUuid}` },
       user2Id: { S: users[usersIndex].primaryKey.S },
       user2Faculty: { S: users[usersIndex].faculty.S },
+      entityType: { S: 'match' },
     };
 
     matches.push(match1);

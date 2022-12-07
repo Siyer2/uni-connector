@@ -18,10 +18,36 @@
     {
       "AttributeName": "sortKey",
       "AttributeType": "S"
+    },
+    {
+      "AttributeName": "entityType",
+      "AttributeType": "S"
     }
   ],
   "ProvisionedThroughput": {
     "ReadCapacityUnits": 5,
     "WriteCapacityUnits": 5
-  }
+  },
+  "GlobalSecondaryIndexes": [
+    {
+      "IndexName": "EntityTypeIndex",
+      "KeySchema": [
+        {
+          "AttributeName": "entityType",
+          "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "primaryKey",
+          "KeyType": "RANGE"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 3,
+        "WriteCapacityUnits": 3
+      }
+    }
+  ]
 }
