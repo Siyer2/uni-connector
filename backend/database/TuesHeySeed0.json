@@ -15,8 +15,8 @@
           "name": {
             "S": "John Smith"
           },
-          "isUser": {
-            "BOOL": true
+          "type": {
+            "S": "user"
           }
         }
       }
@@ -36,8 +36,8 @@
           "name": {
             "S": "Jane Doe"
           },
-          "isUser": {
-            "BOOL": true
+          "type": {
+            "S": "user"
           }
         }
       }
@@ -57,8 +57,8 @@
           "name": {
             "S": "Bob Jones"
           },
-          "isUser": {
-            "BOOL": true
+          "type": {
+            "S": "user"
           }
         }
       }
@@ -78,8 +78,8 @@
           "name": {
             "S": "Alice Smith"
           },
-          "isUser": {
-            "BOOL": true
+          "type": {
+            "S": "user"
           }
         }
       }
@@ -99,8 +99,8 @@
           "name": {
             "S": "Bob Smith"
           },
-          "isUser": {
-            "BOOL": true
+          "type": {
+            "S": "user"
           }
         }
       }
@@ -120,8 +120,8 @@
           "name": {
             "S": "Alice Jones"
           },
-          "isUser": {
-            "BOOL": true
+          "type": {
+            "S": "user"
           }
         }
       }
@@ -133,13 +133,16 @@
             "S": "USER#c8345096-448d-4939-8691-c62259470667"
           },
           "sortKey": {
-            "S": "MATCH#2022-11-25T04:36:29.539Z#f3cd9fa8-716b-4e33-98c3-157e06a5ab29"
+            "S": "MATCH#2022-11-22T12:20:06.582Z#a5a2b27c-bf20-4009-a13e-976e3cc4eb5e"
           },
           "user2Id": {
             "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
           },
           "user2Faculty": {
             "S": "medicineAndHealth"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -151,13 +154,16 @@
             "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
           },
           "sortKey": {
-            "S": "MATCH#2022-11-25T04:36:29.539Z#f3cd9fa8-716b-4e33-98c3-157e06a5ab29"
+            "S": "MATCH#2022-11-22T12:20:06.582Z#a5a2b27c-bf20-4009-a13e-976e3cc4eb5e"
           },
           "user2Id": {
             "S": "USER#c8345096-448d-4939-8691-c62259470667"
           },
           "user2Faculty": {
             "S": "artsDesignAndArchitecture"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -169,13 +175,16 @@
             "S": "USER#c8345096-448d-4939-8691-c62259470667"
           },
           "sortKey": {
-            "S": "MATCH#2022-09-08T22:16:22.857Z#ffbfea16-3d1f-487a-b9f7-f06f95e3366b"
+            "S": "MATCH#2022-11-21T19:20:11.858Z#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
           },
           "user2Id": {
             "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
           },
           "user2Faculty": {
             "S": "business"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -187,13 +196,16 @@
             "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
           },
           "sortKey": {
-            "S": "MATCH#2022-09-08T22:16:22.857Z#ffbfea16-3d1f-487a-b9f7-f06f95e3366b"
+            "S": "MATCH#2022-11-21T19:20:11.858Z#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
           },
           "user2Id": {
             "S": "USER#c8345096-448d-4939-8691-c62259470667"
           },
           "user2Faculty": {
             "S": "artsDesignAndArchitecture"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -205,13 +217,16 @@
             "S": "USER#c8345096-448d-4939-8691-c62259470667"
           },
           "sortKey": {
-            "S": "MATCH#2022-08-21T00:50:30.374Z#948c45df-2432-4007-9df4-130a08b9c7dc"
+            "S": "MATCH#2022-11-28T20:00:16.792Z#7eb7e5d7-9f39-4dd4-a49d-f47d8abba400"
           },
           "user2Id": {
             "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
           },
           "user2Faculty": {
             "S": "engineering"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -223,13 +238,16 @@
             "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
           },
           "sortKey": {
-            "S": "MATCH#2022-08-21T00:50:30.374Z#948c45df-2432-4007-9df4-130a08b9c7dc"
+            "S": "MATCH#2022-11-28T20:00:16.792Z#7eb7e5d7-9f39-4dd4-a49d-f47d8abba400"
           },
           "user2Id": {
             "S": "USER#c8345096-448d-4939-8691-c62259470667"
           },
           "user2Faculty": {
             "S": "artsDesignAndArchitecture"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -241,13 +259,16 @@
             "S": "USER#c8345096-448d-4939-8691-c62259470667"
           },
           "sortKey": {
-            "S": "MATCH#2022-11-13T13:20:09.509Z#2b07050b-c2a5-42fe-81c7-30f93877b572"
+            "S": "MATCH#2022-12-06T23:26:07.931Z#c6f53c50-1617-41d7-90fc-1be7b395c032"
           },
           "user2Id": {
             "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
           },
           "user2Faculty": {
             "S": "science"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -259,13 +280,16 @@
             "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
           },
           "sortKey": {
-            "S": "MATCH#2022-11-13T13:20:09.509Z#2b07050b-c2a5-42fe-81c7-30f93877b572"
+            "S": "MATCH#2022-12-06T23:26:07.931Z#c6f53c50-1617-41d7-90fc-1be7b395c032"
           },
           "user2Id": {
             "S": "USER#c8345096-448d-4939-8691-c62259470667"
           },
           "user2Faculty": {
             "S": "artsDesignAndArchitecture"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -277,13 +301,16 @@
             "S": "USER#c8345096-448d-4939-8691-c62259470667"
           },
           "sortKey": {
-            "S": "MATCH#2022-08-14T06:16:11.371Z#5c73e702-9eb2-4e77-b8b1-5f163e5cd37f"
+            "S": "MATCH#2022-10-18T13:20:44.602Z#7bdf8b7a-ef3b-4e65-8cdf-2cdfbac3e5f8"
           },
           "user2Id": {
             "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
           },
           "user2Faculty": {
             "S": "lawAndJustice"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -295,13 +322,16 @@
             "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
           },
           "sortKey": {
-            "S": "MATCH#2022-08-14T06:16:11.371Z#5c73e702-9eb2-4e77-b8b1-5f163e5cd37f"
+            "S": "MATCH#2022-10-18T13:20:44.602Z#7bdf8b7a-ef3b-4e65-8cdf-2cdfbac3e5f8"
           },
           "user2Id": {
             "S": "USER#c8345096-448d-4939-8691-c62259470667"
           },
           "user2Faculty": {
             "S": "artsDesignAndArchitecture"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -313,13 +343,16 @@
             "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
           },
           "sortKey": {
-            "S": "MATCH#2022-10-29T15:38:19.436Z#700b3549-aa9e-4d6c-82d3-99fb7d03dbc0"
+            "S": "MATCH#2022-11-09T04:02:31.784Z#eb59bf99-55ad-42f5-b9c9-62cab7b7a369"
           },
           "user2Id": {
             "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
           },
           "user2Faculty": {
             "S": "business"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -331,13 +364,16 @@
             "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
           },
           "sortKey": {
-            "S": "MATCH#2022-10-29T15:38:19.436Z#700b3549-aa9e-4d6c-82d3-99fb7d03dbc0"
+            "S": "MATCH#2022-11-09T04:02:31.784Z#eb59bf99-55ad-42f5-b9c9-62cab7b7a369"
           },
           "user2Id": {
             "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
           },
           "user2Faculty": {
             "S": "medicineAndHealth"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -349,13 +385,16 @@
             "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
           },
           "sortKey": {
-            "S": "MATCH#2022-08-31T20:51:47.374Z#aba2780f-7ad2-45c8-8357-8aa982702fc9"
+            "S": "MATCH#2022-09-11T18:25:45.676Z#a6189b99-347f-451e-9fdb-1c5cc09350ec"
           },
           "user2Id": {
             "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
           },
           "user2Faculty": {
             "S": "engineering"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -367,13 +406,16 @@
             "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
           },
           "sortKey": {
-            "S": "MATCH#2022-08-31T20:51:47.374Z#aba2780f-7ad2-45c8-8357-8aa982702fc9"
+            "S": "MATCH#2022-09-11T18:25:45.676Z#a6189b99-347f-451e-9fdb-1c5cc09350ec"
           },
           "user2Id": {
             "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
           },
           "user2Faculty": {
             "S": "medicineAndHealth"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -385,13 +427,16 @@
             "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
           },
           "sortKey": {
-            "S": "MATCH#2022-09-28T13:21:08.377Z#ad744d84-6728-4280-8559-8684ebc6fd10"
+            "S": "MATCH#2022-12-01T08:30:17.599Z#2c59f7de-5cea-4829-b303-33a142574b12"
           },
           "user2Id": {
             "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
           },
           "user2Faculty": {
             "S": "science"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -403,13 +448,16 @@
             "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
           },
           "sortKey": {
-            "S": "MATCH#2022-09-28T13:21:08.377Z#ad744d84-6728-4280-8559-8684ebc6fd10"
+            "S": "MATCH#2022-12-01T08:30:17.599Z#2c59f7de-5cea-4829-b303-33a142574b12"
           },
           "user2Id": {
             "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
           },
           "user2Faculty": {
             "S": "medicineAndHealth"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -421,13 +469,16 @@
             "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
           },
           "sortKey": {
-            "S": "MATCH#2022-11-23T00:11:04.361Z#c6f53c50-1617-41d7-90fc-1be7b395c032"
+            "S": "MATCH#2022-09-04T06:47:04.207Z#a623d225-4728-4c5d-b1df-4a1e134987db"
           },
           "user2Id": {
             "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
           },
           "user2Faculty": {
             "S": "lawAndJustice"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -439,13 +490,16 @@
             "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
           },
           "sortKey": {
-            "S": "MATCH#2022-11-23T00:11:04.361Z#c6f53c50-1617-41d7-90fc-1be7b395c032"
+            "S": "MATCH#2022-09-04T06:47:04.207Z#a623d225-4728-4c5d-b1df-4a1e134987db"
           },
           "user2Id": {
             "S": "USER#17d2f33d-67e0-40ab-977e-73d1580e990d"
           },
           "user2Faculty": {
             "S": "medicineAndHealth"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -457,13 +511,16 @@
             "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
           },
           "sortKey": {
-            "S": "MATCH#2022-11-13T13:57:02.908Z#2b07050b-c2a5-42fe-81c7-30f93877b572"
+            "S": "MATCH#2022-10-04T10:45:18.759Z#83141240-fb48-4ade-a743-259dd5b8d53e"
           },
           "user2Id": {
             "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
           },
           "user2Faculty": {
             "S": "engineering"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }

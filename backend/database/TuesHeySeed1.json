@@ -7,13 +7,16 @@
             "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
           },
           "sortKey": {
-            "S": "MATCH#2022-11-13T13:57:02.908Z#2b07050b-c2a5-42fe-81c7-30f93877b572"
+            "S": "MATCH#2022-10-04T10:45:18.759Z#83141240-fb48-4ade-a743-259dd5b8d53e"
           },
           "user2Id": {
             "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
           },
           "user2Faculty": {
             "S": "business"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -25,13 +28,16 @@
             "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
           },
           "sortKey": {
-            "S": "MATCH#2022-09-16T23:27:30.878Z#31184884-6cb8-4a41-a8df-8840b0828c19"
+            "S": "MATCH#2022-11-29T04:35:29.451Z#1ed02d11-4c1a-4957-98b4-374dc4ecd2de"
           },
           "user2Id": {
             "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
           },
           "user2Faculty": {
             "S": "science"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -43,13 +49,16 @@
             "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
           },
           "sortKey": {
-            "S": "MATCH#2022-09-16T23:27:30.878Z#31184884-6cb8-4a41-a8df-8840b0828c19"
+            "S": "MATCH#2022-11-29T04:35:29.451Z#1ed02d11-4c1a-4957-98b4-374dc4ecd2de"
           },
           "user2Id": {
             "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
           },
           "user2Faculty": {
             "S": "business"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -61,13 +70,16 @@
             "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
           },
           "sortKey": {
-            "S": "MATCH#2022-11-09T13:57:27.491Z#0e707b80-5e93-469e-84af-8fd15cb85b5d"
+            "S": "MATCH#2022-08-28T07:04:25.914Z#ffbfea16-3d1f-487a-b9f7-f06f95e3366b"
           },
           "user2Id": {
             "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
           },
           "user2Faculty": {
             "S": "lawAndJustice"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -79,13 +91,16 @@
             "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
           },
           "sortKey": {
-            "S": "MATCH#2022-11-09T13:57:27.491Z#0e707b80-5e93-469e-84af-8fd15cb85b5d"
+            "S": "MATCH#2022-08-28T07:04:25.914Z#ffbfea16-3d1f-487a-b9f7-f06f95e3366b"
           },
           "user2Id": {
             "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
           },
           "user2Faculty": {
             "S": "business"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -97,13 +112,16 @@
             "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
           },
           "sortKey": {
-            "S": "MATCH#2022-09-19T22:24:37.973Z#2fa27dd7-cd14-4566-a825-f657cc60b197"
+            "S": "MATCH#2022-10-24T03:46:37.415Z#434f2865-93cf-4644-8d41-54713a7c6bc1"
           },
           "user2Id": {
             "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
           },
           "user2Faculty": {
             "S": "science"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -115,13 +133,16 @@
             "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
           },
           "sortKey": {
-            "S": "MATCH#2022-09-19T22:24:37.973Z#2fa27dd7-cd14-4566-a825-f657cc60b197"
+            "S": "MATCH#2022-10-24T03:46:37.415Z#434f2865-93cf-4644-8d41-54713a7c6bc1"
           },
           "user2Id": {
             "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
           },
           "user2Faculty": {
             "S": "engineering"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -133,13 +154,16 @@
             "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
           },
           "sortKey": {
-            "S": "MATCH#2022-11-27T13:34:24.932Z#3edf21fa-07b7-45bb-9b62-f3a87ff38c05"
+            "S": "MATCH#2022-09-29T02:44:53.834Z#ecf7ad01-19ee-4607-b6c7-af849a68801a"
           },
           "user2Id": {
             "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
           },
           "user2Faculty": {
             "S": "lawAndJustice"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -151,13 +175,16 @@
             "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
           },
           "sortKey": {
-            "S": "MATCH#2022-11-27T13:34:24.932Z#3edf21fa-07b7-45bb-9b62-f3a87ff38c05"
+            "S": "MATCH#2022-09-29T02:44:53.834Z#ecf7ad01-19ee-4607-b6c7-af849a68801a"
           },
           "user2Id": {
             "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
           },
           "user2Faculty": {
             "S": "engineering"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -169,13 +196,16 @@
             "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
           },
           "sortKey": {
-            "S": "MATCH#2022-10-06T08:19:33.590Z#e7a00657-3b43-4a24-b5a0-06b4c4a2aafa"
+            "S": "MATCH#2022-10-20T06:10:13.783Z#a67decde-dbf5-46fe-a3e0-662c0f8e7a8b"
           },
           "user2Id": {
             "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
           },
           "user2Faculty": {
             "S": "lawAndJustice"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
@@ -187,13 +217,16 @@
             "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
           },
           "sortKey": {
-            "S": "MATCH#2022-10-06T08:19:33.590Z#e7a00657-3b43-4a24-b5a0-06b4c4a2aafa"
+            "S": "MATCH#2022-10-20T06:10:13.783Z#a67decde-dbf5-46fe-a3e0-662c0f8e7a8b"
           },
           "user2Id": {
             "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
           },
           "user2Faculty": {
             "S": "science"
+          },
+          "type": {
+            "S": "match"
           }
         }
       }
