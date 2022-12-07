@@ -62,6 +62,13 @@ Resources:
         - AttributeName: 'sortKey'
           KeyType: 'RANGE'
       TableName: 'TuesHey'
+      GlobalSecondaryIndexes:
+        - IndexName: 'TypeIndex'
+          KeySchema:
+            - AttributeName: 'type'
+              KeyType: 'HASH'
+            - AttributeName: 'primaryKey'
+              KeyType: 'RANGE'
   # End DynamoDB Tables
 
   # Start Connecting Algorithm Lambda

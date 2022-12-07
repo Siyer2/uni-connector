@@ -35,6 +35,10 @@
         {
           "AttributeName": "type",
           "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "primaryKey",
+          "KeyType": "RANGE"
         }
       ],
       "Projection": {
