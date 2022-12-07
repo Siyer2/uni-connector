@@ -4,7 +4,7 @@ import boto3
 import requests
 
 # SET THIS TO YOUR LOCAL OPERATING SYSTEM
-LOCAL_OPERATING_SYSTEM = 'mac'  # set to 'mac', 'windows' or 'linux'
+LOCAL_OPERATING_SYSTEM = 'windows'  # set to 'mac', 'windows' or 'linux'
 
 
 def lambda_handler(event, context):
