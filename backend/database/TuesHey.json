@@ -20,7 +20,7 @@
       "AttributeType": "S"
     },
     {
-      "AttributeName": "type",
+      "AttributeName": "entityType",
       "AttributeType": "S"
     }
   ],
@@ -30,10 +30,10 @@
   },
   "GlobalSecondaryIndexes": [
     {
-      "IndexName": "TypeIndex",
+      "IndexName": "EntityTypeIndex",
       "KeySchema": [
         {
-          "AttributeName": "type",
+          "AttributeName": "entityType",
           "KeyType": "HASH"
         },
         {

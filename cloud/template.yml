@@ -55,6 +55,8 @@ Resources:
           AttributeType: 'S'
         - AttributeName: 'sortKey'
           AttributeType: 'S'
+        - AttributeName: 'entityType'
+          AttributeType: 'S'
       BillingMode: 'PAY_PER_REQUEST'
       KeySchema:
         - AttributeName: 'primaryKey'
@@ -63,12 +65,15 @@ Resources:
           KeyType: 'RANGE'
       TableName: 'TuesHey'
       GlobalSecondaryIndexes:
-        - IndexName: 'TypeIndex'
+        - IndexName: 'EntityTypeIndex'
           KeySchema:
-            - AttributeName: 'type'
+            - AttributeName: 'entityType'
               KeyType: 'HASH'
             - AttributeName: 'primaryKey'
               KeyType: 'RANGE'
+          Projection:
+            ProjectionType: 'ALL'
+
   # End DynamoDB Tables
 
   # Start Connecting Algorithm Lambda

@@ -7,7 +7,7 @@
             "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
           },
           "sortKey": {
-            "S": "MATCH#2022-10-04T10:45:18.759Z#83141240-fb48-4ade-a743-259dd5b8d53e"
+            "S": "MATCH#2022-09-11T22:29:37.860Z#9f8b450e-ac31-4353-a8d7-60810c1e2a76"
           },
           "user2Id": {
             "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
@@ -15,7 +15,7 @@
           "user2Faculty": {
             "S": "business"
           },
-          "type": {
+          "entityType": {
             "S": "match"
           }
         }
@@ -28,7 +28,7 @@
             "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
           },
           "sortKey": {
-            "S": "MATCH#2022-11-29T04:35:29.451Z#1ed02d11-4c1a-4957-98b4-374dc4ecd2de"
+            "S": "MATCH#2022-11-27T20:31:37.275Z#434f2865-93cf-4644-8d41-54713a7c6bc1"
           },
           "user2Id": {
             "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
@@ -36,7 +36,7 @@
           "user2Faculty": {
             "S": "science"
           },
-          "type": {
+          "entityType": {
             "S": "match"
           }
         }
@@ -49,7 +49,7 @@
             "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
           },
           "sortKey": {
-            "S": "MATCH#2022-11-29T04:35:29.451Z#1ed02d11-4c1a-4957-98b4-374dc4ecd2de"
+            "S": "MATCH#2022-11-27T20:31:37.275Z#434f2865-93cf-4644-8d41-54713a7c6bc1"
           },
           "user2Id": {
             "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
@@ -57,7 +57,7 @@
           "user2Faculty": {
             "S": "business"
           },
-          "type": {
+          "entityType": {
             "S": "match"
           }
         }
@@ -70,7 +70,7 @@
             "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
           },
           "sortKey": {
-            "S": "MATCH#2022-08-28T07:04:25.914Z#ffbfea16-3d1f-487a-b9f7-f06f95e3366b"
+            "S": "MATCH#2022-11-21T21:12:38.410Z#6ef59e04-294a-450f-a9c1-22d0dcabe096"
           },
           "user2Id": {
             "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
@@ -78,7 +78,7 @@
           "user2Faculty": {
             "S": "lawAndJustice"
           },
-          "type": {
+          "entityType": {
             "S": "match"
           }
         }
@@ -91,7 +91,7 @@
             "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
           },
           "sortKey": {
-            "S": "MATCH#2022-08-28T07:04:25.914Z#ffbfea16-3d1f-487a-b9f7-f06f95e3366b"
+            "S": "MATCH#2022-11-21T21:12:38.410Z#6ef59e04-294a-450f-a9c1-22d0dcabe096"
           },
           "user2Id": {
             "S": "USER#1f44e322-8fe3-4357-bf0f-aa0a82e120a7"
@@ -99,7 +99,7 @@
           "user2Faculty": {
             "S": "business"
           },
-          "type": {
+          "entityType": {
             "S": "match"
           }
         }
@@ -112,7 +112,7 @@
             "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
           },
           "sortKey": {
-            "S": "MATCH#2022-10-24T03:46:37.415Z#434f2865-93cf-4644-8d41-54713a7c6bc1"
+            "S": "MATCH#2022-10-20T03:05:05.350Z#e8324546-1cd0-4453-a6b5-492509bc4048"
           },
           "user2Id": {
             "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
@@ -120,7 +120,7 @@
           "user2Faculty": {
             "S": "science"
           },
-          "type": {
+          "entityType": {
             "S": "match"
           }
         }
@@ -133,7 +133,7 @@
             "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
           },
           "sortKey": {
-            "S": "MATCH#2022-10-24T03:46:37.415Z#434f2865-93cf-4644-8d41-54713a7c6bc1"
+            "S": "MATCH#2022-10-20T03:05:05.350Z#e8324546-1cd0-4453-a6b5-492509bc4048"
           },
           "user2Id": {
             "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
@@ -141,7 +141,7 @@
           "user2Faculty": {
             "S": "engineering"
           },
-          "type": {
+          "entityType": {
             "S": "match"
           }
         }
@@ -154,7 +154,7 @@
             "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
           },
           "sortKey": {
-            "S": "MATCH#2022-09-29T02:44:53.834Z#ecf7ad01-19ee-4607-b6c7-af849a68801a"
+            "S": "MATCH#2022-09-26T06:54:56.086Z#3edf21fa-07b7-45bb-9b62-f3a87ff38c05"
           },
           "user2Id": {
             "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
@@ -162,7 +162,7 @@
           "user2Faculty": {
             "S": "lawAndJustice"
           },
-          "type": {
+          "entityType": {
             "S": "match"
           }
         }
@@ -175,7 +175,7 @@
             "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
           },
           "sortKey": {
-            "S": "MATCH#2022-09-29T02:44:53.834Z#ecf7ad01-19ee-4607-b6c7-af849a68801a"
+            "S": "MATCH#2022-09-26T06:54:56.086Z#3edf21fa-07b7-45bb-9b62-f3a87ff38c05"
           },
           "user2Id": {
             "S": "USER#aac4759e-5e40-4479-a9ea-0bdc0647e655"
@@ -183,7 +183,7 @@
           "user2Faculty": {
             "S": "engineering"
           },
-          "type": {
+          "entityType": {
             "S": "match"
           }
         }
@@ -196,7 +196,7 @@
             "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
           },
           "sortKey": {
-            "S": "MATCH#2022-10-20T06:10:13.783Z#a67decde-dbf5-46fe-a3e0-662c0f8e7a8b"
+            "S": "MATCH#2022-11-23T12:26:52.356Z#4d3e1341-7709-482c-b53c-5a5b0425a349"
           },
           "user2Id": {
             "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
@@ -204,7 +204,7 @@
           "user2Faculty": {
             "S": "lawAndJustice"
           },
-          "type": {
+          "entityType": {
             "S": "match"
           }
         }
@@ -217,7 +217,7 @@
             "S": "USER#a6a4588c-224f-400a-b7eb-ac64b32732dc"
           },
           "sortKey": {
-            "S": "MATCH#2022-10-20T06:10:13.783Z#a67decde-dbf5-46fe-a3e0-662c0f8e7a8b"
+            "S": "MATCH#2022-11-23T12:26:52.356Z#4d3e1341-7709-482c-b53c-5a5b0425a349"
           },
           "user2Id": {
             "S": "USER#83afa77d-4209-49bb-853c-6010f555c6dd"
@@ -225,7 +225,7 @@
           "user2Faculty": {
             "S": "science"
           },
-          "type": {
+          "entityType": {
             "S": "match"
           }
         }

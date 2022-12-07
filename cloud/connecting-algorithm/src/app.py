@@ -1,14 +1,29 @@
 import json
 import os
 import boto3
+import requests
 
 # SET THIS TO YOUR LOCAL OPERATING SYSTEM
-LOCAL_OPERATING_SYSTEM = 'windows'  # set to 'mac', 'windows' or 'linux'
+LOCAL_OPERATING_SYSTEM = 'mac'  # set to 'mac', 'windows' or 'linux'
 
 
 def lambda_handler(event, context):
     try:
         client = get_client()
+
+        # Get all users using EntityTypeIndex GSI where entityType = 'user'
+        allUsersQuery = client.query(
+            TableName='TuesHey',
+            IndexName='EntityTypeIndex',
+            KeyConditionExpression='entityType = :entityType',
+            ExpressionAttributeValues={
+                ':entityType': {
+                    'S': 'user'
+                }
+            }
+        )
+        print(allUsersQuery.get('Items'))
+
         testUserId = '17d2f33d-67e0-40ab-977e-73d1580e990d'
 
         # Get user from dynamo
