@@ -1,5 +1,9 @@
-import { Box } from '@mui/material';
+import { TopAppBar } from '../components/TopAppBar';
 
 export const Chats = () => {
-  return <Box>This is the Chats Page!</Box>;
+  return (
+    <TopAppBar>
+      <div>Chat Messages</div>
+    </TopAppBar>
+  );
 };

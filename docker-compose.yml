@@ -8,7 +8,7 @@ services:
       - app_dynamodb:/home/dynamodblocal
     working_dir: /home/dynamodblocal
     ports:
-      - '8000:8000'
+      - '8002:8000'
     command: '-jar DynamoDBLocal.jar -sharedDb -dbPath .'
     restart: unless-stopped
 
@@ -23,63 +23,49 @@ services:
       - dynamodb
     restart: unless-stopped
 
-  dynamodb_User_migrator:
+  dynamodb_TuesHey_migrator:
     image: banst/awscli
-    container_name: app-dynamodb_User_migrator
+    container_name: app-dynamodb_TuesHey_migrator
     working_dir: /home/dynamodblocal
-    command: dynamodb create-table --cli-input-json file://User.json --endpoint-url http://dynamodb:8000
+    command: dynamodb create-table --cli-input-json file://TuesHey.json --endpoint-url http://dynamodb:8000
     volumes:
       - ./backend/database:/home/dynamodblocal
     environment:
-      - AWS_ACCESS_KEY_ID=unicorn_user
+      - AWS_ACCESS_KEY_ID=unicorn
       - AWS_SECRET_ACCESS_KEY=magical_password
       - AWS_DEFAULT_REGION=ap-southeast-1
     depends_on:
       - dynamodb
 
-  dynamodb_MatchHistory_migrator:
+  dynamodb_TuesHeySeed0:
     image: banst/awscli
-    container_name: app-dynamodb_MatchHistory_migrator
+    container_name: app-dynamodb_TuesHeySeed1
     working_dir: /home/dynamodblocal
-    command: dynamodb create-table --cli-input-json file://MatchHistory.json --endpoint-url http://dynamodb:8000
+    command: dynamodb batch-write-item --request-items file://TuesHeySeed0.json --endpoint-url http://dynamodb:8000 && dynamodb batch-write-item --request-items file://TuesHeySeederGroup2.json --endpoint-url http://dynamodb:8000 && dynamodb batch-write-item --request-items file://TuesHeySeederGroup3.json --endpoint-url http://dynamodb:8000
     volumes:
       - ./backend/database:/home/dynamodblocal
     environment:
-      - AWS_ACCESS_KEY_ID=unicorn_user
+      - AWS_ACCESS_KEY_ID=unicorn
       - AWS_SECRET_ACCESS_KEY=magical_password
       - AWS_DEFAULT_REGION=ap-southeast-1
     depends_on:
-      - dynamodb
-
-  dynamodb_MatchHistorySeeder:
-    image: banst/awscli
-    container_name: app-dynamodb_MatchHistorySeeder
-    working_dir: /home/dynamodblocal
-    command: dynamodb batch-write-item --request-items file://MatchHistorySeeder.json --endpoint-url http://dynamodb:8000
-    volumes:
-      - ./backend/database:/home/dynamodblocal
-    environment:
-      - AWS_ACCESS_KEY_ID=unicorn_user
-      - AWS_SECRET_ACCESS_KEY=magical_password
-      - AWS_DEFAULT_REGION=ap-southeast-1
-    depends_on:
-      - dynamodb_MatchHistory_migrator
+      - dynamodb_TuesHey_migrator
       - dynamodb
     restart: on-failure
 
-  dynamodb_UserSeeder:
+  dynamodb_TuesHeySeed1:
     image: banst/awscli
-    container_name: app-dynamodb_UserSeeder
+    container_name: app-dynamodb_TuesHeySeed2
     working_dir: /home/dynamodblocal
-    command: dynamodb batch-write-item --request-items file://UserSeeder.json --endpoint-url http://dynamodb:8000
+    command: dynamodb batch-write-item --request-items file://TuesHeySeed1.json --endpoint-url http://dynamodb:8000 && dynamodb batch-write-item --request-items file://TuesHeySeederGroup2.json --endpoint-url http://dynamodb:8000 && dynamodb batch-write-item --request-items file://TuesHeySeederGroup3.json --endpoint-url http://dynamodb:8000
     volumes:
       - ./backend/database:/home/dynamodblocal
     environment:
-      - AWS_ACCESS_KEY_ID=unicorn_user
+      - AWS_ACCESS_KEY_ID=unicorn
       - AWS_SECRET_ACCESS_KEY=magical_password
       - AWS_DEFAULT_REGION=ap-southeast-1
     depends_on:
-      - dynamodb_User_migrator
+      - dynamodb_TuesHey_migrator
       - dynamodb
     restart: on-failure
 

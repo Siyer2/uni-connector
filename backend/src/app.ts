@@ -1,13 +1,61 @@
 import * as express from 'express';
-import { authenticateUser } from './middleware/authenticateUser';
+import * as cors from 'cors';
+import * as dotenv from 'dotenv';
+import { middleware } from './middleware';
+import { DocumentClient } from 'aws-sdk/clients/dynamodb';
+import { Faculty, User } from './user/types';
+import { getUser, updateUser } from './user';
 
+dotenv.config({ path: __dirname + '/../.env.local' });
 const app = express();
 
+// CORS
+const allowlist =
+  process.env.ENVIRONMENT === 'local'
+    ? ['http://localhost:3001']
+    : ['https://main.d2dflf7eo6e40g.amplifyapp.com/'];
+const options: cors.CorsOptions = {
+  origin: allowlist,
+};
+app.use(cors(options));
+app.use(express.json());
+
 // Routes
-app.get('/', authenticateUser, (req, res) => {
-  console.log(req.user);
-  res.send(`Request received: ${req.method} - ${req.path}`);
-});
+/**
+ * Endpoint to update a user's profile
+ */
+app.post(
+  '/updateUser',
+  [middleware.authenticateUser, middleware.getDB],
+  async (req: express.Request, res: express.Response) => {
+    // Ensure that faculty is provided and is a valid faculty
+    if (
+      typeof req.body.faculty !== 'string' ||
+      !Object.values(Faculty).includes(req.body.faculty)
+    ) {
+      return res.status(400).json({
+        error: 'INVALID_FACULTY',
+        message: 'Faculty is required body param',
+      });
+    }
+
+    // Construct the updated user
+    const updatedUser: User = {
+      primaryKey: `USER#${req.user.oid}`,
+      sortKey: `METADATA#${req.user.oid}`,
+      ...req.body,
+    };
+
+    // Update it in the database
+    await updateUser(req.db, updatedUser);
+
+    // Get the updated user from the database
+    const user = await getUser(req.db, req.user.oid);
+
+    // Return it
+    return res.json(user);
+  }
+);
 
 // Error handler
 app.use(
