@@ -3,6 +3,7 @@ import { loginRequest } from '../authConfig';
 import { IPublicClientApplication } from '@azure/msal-browser';
 import { Button } from '@mui/material';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Renders a button which, when selected, will open a popup for login
@@ -10,11 +11,12 @@ import { useState } from 'react';
 export const SignInButton = () => {
   const { instance } = useMsal();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const navigate = useNavigate();
   async function handleLogin(instance: IPublicClientApplication) {
     try {
       setIsLoading(true);
       await instance.loginRedirect(loginRequest);
+      navigate('/update-user');
       setIsLoading(false);
     } catch (error) {
       console.log('error', error);

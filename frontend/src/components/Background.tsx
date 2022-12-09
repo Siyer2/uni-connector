@@ -4,6 +4,7 @@ import { Grid, Paper } from '@mui/material';
 type backgroundProps = {
   children: React.ReactNode;
 };
+
 const Background = (props: backgroundProps) => {
   return (
     <Grid
