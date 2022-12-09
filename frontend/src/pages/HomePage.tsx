@@ -3,6 +3,7 @@ import Background from '../components/Background';
 import { AuthenticatedTemplate } from '@azure/msal-react';
 import { ProfileContent } from '../components/ProfileContent';
 import { Grid, Typography } from '@mui/material';
+import beanWave from '../assets/bean-wave.gif';
 
 export const HomePage = () => {
   return (
@@ -17,18 +18,21 @@ export const HomePage = () => {
           alignItems: 'center',
         }}
       >
-        <Typography variant="h1" gutterBottom textAlign={'center'} color="#fff">
-          Lorem ipsum dolor sit amet consectetur.
+        <Typography variant="h4" gutterBottom textAlign={'center'} color="#fff">
+          <img src={beanWave} alt="bean" height="40" width="40" /> <br />
+          TuesHey
         </Typography>
         <Typography
-          variant="h4"
+          variant="h6"
           textAlign={'center'}
           color="#fff"
-          mb={6}
+          mb={10}
           mx={10}
         >
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui neque
-          quos enim praese
+          Connect with a UNSW student/alumni not in your faculty!
+          <br />
+          <br />
+          Every Tuesday
         </Typography>
         <PageLayout>
           <AuthenticatedTemplate>
