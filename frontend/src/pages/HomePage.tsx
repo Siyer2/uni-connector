@@ -1,48 +1,45 @@
 import { PageLayout } from '../components/PageLayout';
+import Background from '../components/Background';
 import { AuthenticatedTemplate } from '@azure/msal-react';
 import { ProfileContent } from '../components/ProfileContent';
-import { Typography, Container, Box } from '@mui/material';
-//import { useTheme } from '@mui/material/styles';
+import { Grid, Typography } from '@mui/material';
+import beanWave from '../assets/bean-wave.gif';
 
 export const HomePage = () => {
-  //const theme = useTheme();
-
-  // TODO: figure out how to use theme for backgroundColor of a Box rather
-  // than hard coding the value
-
-  // NOTE: border and spacing starts to go funny below 523px
-
   return (
-    <Box bgcolor="#2185ef">
-      {/*background color should be set by theme*/}
-      <Container
-        maxWidth={'md'}
-        sx={{
-          height: '100vh',
+    <Background>
+      <Grid
+        item
+        xs={12}
+        style={{
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          color: '#fff',
+          alignItems: 'center',
         }}
       >
-        <Typography
-          variant="h1"
-          textAlign={'center'}
-          gutterBottom
-          //sx={{ fontSize: { lg: '3em', sm: '10em' } }}
-        >
-          Lorem ipsum dolor sit amet consectetur.
+        <Typography variant="h4" gutterBottom textAlign={'center'} color="#fff">
+          <img src={beanWave} alt="bean" height="40" width="40" /> <br />
+          TuesHey
         </Typography>
-        <Typography variant="h4" textAlign={'center'} mb={10}>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui neque
-          quos enim praese
+        <Typography
+          variant="h6"
+          textAlign={'center'}
+          color="#fff"
+          mb={10}
+          mx={10}
+        >
+          Connect with a UNSW student/alumni not in your faculty!
+          <br />
+          <br />
+          Every Tuesday
         </Typography>
         <PageLayout>
           <AuthenticatedTemplate>
             <ProfileContent />
           </AuthenticatedTemplate>
         </PageLayout>
-      </Container>
-    </Box>
+      </Grid>
+    </Background>
   );
 };

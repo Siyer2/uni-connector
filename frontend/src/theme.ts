@@ -19,4 +19,13 @@ export const theme = createTheme({
     },
   },
   spacing: 8, // Every unit of spacing for margin/padding is 8px
+  components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#2185ef',
+        },
+      },
+    },
+  },
 });
