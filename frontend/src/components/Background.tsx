@@ -1,18 +1,19 @@
 import React from 'react';
-import { Grid, Paper } from '@mui/material';
+import { Grid } from '@mui/material';
 
 type backgroundProps = {
   children: React.ReactNode;
+  bgcolor: string;
 };
 
 const Background = (props: backgroundProps) => {
   return (
     <Grid
       container
-      component={Paper}
       sx={{
         width: '100vw',
         height: '100vh',
+        backgroundColor: props.bgcolor,
       }}
       textAlign={'center'}
       display={'flex'}

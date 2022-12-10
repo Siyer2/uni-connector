@@ -7,7 +7,7 @@ import beanWave from '../assets/bean-wave.gif';
 
 export const HomePage = () => {
   return (
-    <Background>
+    <Background bgcolor={'background.default'}>
       <Grid
         item
         xs={12}
@@ -26,7 +26,7 @@ export const HomePage = () => {
           variant="h6"
           textAlign={'center'}
           color="#fff"
-          mb={10}
+          mb={5}
           mx={10}
         >
           Connect with a UNSW student/alumni not in your faculty!
