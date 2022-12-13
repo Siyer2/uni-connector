@@ -16,9 +16,9 @@ export const UpdateUser = () => {
   const [userDetails, setUserDetails] = useState<{
     emojis: string;
     faculty: string;
-    bestEat: string;
+    faveEat: string;
     interests: string;
-  }>({ emojis: '', faculty: '', bestEat: '', interests: '' });
+  }>({ emojis: '', faculty: '', faveEat: '', interests: '' });
 
   // TODO:
   // Add appropriate type to event
@@ -68,19 +68,17 @@ export const UpdateUser = () => {
           alignItems: 'center',
         }}
       >
-        <div style={{ width: '20rem' }}>
-          <InputLabel sx={{ marginBottom: '8px' }}>
-            Describe yourself in 3 emojis!
-          </InputLabel>
+        <div style={{ width: '20rem', margin: '1em 0' }}>
           <TextField
             onChange={handleChange}
             value={userDetails.emojis}
             placeholder={'😎 ⚽ 🍔'}
             name="emojis"
+            label={'Describe yourself in 3 emojis!'}
             fullWidth
           />
         </div>
-        <div style={{ width: '20rem' }}>
+        <div style={{ width: '20rem', margin: '1em 0' }}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">
               Choose your faculty
@@ -106,21 +104,18 @@ export const UpdateUser = () => {
             </Select>
           </FormControl>
         </div>
-        <div style={{ width: '20rem' }}>
-          <InputLabel sx={{ marginBottom: '8px' }}>
-            What's the best place to eat on campus?
-          </InputLabel>
+        <div style={{ width: '20rem', margin: '1em 0' }}>
           <TextField
-            value={userDetails.bestEat}
-            placeholder={'Guzman y Gomez'}
+            label={"What's your favourite place to eat on campus?"}
+            value={userDetails.faveEat}
             onChange={handleChange}
             name="bestEat"
             fullWidth
           />
         </div>
-        <div style={{ width: '20rem' }}>
-          <InputLabel sx={{ marginBottom: '8px' }}>I'm into...</InputLabel>
+        <div style={{ width: '20rem', margin: '1em 0' }}>
           <TextField
+            label={"I'm into..."}
             value={userDetails.interests}
             placeholder={'hip-hop, Simpsons'}
             onChange={handleChange}
