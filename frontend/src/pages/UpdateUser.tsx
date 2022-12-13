@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import Background from '../components/Background';
 import { useState } from 'react';
+import { Faculty } from '../types';
 
 export const UpdateUser = () => {
   const [userDetails, setUserDetails] = useState<{
@@ -19,6 +20,8 @@ export const UpdateUser = () => {
     interests: string;
   }>({ emojis: '', faculty: '', bestEat: '', interests: '' });
 
+  // TODO:
+  // Add appropriate type to event
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setUserDetails({
@@ -31,30 +34,41 @@ export const UpdateUser = () => {
     console.log(userDetails);
     // TODO:
     // Hit the correct API to successfully store info to the db
-    const res = await fetch('http://dynamodb:8000/updateUser', {
+    const res = await fetch('http://localhost:3001/updateUser', {
       method: 'POST',
     });
-    const data = await res.json();
-    console.log(data);
-  };
-
-  const baseFlexStyles = {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    await res.json();
   };
 
   return (
     <Background bgcolor={'#fff'}>
-      <Grid item xs={12} sx={baseFlexStyles}>
+      <Grid
+        item
+        xs={12}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         <Typography variant={'h5'}>This is...</Typography>
         <Typography variant={'h2'}>TuesHey</Typography>
-        <Typography variant={'h4'} mb={7}>
-          Let's get to know you ✌️😙✌️
+        <Typography variant={'h4'}>
+          Let's get to know you <br /> ✌️😙✌️
         </Typography>
-
-        <div style={{ margin: '1em 0' }}>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <div style={{ width: '20rem' }}>
           <InputLabel sx={{ marginBottom: '8px' }}>
             Describe yourself in 3 emojis!
           </InputLabel>
@@ -63,34 +77,36 @@ export const UpdateUser = () => {
             value={userDetails.emojis}
             placeholder={'😎 ⚽ 🍔'}
             name="emojis"
+            fullWidth
           />
         </div>
-        <div style={{ margin: '1em 0' }}>
-          <InputLabel sx={{ marginBottom: '8px' }}>
-            What Faculty are you in?
-          </InputLabel>
-          <FormControl>
+        <div style={{ width: '20rem' }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">
+              Choose your faculty
+            </InputLabel>
             <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
               value={userDetails.faculty}
-              label="Choose Faculty"
+              label="Choose your faculty"
               onChange={handleChange}
-              displayEmpty
-              defaultValue=""
               name="faculty"
             >
-              <MenuItem value={'Arts, Design & Architecture'}>
+              <MenuItem value={Faculty.ArtsDesignAndArchitecture}>
                 Arts, Design & Architecture
               </MenuItem>
-              <MenuItem value={'Business School'}>Business School</MenuItem>
-              <MenuItem value={'Engineering'}>Engineering</MenuItem>
-              <MenuItem value={'Law'}>Law</MenuItem>
-              <MenuItem value={'Medicine'}>Medicine</MenuItem>
-              <MenuItem value={'Science'}>Science</MenuItem>
-              <MenuItem value="">Choose your Faculty</MenuItem>
+              <MenuItem value={Faculty.Business}>Business School</MenuItem>
+              <MenuItem value={Faculty.Engineering}>Engineering</MenuItem>
+              <MenuItem value={Faculty.LawAndJustice}>Law and Justice</MenuItem>
+              <MenuItem value={Faculty.MedicineAndHealth}>
+                Medicine and Health
+              </MenuItem>
+              <MenuItem value={Faculty.Science}>Science</MenuItem>
             </Select>
           </FormControl>
         </div>
-        <div style={{ margin: '1em 0' }}>
+        <div style={{ width: '20rem' }}>
           <InputLabel sx={{ marginBottom: '8px' }}>
             What's the best place to eat on campus?
           </InputLabel>
@@ -99,17 +115,30 @@ export const UpdateUser = () => {
             placeholder={'Guzman y Gomez'}
             onChange={handleChange}
             name="bestEat"
+            fullWidth
           />
         </div>
-        <div style={{ margin: '1em 0' }}>
+        <div style={{ width: '20rem' }}>
           <InputLabel sx={{ marginBottom: '8px' }}>I'm into...</InputLabel>
           <TextField
             value={userDetails.interests}
             placeholder={'hip-hop, Simpsons'}
             onChange={handleChange}
             name="interests"
+            fullWidth
           />
         </div>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         <Button variant={'contained'} onClick={handleSubmit}>
           Submit!
         </Button>
