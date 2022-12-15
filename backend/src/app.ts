@@ -57,6 +57,19 @@ app.post(
   }
 );
 
+/**
+ * User sign up/sign in
+ */
+app.post(
+  '/userLoginSignup',
+  [middleware.authenticateUser, middleware.getDB],
+  async (req: express.Request, res: express.Response) => {
+    // search for existing user
+    // create if not found
+    // return user data
+  }
+);
+
 // Error handler
 app.use(
   (
