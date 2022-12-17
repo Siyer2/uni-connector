@@ -65,8 +65,22 @@ app.post(
   [middleware.authenticateUser, middleware.getDB],
   async (req: express.Request, res: express.Response) => {
     // search for existing user
+    const user = await getUser(req.db, req.user.oid);
+
     // create if not found
+    if (Object.keys(user).length === 0) {
+      const newUser: User = {
+        primaryKey: `USER#${req.user.oid}`,
+        sortKey: `METADATA#${req.user.oid}`,
+        ...req.body,
+      };
+      await updateUser(req.db, newUser);
+
+      return await getUser(req.db, req.user.oid);
+    }
+
     // return user data
+    return res.json(user);
   }
 );
 
