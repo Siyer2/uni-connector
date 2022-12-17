@@ -4,12 +4,81 @@ import boto3
 import requests
 
 # SET THIS TO YOUR LOCAL OPERATING SYSTEM
-LOCAL_OPERATING_SYSTEM = 'windows'  # set to 'mac', 'windows' or 'linux'
+LOCAL_OPERATING_SYSTEM = 'mac'  # set to 'mac', 'windows' or 'linux'
 
 
 def lambda_handler(event, context):
     try:
         client = get_client()
+
+        # Create TuesHey table
+        client.create_table(
+            TableName='TuesHey',
+            KeySchema=[
+                {
+                    'AttributeName': 'primaryKey',
+                    'KeyType': 'HASH'
+                },
+                {
+                    'AttributeName': 'sortKey',
+                    'KeyType': 'RANGE'
+                }
+            ],
+            AttributeDefinitions=[
+                {
+                    'AttributeName': 'primaryKey',
+                    'AttributeType': 'S'
+                },
+                {
+                    'AttributeName': 'sortKey',
+                    'AttributeType': 'S'
+                },
+                {
+                    'AttributeName': 'entityType',
+                    'AttributeType': 'S'
+                }
+            ],
+            ProvisionedThroughput={
+                'ReadCapacityUnits': 5,
+                'WriteCapacityUnits': 5
+            },
+            GlobalSecondaryIndexes=[
+                {
+                    'IndexName': 'EntityTypeIndex',
+                    'KeySchema': [
+                        {
+                            'AttributeName': 'entityType',
+                            'KeyType': 'HASH'
+                        },
+                        {
+                            'AttributeName': 'sortKey',
+                            'KeyType': 'RANGE'
+                        }
+                    ],
+                    'Projection': {
+                        'ProjectionType': 'ALL'
+                    },
+                    'ProvisionedThroughput': {
+                        'ReadCapacityUnits': 5,
+                        'WriteCapacityUnits': 5
+                    }
+                }
+            ]
+        )
+
+        # Insert ./TuesHeySeed0.json into TuesHey table with batch write
+        with open('./TuesHeySeed0.json') as f:
+            data = json.load(f)
+            client.batch_write_item(
+                RequestItems=data
+            )
+
+        # Insert ./TuesHeySeed1.json into TuesHey table with batch write
+        with open('./TuesHeySeed1.json') as f:
+            data = json.load(f)
+            client.batch_write_item(
+                RequestItems=data
+            )
 
         # Get all users using EntityTypeIndex GSI where entityType = 'user'
         allUsersQuery = client.query(
