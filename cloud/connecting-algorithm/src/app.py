@@ -11,6 +11,11 @@ def lambda_handler(event, context):
     try:
         client = get_client()
 
+        # Delete TuesHey table if it exists
+        client.delete_table(
+            TableName='TuesHey'
+        )
+
         # Create TuesHey table
         client.create_table(
             TableName='TuesHey',
