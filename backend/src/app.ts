@@ -64,16 +64,16 @@ app.post(
   '/userLoginSignup',
   [middleware.authenticateUser, middleware.getDB],
   async (req: express.Request, res: express.Response) => {
-    // search for existing user
-    console.log(req.user);
     let user = await getUser(req.db, req.user.oid);
 
     // create if not found
-    if (user === undefined) {
+    if (!user) {
       const newUser: User = {
         primaryKey: `USER#${req.user.oid}`,
         sortKey: `METADATA#${req.user.oid}`,
-        ...req.body,
+        faculty: undefined,
+        imInto: undefined,
+        name: req.user.name,
       };
       await updateUser(req.db, newUser);
 
