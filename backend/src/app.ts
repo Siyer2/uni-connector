@@ -57,6 +57,31 @@ app.post(
   }
 );
 
+/**
+ * User sign up/sign in
+ */
+app.post(
+  '/userLoginSignup',
+  [middleware.authenticateUser, middleware.getDB],
+  async (req: express.Request, res: express.Response) => {
+    let user = await getUser(req.db, req.user.oid);
+
+    // create if not found
+    if (!user) {
+      const newUser: User = {
+        primaryKey: `USER#${req.user.oid}`,
+        sortKey: `METADATA#${req.user.oid}`,
+      };
+      await updateUser(req.db, newUser);
+
+      user = await getUser(req.db, req.user.oid);
+    }
+
+    // return user data
+    return res.json(user);
+  }
+);
+
 // Error handler
 app.use(
   (
