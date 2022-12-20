@@ -71,9 +71,6 @@ app.post(
       const newUser: User = {
         primaryKey: `USER#${req.user.oid}`,
         sortKey: `METADATA#${req.user.oid}`,
-        faculty: undefined,
-        imInto: undefined,
-        name: req.user.name,
       };
       await updateUser(req.db, newUser);
 
