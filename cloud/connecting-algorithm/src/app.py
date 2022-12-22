@@ -68,7 +68,7 @@ def lambda_handler(event, context):
             match_limit = today - datetime.timedelta(days=7*MATCH_COOLDOWN)
             iso_date_match_limit = match_limit.isoformat()
 
-            # Get all matches of specific user after match_limit
+            # Get all matches of specific user after match_limit from most to least recent
             matchHistoryQuery = client.query(
                 TableName='TuesHey',
                 KeyConditionExpression='primaryKey = :primarykeyval AND '\
@@ -78,17 +78,15 @@ def lambda_handler(event, context):
                         'S': user['primaryKey']['S']
                     },
                     ':sortkeyval1': {
-                        'S': 'MATCH#' + iso_date_match_limit 
+                        'S': 'MATCH#' #+ iso_date_match_limit 
                     },
                     ':sortkeyval2': {
                         'S': 'METADATA'
                     }
-                }
+                },
+                ScanIndexForward=False
             )   
             prev_matches_for_user = matchHistoryQuery.get('Items')
-
-            # Sort previous matches in descending order according to date of match
-            prev_matches_for_user.sort(key=lambda match: match['sortKey']['S'], reverse=True)
 
             # Append to prev_matches a list of the IDs of the users the current user was matched with
             prev_matches.append([match['user2Id']['S'] for match in prev_matches_for_user])
