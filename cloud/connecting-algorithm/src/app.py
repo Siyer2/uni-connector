@@ -37,7 +37,7 @@ def lambda_handler(event, context):
             prev_matches_for_user = database.getUserMatchHistory(client, user, iso_date_match_limit)
 
             # Append to prev_matches a list of the IDs of the users the current user was matched with
-            prev_matches.append([match['user2Id']['S'] for match in prev_matches_for_user])
+            prev_matches.append(prev_matches_for_user)
 
         matches = match_logic.generate_matches(users, prev_matches)
 

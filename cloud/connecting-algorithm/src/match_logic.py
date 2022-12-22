@@ -68,12 +68,11 @@ def eval_cost(user1, user2, prev_matches):
     if user1['faculty']['S'] == user2['faculty']['S']:
         cost += constants.COST_SAME_FACULTY
 
-    if user2['primaryKey']['S'] not in prev_matches: 
-        # If users have not been matched within the MATCH_COOLDOWN period
-        pass
-    else:
-        # If users have been matched within the MATCH_COOLDOWN period, add a cost that corresponds
-        # to the recency of the match - i.e. maximum if both users' last match was each other
-        cost += constants.COST_PREV_MATCHED[prev_matches.index(user2['primaryKey']['S'])]
+    # If users have been matched within the MATCH_COOLDOWN period, add a cost that corresponds
+    # to the recency of the match - i.e. maximum if both users' last match was each other
+    for i, match in enumerate(prev_matches):
+        if user2['primaryKey']['S'] == match['user2Id']['S']:
+            print("previously matched!")
+            cost += constants.COST_PREV_MATCHED[i]
 
     return cost
