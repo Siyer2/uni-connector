@@ -64,7 +64,7 @@ def lambda_handler(event, context):
             },
             GlobalSecondaryIndexes=[
                 {
-                    'IndexName': 'entityTypeIndex',
+                    'IndexName': 'EntityTypeIndex',
                     'KeySchema': [
                         {
                             'AttributeName': 'entityType',
