@@ -83,7 +83,7 @@ Resources:
       CodeUri: connecting-algorithm/src/
       Handler: app.lambda_handler
       Runtime: python3.9
-      Timeout: 100
+      Timeout: 600
       Role: !GetAtt ConnectingAlgorithmExecutionRole.Arn
       Environment:
         Variables:

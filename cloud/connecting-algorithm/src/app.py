@@ -10,36 +10,163 @@ import match_logic
 
 # SET THIS TO YOUR LOCAL OPERATING SYSTEM
 LOCAL_OPERATING_SYSTEM = 'windows'  # set to 'mac', 'windows' or 'linux'
+USERS_PER_FACULTY = 100
+MATCHES_PER_USER = 20
+FACULTIES = ['artsDesignAndArchitecture',
+             'medicineAndHealth',
+             'business',
+             'engineering',
+             'science',
+             'lawAndJustice']
+OLDEST_MATCH_DATE = 15  # in weeks ago from today
 
 
 def lambda_handler(event, context):
-    matches = []
-    
+
     try:
         client = get_client()
 
-        # Get all users from database
-        users = database.getAllUsers(client)
+        # Delete TuesHey table and wait for it to finish
+        client.delete_table(TableName="TuesHey")
+        waiter = client.get_waiter('table_not_exists')
+        waiter.wait(TableName="TuesHey")
 
-        # Remove 'Joker' user if there are an odd number of users to be matched
-        if len(users) % 2 == 1:
-            users = [user for user in users if user['primaryKey']['S'] != ('USER#' + constants.JOKER_USER_ID)]
+        # Create TuesHey table and wait for it to finish
+        client.create_table(
+            TableName="TuesHey",
+            KeySchema=[
+                {
+                    'AttributeName': 'primaryKey',
+                    'KeyType': 'HASH'
+                },
+                {
+                    'AttributeName': 'sortKey',
+                    'KeyType': 'RANGE'
+                }
+            ],
+            AttributeDefinitions=[
+                {
+                    "AttributeName": "primaryKey",
+                    "AttributeType": "S"
+                },
+                {
+                    "AttributeName": "sortKey",
+                    "AttributeType": "S"
+                },
+                {
+                    "AttributeName": "entityType",
+                    "AttributeType": "S"
+                }
+            ],
+            ProvisionedThroughput={
+                'ReadCapacityUnits': 5,
+                'WriteCapacityUnits': 5
+            },
+            GlobalSecondaryIndexes=[
+                {
+                    'IndexName': 'entityTypeIndex',
+                    'KeySchema': [
+                        {
+                            'AttributeName': 'entityType',
+                            'KeyType': 'HASH'
+                        },
+                        {
+                            'AttributeName': 'sortKey',
+                            'KeyType': 'RANGE'
+                        }
+                    ],
+                    'Projection': {
+                        'ProjectionType': 'ALL'
+                    },
+                    'ProvisionedThroughput': {
+                        'ReadCapacityUnits': 5,
+                        'WriteCapacityUnits': 5
+                    }
+                }
+            ]
+        )
+        waiter = client.get_waiter('table_exists')
+        waiter.wait(TableName="TuesHey")
 
-        # Get previous match history for each user
-        prev_matches = []
+        dummyUuidFile = open('uuids.json')
+        dummyUuids = json.load(dummyUuidFile)
+
+        dummyUserFile = open('users.json')
+        dummyUsers = json.load(dummyUserFile)
+
+        # Create USERS_PER_FACULTY users in each faculty
+        users = []
+        for faculty in FACULTIES:
+            for i in range(USERS_PER_FACULTY):
+                dummyUser = dummyUsers[i *
+                                       len(FACULTIES) + FACULTIES.index(faculty)]
+
+                user = {
+                    'primaryKey': {"S": 'USER#' + dummyUser.get('userId')},
+                    'sortKey': {"S": 'METADATA#' + dummyUser.get('userId')},
+                    'faculty': {"S": faculty},
+                    'name': {"S": dummyUser.get('name')},
+                    'entityType': {"S": 'user'},
+                }
+
+                users.append(user)
+
+                # Add the user to the database
+                client.put_item(
+                    TableName="TuesHey",
+                    Item=user
+                )
+
+        # For each user, create MATCHES_PER_USER matches where user2Id is a user in a different faculty
         for user in users:
-            # Generate date of which last match will be considered
-            today = datetime.date.today()
-            match_limit = today - datetime.timedelta(days=7*constants.MATCH_COOLDOWN)
-            iso_date_match_limit = match_limit.isoformat()
+            for i in range(MATCHES_PER_USER):
+                # Find a user in a different faculty
+                user2 = None
+                while user2 is None or user2.get('faculty').get('S') == user.get('faculty').get('S'):
+                    user2 = users[i]
+                    i += 1
 
-            # Get match history for user from most to least recent
-            prev_matches_for_user = database.getUserMatchHistory(client, user, iso_date_match_limit)
+                # Get the last Tuesday date
+                today = datetime.date.today()
+                tuesday = today + datetime.timedelta((0 - today.weekday()) % 7)
 
-            # Append to prev_matches a list of the IDs of the users the current user was matched with
-            prev_matches.append(prev_matches_for_user)
+                # Get a random number from 1 to OLDEST_MATCH_DATE
+                random = i % OLDEST_MATCH_DATE + 1
 
-        matches = match_logic.generate_matches(users, prev_matches)
+                # Get the tuesday minus random weeks in isoformat
+                tuesday = (
+                    tuesday - datetime.timedelta(weeks=random)).isoformat()
+
+                # Get random uuid from uuids.json
+                matchId = dummyUuids[i % len(dummyUuids)]
+
+                # Create a match
+                match1 = {
+                    'primaryKey': {"S": 'USER#' + user.get('primaryKey').get('S')},
+                    'sortKey': {"S": 'MATCH#' + tuesday + matchId},
+                    'user2Id': {"S": user2.get('primaryKey').get('S')},
+                    'user2Faculty': {"S": user2.get('faculty').get('S')},
+                    'entityType': {"S": 'match'},
+                    'date': {"S": tuesday},
+                }
+                match2 = {
+                    'primaryKey': {"S": 'USER#' + user2.get('primaryKey').get('S')},
+                    'sortKey': {"S": 'MATCH#' + tuesday + matchId},
+                    'user2Id': {"S": user.get('primaryKey').get('S')},
+                    'user2Faculty': {"S": user.get('faculty').get('S')},
+                    'entityType': {"S": 'match'},
+                    'date': {"S": tuesday},
+                }
+
+                # Add the match to the database
+                client.put_item(
+                    TableName="TuesHey",
+                    Item=match1
+                )
+                client.put_item(
+                    TableName="TuesHey",
+                    Item=match2
+                )
 
     except requests.RequestException as e:
         print(e)
@@ -47,11 +174,9 @@ def lambda_handler(event, context):
         raise e
 
     return {
-        "statusCode": 200,
-        "body": json.dumps({
-            "message": matches,
-        }),
+        "statusCode": 200
     }
+
 
 def get_client():
     isLocalEnvironment = os.environ['ENVIRONMENT'] == 'local'
