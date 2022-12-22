@@ -142,7 +142,7 @@ def lambda_handler(event, context):
 
                 # Create a match
                 match1 = {
-                    'primaryKey': {"S": 'USER#' + user.get('primaryKey').get('S')},
+                    'primaryKey': {"S": user.get('primaryKey').get('S')},
                     'sortKey': {"S": 'MATCH#' + tuesday + matchId},
                     'user2Id': {"S": user2.get('primaryKey').get('S')},
                     'user2Faculty': {"S": user2.get('faculty').get('S')},
@@ -150,7 +150,7 @@ def lambda_handler(event, context):
                     'date': {"S": tuesday},
                 }
                 match2 = {
-                    'primaryKey': {"S": 'USER#' + user2.get('primaryKey').get('S')},
+                    'primaryKey': {"S": user2.get('primaryKey').get('S')},
                     'sortKey': {"S": 'MATCH#' + tuesday + matchId},
                     'user2Id': {"S": user.get('primaryKey').get('S')},
                     'user2Faculty': {"S": user.get('faculty').get('S')},
