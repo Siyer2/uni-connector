@@ -5,18 +5,10 @@ import requests
 import datetime
 from ortools.sat.python import cp_model
 
+import constants
+
 # SET THIS TO YOUR LOCAL OPERATING SYSTEM
 LOCAL_OPERATING_SYSTEM = 'windows'  # set to 'mac', 'windows' or 'linux'
-
-# How many weeks we will take into account regarding repeat matches
-MATCH_COOLDOWN = 5
-
-# The userId of the 'Joker' user
-JOKER_USER_ID = '17d2f33d-67e0-40ab-977e-73d1580e990d'
-
-# Costs for the decision matrix
-COST_SAME_FACULTY = 5
-COST_PREV_MATCHED = [2 * i for i in range(MATCH_COOLDOWN, 0, -1)]
 
 
 # This will evaluate the potential 'cost' that a certain match between user1 and user2 will incur
@@ -25,7 +17,7 @@ def eval_cost(user1, user2, prev_matches):
 
     # If both users are from the same faculty
     if user1['faculty']['S'] == user2['faculty']['S']:
-        cost += COST_SAME_FACULTY
+        cost += constants.COST_SAME_FACULTY
 
     if user2['primaryKey']['S'] not in prev_matches: 
         # If users have not been matched within the MATCH_COOLDOWN period
@@ -33,7 +25,7 @@ def eval_cost(user1, user2, prev_matches):
     else:
         # If users have been matched within the MATCH_COOLDOWN period, add a cost that corresponds
         # to the recency of the match - i.e. maximum if both users' last match was each other
-        cost += COST_PREV_MATCHED[prev_matches.index(user2['primaryKey']['S'])]
+        cost += constants.COST_PREV_MATCHED[prev_matches.index(user2['primaryKey']['S'])]
 
     return cost
 
@@ -59,13 +51,13 @@ def lambda_handler(event, context):
 
         # Remove 'Joker' user if there are an odd number of users to be matched
         if len(users) % 2 == 1:
-            users = [user for user in users if user['primaryKey']['S'] != ('USER#' + JOKER_USER_ID)]
+            users = [user for user in users if user['primaryKey']['S'] != ('USER#' + constants.JOKER_USER_ID)]
 
         prev_matches = []
         for user in users:
             # Generate date of which last match will be considered
             today = datetime.date.today()
-            match_limit = today - datetime.timedelta(days=7*MATCH_COOLDOWN)
+            match_limit = today - datetime.timedelta(days=7*constants.MATCH_COOLDOWN)
             iso_date_match_limit = match_limit.isoformat()
 
             # Get all matches of specific user after match_limit from most to least recent
