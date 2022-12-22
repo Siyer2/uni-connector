@@ -6,28 +6,10 @@ import datetime
 from ortools.sat.python import cp_model
 
 import constants
+import database
 
 # SET THIS TO YOUR LOCAL OPERATING SYSTEM
 LOCAL_OPERATING_SYSTEM = 'windows'  # set to 'mac', 'windows' or 'linux'
-
-
-# This will evaluate the potential 'cost' that a certain match between user1 and user2 will incur
-def eval_cost(user1, user2, prev_matches):
-    cost = 0
-
-    # If both users are from the same faculty
-    if user1['faculty']['S'] == user2['faculty']['S']:
-        cost += constants.COST_SAME_FACULTY
-
-    if user2['primaryKey']['S'] not in prev_matches: 
-        # If users have not been matched within the MATCH_COOLDOWN period
-        pass
-    else:
-        # If users have been matched within the MATCH_COOLDOWN period, add a cost that corresponds
-        # to the recency of the match - i.e. maximum if both users' last match was each other
-        cost += constants.COST_PREV_MATCHED[prev_matches.index(user2['primaryKey']['S'])]
-
-    return cost
 
 
 def lambda_handler(event, context):
@@ -36,18 +18,8 @@ def lambda_handler(event, context):
     try:
         client = get_client()
 
-        # Get all users using EntityTypeIndex GSI where entityType = 'user'
-        allUsersQuery = client.query(
-            TableName='TuesHey',
-            IndexName='EntityTypeIndex',
-            KeyConditionExpression='entityType = :entityType',
-            ExpressionAttributeValues={
-                ':entityType': {
-                    'S': 'user'
-                }
-            }
-        )
-        users = allUsersQuery.get('Items')
+        # Get all users from database
+        users = database.getAllUsers(client)
 
         # Remove 'Joker' user if there are an odd number of users to be matched
         if len(users) % 2 == 1:
@@ -60,25 +32,8 @@ def lambda_handler(event, context):
             match_limit = today - datetime.timedelta(days=7*constants.MATCH_COOLDOWN)
             iso_date_match_limit = match_limit.isoformat()
 
-            # Get all matches of specific user after match_limit from most to least recent
-            matchHistoryQuery = client.query(
-                TableName='TuesHey',
-                KeyConditionExpression='primaryKey = :primarykeyval AND '\
-                                        'sortKey BETWEEN :sortkeyval1 AND :sortkeyval2',
-                ExpressionAttributeValues={
-                    ':primarykeyval': {
-                        'S': user['primaryKey']['S']
-                    },
-                    ':sortkeyval1': {
-                        'S': 'MATCH#' #+ iso_date_match_limit 
-                    },
-                    ':sortkeyval2': {
-                        'S': 'METADATA'
-                    }
-                },
-                ScanIndexForward=False
-            )   
-            prev_matches_for_user = matchHistoryQuery.get('Items')
+            # Get match history for user from most to least recent
+            prev_matches_for_user = database.getUserMatchHistory(client, user, iso_date_match_limit)
 
             # Append to prev_matches a list of the IDs of the users the current user was matched with
             prev_matches.append([match['user2Id']['S'] for match in prev_matches_for_user])
@@ -147,6 +102,24 @@ def lambda_handler(event, context):
         }),
     }
 
+
+# This will evaluate the potential 'cost' that a certain match between user1 and user2 will incur
+def eval_cost(user1, user2, prev_matches):
+    cost = 0
+
+    # If both users are from the same faculty
+    if user1['faculty']['S'] == user2['faculty']['S']:
+        cost += constants.COST_SAME_FACULTY
+
+    if user2['primaryKey']['S'] not in prev_matches: 
+        # If users have not been matched within the MATCH_COOLDOWN period
+        pass
+    else:
+        # If users have been matched within the MATCH_COOLDOWN period, add a cost that corresponds
+        # to the recency of the match - i.e. maximum if both users' last match was each other
+        cost += constants.COST_PREV_MATCHED[prev_matches.index(user2['primaryKey']['S'])]
+
+    return cost
 
 def get_client():
     isLocalEnvironment = os.environ['ENVIRONMENT'] == 'local'
