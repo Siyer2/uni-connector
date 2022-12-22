@@ -72,7 +72,6 @@ def eval_cost(user1, user2, prev_matches):
     # to the recency of the match - i.e. maximum if both users' last match was each other
     for i, match in enumerate(prev_matches):
         if user2['primaryKey']['S'] == match['user2Id']['S']:
-            print("previously matched!")
             cost += constants.COST_PREV_MATCHED[i]
 
     return cost
