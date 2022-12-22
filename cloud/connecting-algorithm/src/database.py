@@ -1,3 +1,5 @@
+# This file contains helper functions to get data from the database
+
 # Get all users using EntityTypeIndex GSI where entityType = 'user'
 def getAllUsers(client):
     allUsersQuery = client.query(
