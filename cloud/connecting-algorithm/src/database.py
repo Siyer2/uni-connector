@@ -1,5 +1,36 @@
 # This file contains helper functions to get data from the database
 
+import os
+import boto3
+import constants
+
+# Returns boto3 client
+def get_client():
+    isLocalEnvironment = os.environ['ENVIRONMENT'] == 'local'
+
+    endpoint_url = "http://docker.for.mac.localhost:8002/"
+    if (isLocalEnvironment):
+        if constants.LOCAL_OPERATING_SYSTEM == 'linux':
+            # linux
+            endpoint_url = "http://127.0.0.1:8002/"
+        elif constants.LOCAL_OPERATING_SYSTEM == 'mac':
+            # OS X
+            endpoint_url = "http://docker.for.mac.localhost:8002/"
+        elif constants.LOCAL_OPERATING_SYSTEM == 'windows':
+            # Windows
+            endpoint_url = "http://docker.for.windows.localhost:8002/"
+
+    # Create dynamo client based on environment
+    client = boto3.client(
+        'dynamodb',
+        region_name='us-east-1' if isLocalEnvironment else 'ap-southeast-2',
+        endpoint_url=endpoint_url if isLocalEnvironment else None,
+        aws_access_key_id='localKey' if isLocalEnvironment else None,
+        aws_secret_access_key='localSecret' if isLocalEnvironment else None,
+    )
+
+    return client
+
 # Get all users using EntityTypeIndex GSI where entityType = 'user'
 def getAllUsers(client):
     allUsersQuery = client.query(
