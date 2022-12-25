@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "connecting-algorithm:ConnectingAlgorithmLambda",
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "invokeTarget": {
+                "target": "template",
+                "templatePath": "cloud/template.yml",
+                "logicalId": "ConnectingAlgorithmLambda"
+            },
+            "sam": {
+                "containerBuild": true,
+                "skipNewImageCheck": false,
+                "template": {
+                    "parameters": {
+                        "ENVIRONMENT": "local"
+                    }
+                },
+            },
+        }
+    ]
+}
