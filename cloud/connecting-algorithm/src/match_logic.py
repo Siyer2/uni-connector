@@ -1,12 +1,15 @@
 # This file contains the logic that will be used to generate matches in lambda_handler()
 
+from profiler import profile, print_stats
 from ortools.sat.python import cp_model
 import constants
 
+
+@profile
 def generate_matches(users, prev_matches):
     matches = []
 
-     # Creates the model
+    # Creates the model
     model = cp_model.CpModel()
 
     # Creates the variables
@@ -20,7 +23,7 @@ def generate_matches(users, prev_matches):
                 x[i, j] = model.NewIntVar(0, 0, f'x[{i},{j}]')
                 costs[i, j] = 0
             else:
-                x[i, j] = (model.NewBoolVar(f'x[{i},{j}]')) 
+                x[i, j] = (model.NewBoolVar(f'x[{i},{j}]'))
                 costs[i, j] = eval_cost(users[i], users[j], prev_matches[i])
 
     # Creates the constraints
@@ -28,7 +31,7 @@ def generate_matches(users, prev_matches):
         model.Add(
             sum((x[i, j] + x[j, i] for j in range(num_users))) == 1
         )
-    
+
     # Create objective function
     objective = []
     for i in range(num_users):
@@ -40,7 +43,7 @@ def generate_matches(users, prev_matches):
     solver = cp_model.CpSolver()
     status = solver.Solve(model)
 
-    # Return array of all matches 
+    # Return array of all matches
     if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
         print('Solution found.')
         print(f'Total cost = {solver.ObjectiveValue()}')
@@ -56,7 +59,9 @@ def generate_matches(users, prev_matches):
                     matches.append(new_match)
     else:
         print('No solution found.')
-    
+
+    print_stats()
+
     return matches
 
 
