@@ -1,5 +1,6 @@
 import { Box, AppBar, Toolbar } from '@mui/material';
 import { SignOutButton } from './SignOutButton';
+import beanWave from '../assets/bean-wave.gif';
 
 export const TopAppBar = (props: { children: JSX.Element }) => {
   return (
