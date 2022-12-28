@@ -4,8 +4,7 @@ interface TuesHeyDBEntry {
 }
 
 export interface User extends TuesHeyDBEntry {
-  faculty: Faculty;
-  imInto: string;
+  faculty?: Faculty;
   [key: string]: string;
 }
 
