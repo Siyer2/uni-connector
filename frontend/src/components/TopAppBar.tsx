@@ -6,6 +6,14 @@ export const TopAppBar = (props: { children: JSX.Element }) => {
     <>
       <AppBar position="static">
         <Toolbar>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <img src={beanWave} alt="queen" height="40" width="40" />
+          </IconButton>
           <Box display="flex" flexGrow={1}></Box>
           <SignOutButton />
         </Toolbar>
