@@ -64,11 +64,11 @@ export const UpdateUser = () => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
+          justifyContent: 'space-around',
           alignItems: 'center',
         }}
       >
-        <div style={{ width: '20rem', margin: '1em 0' }}>
+        <div style={{ width: '25rem' }}>
           <TextField
             onChange={handleChange}
             value={userDetails.emojis}
@@ -78,14 +78,10 @@ export const UpdateUser = () => {
             fullWidth
           />
         </div>
-        <div style={{ width: '20rem', margin: '1em 0' }}>
+        <div style={{ width: '25rem' }}>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">
-              Choose your faculty
-            </InputLabel>
+            <InputLabel>Choose your faculty</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
               value={userDetails.faculty}
               label="Choose your faculty"
               onChange={handleChange}
@@ -104,7 +100,7 @@ export const UpdateUser = () => {
             </Select>
           </FormControl>
         </div>
-        <div style={{ width: '20rem', margin: '1em 0' }}>
+        <div style={{ width: '25rem' }}>
           <TextField
             label={"What's your favourite place to eat on campus?"}
             value={userDetails.faveEat}
@@ -113,7 +109,7 @@ export const UpdateUser = () => {
             fullWidth
           />
         </div>
-        <div style={{ width: '20rem', margin: '1em 0' }}>
+        <div style={{ width: '25rem' }}>
           <TextField
             label={"I'm into..."}
             value={userDetails.interests}
