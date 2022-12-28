@@ -1,11 +1,32 @@
-import { PageLayout } from '../components/PageLayout';
 import Background from '../components/Background';
-import { AuthenticatedTemplate } from '@azure/msal-react';
-import { ProfileContent } from '../components/ProfileContent';
 import { Grid, Typography } from '@mui/material';
 import beanWave from '../assets/bean-wave.gif';
+import { useIsAuthenticated, useMsal } from '@azure/msal-react';
+import { SignInButton } from '../components/SignInButton';
+import { SignOutButton } from '../components/SignOutButton';
+import { useEffect } from 'react';
+import { requestMSAuthResult } from '../functions/requestMSAuthResult';
 
 export const HomePage = () => {
+  const { accounts, instance } = useMsal();
+  const isAuthenticated = useIsAuthenticated();
+
+  useEffect(() => {
+    async function signInSignUp() {
+      const response = await requestMSAuthResult(instance, accounts[0]);
+      console.log('logging in', response.idToken);
+
+      // TODO: Make request to /userLoginSignup using response.idToken
+
+      // TODO: Redirect to /updateUser if user is new else redirect to /chats
+      // Note: if a user has an empty faculty, they are new (until we add the backend call, simply use a const user = ...)
+    }
+
+    if (isAuthenticated) {
+      signInSignUp();
+    }
+  }, [accounts, instance, isAuthenticated]);
+
   return (
     <Background bgcolor={'background.default'}>
       <Grid
@@ -34,11 +55,8 @@ export const HomePage = () => {
           <br />
           Every Tuesday
         </Typography>
-        <PageLayout>
-          <AuthenticatedTemplate>
-            <ProfileContent />
-          </AuthenticatedTemplate>
-        </PageLayout>
+
+        {isAuthenticated ? <SignOutButton /> : <SignInButton />}
       </Grid>
     </Background>
   );
