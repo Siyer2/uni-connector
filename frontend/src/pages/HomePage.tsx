@@ -34,11 +34,8 @@ export const HomePage = () => {
           <br />
           Every Tuesday
         </Typography>
-        <PageLayout>
-          <AuthenticatedTemplate>
-            <ProfileContent />
-          </AuthenticatedTemplate>
-        </PageLayout>
+
+        {isAuthenticated ? <SignOutButton /> : <SignInButton />}
       </Grid>
     </Background>
   );
