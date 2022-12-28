@@ -1,8 +1,8 @@
-import { Box, AppBar, Toolbar } from '@mui/material';
+import { Box, AppBar, Toolbar, IconButton } from '@mui/material';
 import { SignOutButton } from './SignOutButton';
 import beanWave from '../assets/bean-wave.gif';
 
-export const TopAppBar = (props: { children: JSX.Element }) => {
+export const TopAppBar = (props: { children: React.ReactNode }) => {
   return (
     <>
       <AppBar position="static">
