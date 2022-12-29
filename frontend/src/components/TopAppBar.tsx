@@ -1,10 +1,11 @@
 import { Box, AppBar, Toolbar, IconButton } from '@mui/material';
 import { SignOutButton } from './SignOutButton';
 import beanWave from '../assets/bean-wave.gif';
+import Background from './Background';
 
-export const TopAppBar = (props: { children: React.ReactNode }) => {
+const TopAppBar = (props: { children: React.ReactNode }) => {
   return (
-    <>
+    <Background bgcolor="#fff">
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -21,6 +22,8 @@ export const TopAppBar = (props: { children: React.ReactNode }) => {
       </AppBar>
 
       {props.children}
-    </>
+    </Background>
   );
 };
+
+export default TopAppBar;

@@ -8,17 +8,17 @@ import {
   Button,
   FormControl,
 } from '@mui/material';
-import Background from '../components/Background';
+import TopAppBar from '../components/TopAppBar';
 import { useState } from 'react';
 import { Faculty } from '../types';
 
 export const UpdateUser = () => {
   const [userDetails, setUserDetails] = useState<{
     emojis: string;
-    faculty: string;
+    faculty: Faculty;
     faveEat: string;
     interests: string;
-  }>({ emojis: '', faculty: '', faveEat: '', interests: '' });
+  }>({ emojis: '', faculty: Faculty.Business, faveEat: '', interests: '' });
 
   // TODO:
   // Add appropriate type to event
@@ -41,7 +41,7 @@ export const UpdateUser = () => {
   };
 
   return (
-    <Background bgcolor={'#fff'}>
+    <TopAppBar>
       <Grid
         item
         xs={12}
@@ -54,21 +54,11 @@ export const UpdateUser = () => {
       >
         <Typography variant={'h5'}>This is...</Typography>
         <Typography variant={'h2'}>TuesHey</Typography>
-        <Typography variant={'h4'}>
-          Let's get to know you <br /> ✌️😙✌️
-        </Typography>
+        <Typography variant={'h4'}>Let's get to know you</Typography>
+        <Typography variant={'h4'}>✌️😙✌️</Typography>
       </Grid>
-      <Grid
-        item
-        xs={12}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-around',
-          alignItems: 'center',
-        }}
-      >
-        <div style={{ width: '25rem' }}>
+      <Grid item container xs={12} paddingX={5} style={{ gap: 15 }}>
+        <Grid item xs={12}>
           <TextField
             onChange={handleChange}
             value={userDetails.emojis}
@@ -77,9 +67,9 @@ export const UpdateUser = () => {
             label={'Describe yourself in 3 emojis!'}
             fullWidth
           />
-        </div>
-        <div style={{ width: '25rem' }}>
-          <FormControl fullWidth>
+        </Grid>
+        <Grid item xs={12}>
+          <FormControl fullWidth required>
             <InputLabel>Choose your faculty</InputLabel>
             <Select
               value={userDetails.faculty}
@@ -99,8 +89,8 @@ export const UpdateUser = () => {
               <MenuItem value={Faculty.Science}>Science</MenuItem>
             </Select>
           </FormControl>
-        </div>
-        <div style={{ width: '25rem' }}>
+        </Grid>
+        <Grid item xs={12}>
           <TextField
             label={"What's your favourite place to eat on campus?"}
             value={userDetails.faveEat}
@@ -108,8 +98,8 @@ export const UpdateUser = () => {
             name="bestEat"
             fullWidth
           />
-        </div>
-        <div style={{ width: '25rem' }}>
+        </Grid>
+        <Grid item xs={12}>
           <TextField
             label={"I'm into..."}
             value={userDetails.interests}
@@ -118,7 +108,7 @@ export const UpdateUser = () => {
             name="interests"
             fullWidth
           />
-        </div>
+        </Grid>
       </Grid>
       <Grid
         item
@@ -134,6 +124,6 @@ export const UpdateUser = () => {
           Submit!
         </Button>
       </Grid>
-    </Background>
+    </TopAppBar>
   );
 };

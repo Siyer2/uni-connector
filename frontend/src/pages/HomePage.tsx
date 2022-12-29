@@ -6,10 +6,12 @@ import { SignInButton } from '../components/SignInButton';
 import { SignOutButton } from '../components/SignOutButton';
 import { useEffect } from 'react';
 import { requestMSAuthResult } from '../functions/requestMSAuthResult';
+import { useNavigate } from 'react-router-dom';
 
 export const HomePage = () => {
   const { accounts, instance } = useMsal();
   const isAuthenticated = useIsAuthenticated();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function signInSignUp() {
@@ -18,8 +20,9 @@ export const HomePage = () => {
 
       // TODO: Make request to /userLoginSignup using response.idToken
 
-      // TODO: Redirect to /updateUser if user is new else redirect to /chats
-      // Note: if a user has an empty faculty, they are new (until we add the backend call, simply use a const user = ...)
+      // user variable is placeholder for data which will be returned from BE
+      const user = { name: 'John Smith', faculty: 'business' };
+      user.faculty ? navigate('/chats') : navigate('/updateUser');
     }
 
     if (isAuthenticated) {
