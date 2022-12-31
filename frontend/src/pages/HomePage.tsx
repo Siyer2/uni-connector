@@ -21,14 +21,14 @@ export const HomePage = () => {
       // TODO: Make request to /userLoginSignup using response.idToken
 
       // user variable is placeholder for data which will be returned from BE
-      const user = { name: 'John Smith', faculty: 'business' };
-      user.faculty ? navigate('/chats') : navigate('/updateUser');
+      const user = { name: 'John Smith', faculty: '' };
+      user.faculty ? navigate('/chats') : navigate('/update-user');
     }
 
     if (isAuthenticated) {
       signInSignUp();
     }
-  }, [accounts, instance, isAuthenticated]);
+  }, [accounts, instance, isAuthenticated, navigate]);
 
   return (
     <Background bgcolor={'background.default'}>
