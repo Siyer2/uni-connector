@@ -19,7 +19,14 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="/chats" element={<Chats />} />
+          <Route
+            path="/chats"
+            element={
+              <PrivateRoute>
+                <Chats />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </Box>
     </Router>
