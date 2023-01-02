@@ -1,11 +1,10 @@
-import { Box, AppBar, Toolbar, IconButton } from '@mui/material';
+import { Box, AppBar, Toolbar, IconButton, Grid } from '@mui/material';
 import { SignOutButton } from './SignOutButton';
 import beanWave from '../assets/bean-wave.gif';
-import Background from './Background';
 
 const TopAppBar = (props: { children: React.ReactNode }) => {
   return (
-    <Background bgcolor="#fff">
+    <>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -20,9 +19,17 @@ const TopAppBar = (props: { children: React.ReactNode }) => {
           <SignOutButton />
         </Toolbar>
       </AppBar>
-
-      {props.children}
-    </Background>
+      <Grid
+        container
+        sx={{
+          width: '100vw',
+          height: 'calc(100vh - 64px)',
+        }}
+        textAlign={'center'}
+      >
+        {props.children}
+      </Grid>
+    </>
   );
 };
 

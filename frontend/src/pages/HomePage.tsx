@@ -1,4 +1,3 @@
-import Background from '../components/Background';
 import { Grid, Typography } from '@mui/material';
 import beanWave from '../assets/bean-wave.gif';
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';
@@ -31,7 +30,16 @@ export const HomePage = () => {
   }, [accounts, instance, isAuthenticated, navigate]);
 
   return (
-    <Background bgcolor={'background.default'}>
+    <Grid
+      container
+      sx={{
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: 'background.default',
+      }}
+      textAlign={'center'}
+      display={'flex'}
+    >
       <Grid
         item
         xs={12}
@@ -61,6 +69,6 @@ export const HomePage = () => {
 
         {isAuthenticated ? <SignOutButton /> : <SignInButton />}
       </Grid>
-    </Background>
+    </Grid>
   );
 };
