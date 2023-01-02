@@ -10,7 +10,6 @@ import { useState } from 'react';
 export const SignInButton = () => {
   const { instance } = useMsal();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
   async function handleLogin(instance: IPublicClientApplication) {
     try {
       setIsLoading(true);

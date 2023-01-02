@@ -1,13 +1,45 @@
-import { PageLayout } from '../components/PageLayout';
-import Background from '../components/Background';
-import { AuthenticatedTemplate } from '@azure/msal-react';
-import { ProfileContent } from '../components/ProfileContent';
 import { Grid, Typography } from '@mui/material';
 import beanWave from '../assets/bean-wave.gif';
+import { useIsAuthenticated, useMsal } from '@azure/msal-react';
+import { SignInButton } from '../components/SignInButton';
+import { SignOutButton } from '../components/SignOutButton';
+import { useEffect } from 'react';
+import { requestMSAuthResult } from '../functions/requestMSAuthResult';
+import { useNavigate } from 'react-router-dom';
 
 export const HomePage = () => {
+  const { accounts, instance } = useMsal();
+  const isAuthenticated = useIsAuthenticated();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function signInSignUp() {
+      const response = await requestMSAuthResult(instance, accounts[0]);
+      console.log('logging in', response.idToken);
+
+      // TODO: Make request to /userLoginSignup using response.idToken
+
+      // user variable is placeholder for data which will be returned from BE
+      const user = { name: 'John Smith', faculty: '' };
+      user.faculty ? navigate('/chats') : navigate('/update-user');
+    }
+
+    if (isAuthenticated) {
+      signInSignUp();
+    }
+  }, [accounts, instance, isAuthenticated, navigate]);
+
   return (
-    <Background>
+    <Grid
+      container
+      sx={{
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: 'background.default',
+      }}
+      textAlign={'center'}
+      display={'flex'}
+    >
       <Grid
         item
         xs={12}
@@ -26,7 +58,7 @@ export const HomePage = () => {
           variant="h6"
           textAlign={'center'}
           color="#fff"
-          mb={10}
+          mb={5}
           mx={10}
         >
           Connect with a UNSW student/alumni not in your faculty!
@@ -34,12 +66,9 @@ export const HomePage = () => {
           <br />
           Every Tuesday
         </Typography>
-        <PageLayout>
-          <AuthenticatedTemplate>
-            <ProfileContent />
-          </AuthenticatedTemplate>
-        </PageLayout>
+
+        {isAuthenticated ? <SignOutButton /> : <SignInButton />}
       </Grid>
-    </Background>
+    </Grid>
   );
 };
