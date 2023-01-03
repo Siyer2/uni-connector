@@ -29,7 +29,7 @@
     "start": "npm run build && node build/app.local.js",
     "build": "tsc && npm run build-dependencies",
     "build-dependencies": "cp package*.json build/ && npm i --only=prod --prefix=build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -39,6 +39,7 @@
       "tsx",
       "js"
     ],
+    "testPathIgnorePatterns": [".d.ts", ".js"], 
     "transform": {
       "^.+\\.(ts|tsx)$": [
         "ts-jest",
