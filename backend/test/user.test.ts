@@ -22,10 +22,7 @@ const mockUserFromMiddleware: MicrosoftUser = {
 const mockUser: User = {
   name: 'John Smith',
   sortKey: 'METADATA#81f3816a-edb5-4352-9f9a-953f23d2f7c1',
-  // imInto: "songs",
-  // favouritePlaceToEat: "quad",
   primaryKey: 'USER#81f3816a-edb5-4352-9f9a-953f23d2f7c1',
-  // faculty: Faculty.Business
 };
 
 jest.mock('../src/middleware/index.ts', () => ({
