@@ -1,8 +1,7 @@
-import * as express from 'express';
-import * as cors from 'cors';
-import * as dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
 import { middleware } from './middleware';
-import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import { Faculty, User } from './user/types';
 import { getUser, updateUser } from './user';
 

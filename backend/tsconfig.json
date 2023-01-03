@@ -6,14 +6,17 @@
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
-    "moduleResolution": "node", 
-    "esModuleInterop": false, 
+    "moduleResolution": "node",
+    "esModuleInterop": true,
     "baseUrl": "src",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     }
   },
   "include": [
     "src/**/*.ts",
+    "test/**/*.ts",
   ],
 }
