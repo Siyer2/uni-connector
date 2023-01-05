@@ -6,6 +6,7 @@ import { SignOutButton } from '../components/SignOutButton';
 import { useEffect } from 'react';
 import { requestMSAuthResult } from '../functions/requestMSAuthResult';
 import { useNavigate } from 'react-router-dom';
+import http from '../http';
 
 export const HomePage = () => {
   const { accounts, instance } = useMsal();
@@ -18,10 +19,21 @@ export const HomePage = () => {
       console.log('logging in', response.idToken);
 
       // TODO: Make request to /userLoginSignup using response.idToken
-
-      // user variable is placeholder for data which will be returned from BE
-      const user = { name: 'John Smith', faculty: '' };
-      user.faculty ? navigate('/chats') : navigate('/update-user');
+      try {
+        const res = await http.post('/userLoginSignup', undefined, {
+          headers: {
+            Authorization: `Bearer ${response.idToken}`,
+          },
+        });
+        console.log(res.data);
+        res.data.faculty ? navigate('/chats') : navigate('/update-user');
+      } catch (err: any) {
+        if (err.response) {
+          console.log(err.response.data);
+        } else {
+          console.log(`Error: ${err.message}`);
+        }
+      }
     }
 
     if (isAuthenticated) {
