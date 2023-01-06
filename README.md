@@ -1,6 +1,6 @@
-# uni-connector (needs a better name)
+# Tueshey
 
-Connect uni students from different faculties
+ Connect with a UNSW student/alumni not in your faculty. Every Tuesday. 
 
 ## Getting started
 
