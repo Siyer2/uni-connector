@@ -1,4 +1,11 @@
-import { Grid, Typography, Snackbar, Alert } from '@mui/material';
+import {
+  Grid,
+  Typography,
+  Snackbar,
+  Alert,
+  CircularProgress,
+  Backdrop,
+} from '@mui/material';
 import beanWave from '../assets/bean-wave.gif';
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';
 import { SignInButton } from '../components/SignInButton';
@@ -12,6 +19,7 @@ export const HomePage = () => {
   const { accounts, instance } = useMsal();
   const isAuthenticated = useIsAuthenticated();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [loginErrorMsg, setLoginErrorMsg] = useState('');
 
@@ -21,10 +29,13 @@ export const HomePage = () => {
       console.log('logging in', response.idToken);
 
       try {
+        setLoading(true);
         const user = await loginUser(response.idToken);
+        setLoading(false);
         console.log(user);
         user.faculty ? navigate('/chats') : navigate('/update-user');
       } catch (err: any) {
+        setLoading(false);
         if (err.response) {
           console.log(err.response.data);
           setLoginErrorMsg(err.response.data);
@@ -53,6 +64,12 @@ export const HomePage = () => {
       textAlign={'center'}
       display={'flex'}
     >
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Grid
         item
         xs={12}
