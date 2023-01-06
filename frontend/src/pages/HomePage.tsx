@@ -1,9 +1,9 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid, Typography, Snackbar, Alert } from '@mui/material';
 import beanWave from '../assets/bean-wave.gif';
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';
 import { SignInButton } from '../components/SignInButton';
 import { SignOutButton } from '../components/SignOutButton';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { requestMSAuthResult } from '../functions/requestMSAuthResult';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../api';
@@ -12,6 +12,8 @@ export const HomePage = () => {
   const { accounts, instance } = useMsal();
   const isAuthenticated = useIsAuthenticated();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [loginErrorMsg, setLoginErrorMsg] = useState('');
 
   useEffect(() => {
     async function signInSignUp() {
@@ -25,8 +27,12 @@ export const HomePage = () => {
       } catch (err: any) {
         if (err.response) {
           console.log(err.response.data);
+          setLoginErrorMsg(err.response.data);
+          setOpen(true);
         } else {
           console.log(`Error: ${err.message}`);
+          setLoginErrorMsg(`Error: ${err.message}`);
+          setOpen(true);
         }
       }
     }
@@ -76,6 +82,20 @@ export const HomePage = () => {
 
         {isAuthenticated ? <SignOutButton /> : <SignInButton />}
       </Grid>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={() => setOpen(false)}
+      >
+        <Alert
+          onClose={() => setOpen(false)}
+          severity="error"
+          sx={{ width: '100%' }}
+          variant="filled"
+        >
+          {loginErrorMsg}
+        </Alert>
+      </Snackbar>
     </Grid>
   );
 };
