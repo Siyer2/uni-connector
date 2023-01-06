@@ -1,44 +1,40 @@
 import json
-import os
-import boto3
 import requests
+import datetime
 
-# SET THIS TO YOUR LOCAL OPERATING SYSTEM
-LOCAL_OPERATING_SYSTEM = 'windows'  # set to 'mac', 'windows' or 'linux'
-
+import constants
+import database
+import match_logic
 
 def lambda_handler(event, context):
+    matches = []
+    
     try:
-        client = get_client()
+        client = database.get_client()
 
-        # Get all users using EntityTypeIndex GSI where entityType = 'user'
-        allUsersQuery = client.query(
-            TableName='TuesHey',
-            IndexName='EntityTypeIndex',
-            KeyConditionExpression='entityType = :entityType',
-            ExpressionAttributeValues={
-                ':entityType': {
-                    'S': 'user'
-                }
-            }
-        )
-        print(allUsersQuery.get('Items'))
+        # Get all users from database
+        users = database.getAllUsers(client)
 
-        testUserId = '17d2f33d-67e0-40ab-977e-73d1580e990d'
+        # Remove 'Joker' user if there are an odd number of users to be matched
+        if len(users) % 2 == 1:
+            users = [user for user in users if user['primaryKey']['S'] != ('USER#' + constants.JOKER_USER_ID)]
 
-        # Get user from dynamo
-        response = client.get_item(
-            TableName='TuesHey',
-            Key={
-                'primaryKey': {
-                    'S': 'USER#' + testUserId
-                },
-                'sortKey': {
-                    'S': 'METADATA#' + testUserId
-                }
-            }
-        )
-        print(response.get('Item'))
+        # Get previous match history for each user
+        prev_matches = []
+        for user in users:
+            # Generate date of which last match will be considered
+            today = datetime.date.today()
+            match_limit = today - datetime.timedelta(days=7*constants.MATCH_COOLDOWN)
+            iso_date_match_limit = match_limit.isoformat()
+
+            # Get match history for user from most to least recent
+            prev_matches_for_user = database.getUserMatchHistory(client, user, iso_date_match_limit)
+
+            # Append to prev_matches a list of the IDs of the users the current user was matched with
+            prev_matches.append(prev_matches_for_user)
+
+        matches = match_logic.generate_matches(users, prev_matches)
+
     except requests.RequestException as e:
         print(e)
 
@@ -47,33 +43,6 @@ def lambda_handler(event, context):
     return {
         "statusCode": 200,
         "body": json.dumps({
-            "message": "hello world",
+            "message": matches,
         }),
     }
-
-
-def get_client():
-    isLocalEnvironment = os.environ['ENVIRONMENT'] == 'local'
-
-    endpoint_url = "http://docker.for.mac.localhost:8002/"
-    if (isLocalEnvironment):
-        if LOCAL_OPERATING_SYSTEM == 'linux':
-            # linux
-            endpoint_url = "http://127.0.0.1:8002/"
-        elif LOCAL_OPERATING_SYSTEM == 'mac':
-            # OS X
-            endpoint_url = "http://docker.for.mac.localhost:8002/"
-        elif LOCAL_OPERATING_SYSTEM == 'windows':
-            # Windows
-            endpoint_url = "http://docker.for.windows.localhost:8002/"
-
-    # Create dynamo client based on environment
-    client = boto3.client(
-        'dynamodb',
-        region_name='us-east-1' if isLocalEnvironment else 'ap-southeast-2',
-        endpoint_url=endpoint_url if isLocalEnvironment else None,
-        aws_access_key_id='localKey' if isLocalEnvironment else None,
-        aws_secret_access_key='localSecret' if isLocalEnvironment else None,
-    )
-
-    return client
