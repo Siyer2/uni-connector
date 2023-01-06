@@ -6,7 +6,7 @@ import { SignOutButton } from '../components/SignOutButton';
 import { useEffect } from 'react';
 import { requestMSAuthResult } from '../functions/requestMSAuthResult';
 import { useNavigate } from 'react-router-dom';
-import http from '../http';
+import { loginUser } from '../api';
 
 export const HomePage = () => {
   const { accounts, instance } = useMsal();
@@ -18,15 +18,10 @@ export const HomePage = () => {
       const response = await requestMSAuthResult(instance, accounts[0]);
       console.log('logging in', response.idToken);
 
-      // TODO: Make request to /userLoginSignup using response.idToken
       try {
-        const res = await http.post('/userLoginSignup', undefined, {
-          headers: {
-            Authorization: `Bearer ${response.idToken}`,
-          },
-        });
-        console.log(res.data);
-        res.data.faculty ? navigate('/chats') : navigate('/update-user');
+        const user = await loginUser(response.idToken);
+        console.log(user);
+        user.faculty ? navigate('/chats') : navigate('/update-user');
       } catch (err: any) {
         if (err.response) {
           console.log(err.response.data);
