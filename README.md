@@ -1,4 +1,4 @@
-# Tueshey
+# TuesHey
 
  Connect with a UNSW student/alumni not in your faculty. Every Tuesday. 
 
