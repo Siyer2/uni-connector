@@ -32,20 +32,18 @@ export const HomePage = () => {
         setLoading(true);
         const user = await loginUser(response.idToken);
         setLoading(false);
-        console.log(user);
         user.faculty ? navigate('/chats') : navigate('/update-user');
       } catch (err: any) {
         setLoading(false);
         if (err.response) {
-          console.log(err.response.data);
           setLoginErrorMsg(err.response.data);
           setOpen(true);
         } else {
-          console.log(`Error: ${err.message}`);
           setLoginErrorMsg(`Error: ${err.message}`);
           setOpen(true);
         }
       }
+
     }
 
     if (isAuthenticated) {
