@@ -1,27 +1,49 @@
-import { Grid, Typography } from '@mui/material';
+import {
+  Grid,
+  Typography,
+  Snackbar,
+  Alert,
+  CircularProgress,
+  Backdrop,
+} from '@mui/material';
 import beanWave from '../assets/bean-wave.gif';
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';
 import { SignInButton } from '../components/SignInButton';
 import { SignOutButton } from '../components/SignOutButton';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { requestMSAuthResult } from '../functions/requestMSAuthResult';
 import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../api';
 
 export const HomePage = () => {
   const { accounts, instance } = useMsal();
   const isAuthenticated = useIsAuthenticated();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [loginErrorMsg, setLoginErrorMsg] = useState('');
 
   useEffect(() => {
     async function signInSignUp() {
       const response = await requestMSAuthResult(instance, accounts[0]);
       console.log('logging in', response.idToken);
 
-      // TODO: Make request to /userLoginSignup using response.idToken
+      try {
+        setLoading(true);
+        const user = await loginUser(response.idToken);
+        setLoading(false);
+        user.faculty ? navigate('/chats') : navigate('/update-user');
+      } catch (err: any) {
+        setLoading(false);
+        if (err.response) {
+          setLoginErrorMsg(err.response.data);
+          setOpen(true);
+        } else {
+          setLoginErrorMsg(`Error: ${err.message}`);
+          setOpen(true);
+        }
+      }
 
-      // user variable is placeholder for data which will be returned from BE
-      const user = { name: 'John Smith', faculty: '' };
-      user.faculty ? navigate('/chats') : navigate('/update-user');
     }
 
     if (isAuthenticated) {
@@ -40,6 +62,12 @@ export const HomePage = () => {
       textAlign={'center'}
       display={'flex'}
     >
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Grid
         item
         xs={12}
@@ -69,6 +97,20 @@ export const HomePage = () => {
 
         {isAuthenticated ? <SignOutButton /> : <SignInButton />}
       </Grid>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={() => setOpen(false)}
+      >
+        <Alert
+          onClose={() => setOpen(false)}
+          severity="error"
+          sx={{ width: '100%' }}
+          variant="filled"
+        >
+          {loginErrorMsg}
+        </Alert>
+      </Snackbar>
     </Grid>
   );
 };

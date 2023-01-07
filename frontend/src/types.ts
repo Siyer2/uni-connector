@@ -6,3 +6,12 @@ export enum Faculty {
   Science = 'science',
   LawAndJustice = 'lawAndJustice',
 }
+
+export type User = {
+  primaryKey: string;
+  sortKey: string;
+  faculty?: Faculty;
+  emojis?: string;
+  faveEat?: string;
+  interests?: string;
+};
