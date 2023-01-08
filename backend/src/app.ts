@@ -12,7 +12,7 @@ const app = express();
 const allowlist =
   process.env.ENVIRONMENT === 'local'
     ? ['http://localhost:3001']
-    : ['https://www.tueshey.com/', 'https://tueshey.com/'];
+    : ['https://www.tueshey.com', 'https://tueshey.com'];
 const options: cors.CorsOptions = {
   origin: allowlist,
 };
