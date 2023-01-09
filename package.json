@@ -9,7 +9,7 @@
     "deploy-backend": "cd backend && components deploy",
     "postinstall": "cd frontend && npm install && cd ../backend && npm install",
     "start": "concurrently \"docker-compose up --build\" \"cd backend && npm run client:start\" \"cd frontend && cross-env PORT=3001 npm start\"",
-    "start-connecting": "cd cloud && sam build --use-container --profile uni-connector && sam local invoke --parameter-overrides 'ParameterKey=ENVIRONMENT,ParameterValue=local' --profile uni-connector"
+    "start-connecting": "cd cloud && sam build --use-container && sam local invoke --parameter-overrides 'ParameterKey=ENVIRONMENT,ParameterValue=local'"
   },
   "keywords": [],
   "author": "",

@@ -12,7 +12,7 @@ const app = express();
 const allowlist =
   process.env.ENVIRONMENT === 'local'
     ? ['http://localhost:3001']
-    : ['https://main.d2dflf7eo6e40g.amplifyapp.com/'];
+    : ['https://www.tueshey.com', 'https://tueshey.com'];
 const options: cors.CorsOptions = {
   origin: allowlist,
 };
@@ -63,6 +63,9 @@ app.post(
   '/userLoginSignup',
   [middleware.authenticateUser, middleware.getDB],
   async (req: express.Request, res: express.Response) => {
+    // Add 2 second wait
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     let user = await getUser(req.db, req.user.oid);
 
     // create if not found
