@@ -1,6 +1,6 @@
 {
   "name": "express-starter-typescript-tsc",
-  "main": "app.js",
+  "main": "src/app.js",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -39,7 +39,10 @@
       "tsx",
       "js"
     ],
-    "testPathIgnorePatterns": [".d.ts", ".js"], 
+    "testPathIgnorePatterns": [
+      ".d.ts",
+      ".js"
+    ],
     "transform": {
       "^.+\\.(ts|tsx)$": [
         "ts-jest",
