@@ -63,9 +63,6 @@ app.post(
   '/userLoginSignup',
   [middleware.authenticateUser, middleware.getDB],
   async (req: express.Request, res: express.Response) => {
-    // Add 2 second wait
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
     let user = await getUser(req.db, req.user.oid);
 
     // create if not found
