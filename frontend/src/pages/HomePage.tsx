@@ -45,7 +45,6 @@ export const HomePage = () => {
           setOpen(true);
         }
       }
-
     }
 
     if (isAuthenticated) {
