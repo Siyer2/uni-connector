@@ -12,7 +12,7 @@ const app = express();
 const allowlist =
   process.env.ENVIRONMENT === 'local'
     ? ['http://localhost:3001']
-    : ['https://main.d2dflf7eo6e40g.amplifyapp.com/'];
+    : ['https://www.tueshey.com', 'https://tueshey.com'];
 const options: cors.CorsOptions = {
   origin: allowlist,
 };

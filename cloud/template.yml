@@ -106,3 +106,10 @@ Resources:
       ManagedPolicyArns:
         - !Ref ReadWriteDynamoPolicy
   # End Connecting Algorithm Lambda
+
+Outputs:
+  serverRoleArn:
+    Description: The ARN of the serverRole
+    Value: !GetAtt serverRole.Arn
+    Export:
+      Name: serverRoleArn

@@ -1,12 +1,14 @@
 import json
 import requests
 import datetime
+import os
 
 import constants
 import database
 import match_logic
 
 def lambda_handler(event, context):
+    print('Starting Connecting Algorithm on ' + os.environ['ENVIRONMENT'])
     matches = []
     
     try:
