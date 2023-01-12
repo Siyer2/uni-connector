@@ -93,3 +93,28 @@ describe('/userLoginSignup tests', () => {
     expect(updateUser).not.toHaveBeenCalled();
   });
 });
+
+describe('/updateUser tests', () => {
+  beforeEach(() => jest.clearAllMocks());
+  it('invalid faculty should return error', async () => {
+    const res = await request.post('/updateUser').send({ faculty: '' });
+    expect(res.status).toEqual(400);
+  });
+
+  it('user should be returned', async () => {
+    // Mock getUser to return the mockUser
+    const getUser = jest.spyOn(require('../src/user/index.ts'), 'getUser');
+    getUser.mockImplementation(async () => mockUser);
+
+    const updateUser = jest.spyOn(
+      require('../src/user/index.ts'),
+      'updateUser'
+    );
+    updateUser.mockImplementation(async () => {});
+
+    const res = await request.post('/updateUser').send({ faculty: 'science' });
+    expect(res.status).toEqual(200);
+    expect(res.body).toEqual(mockUser);
+    expect(updateUser).toHaveBeenCalled();
+  });
+});
