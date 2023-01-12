@@ -7,6 +7,10 @@ import {
   Typography,
   Button,
   FormControl,
+  Backdrop,
+  Snackbar,
+  Alert,
+  CircularProgress,
 } from '@mui/material';
 import TopAppBar from '../components/TopAppBar';
 import { useState } from 'react';
@@ -22,6 +26,9 @@ export const UpdateUser = () => {
     faveEat: string;
     interests: string;
   }>({ emojis: '', faculty: Faculty.Business, faveEat: '', interests: '' });
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [loginErrorMsg, setUpdateErrorMsg] = useState('');
 
   const navigate = useNavigate();
 
@@ -36,23 +43,32 @@ export const UpdateUser = () => {
   };
 
   const handleSubmit = async () => {
-    console.log(userDetails);
     try {
       const token = getToken();
+      setLoading(true);
       const user = await updateUser(token, userDetails);
+      setLoading(false);
       console.log(user);
       navigate('/chats');
     } catch (err: any) {
       if (err.response) {
-        console.log(err.response.data);
+        setUpdateErrorMsg(err.response.data);
+        setOpen(true);
       } else {
-        console.log(err.message);
+        setUpdateErrorMsg(err.message);
+        setOpen(true);
       }
     }
   };
 
   return (
     <TopAppBar>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Grid
         item
         xs={12}
@@ -127,6 +143,20 @@ export const UpdateUser = () => {
           </Button>
         </Grid>
       </Grid>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={() => setOpen(false)}
+      >
+        <Alert
+          onClose={() => setOpen(false)}
+          severity="error"
+          sx={{ width: '100%' }}
+          variant="filled"
+        >
+          {loginErrorMsg}
+        </Alert>
+      </Snackbar>
     </TopAppBar>
   );
 };
