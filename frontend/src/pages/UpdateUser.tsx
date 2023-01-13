@@ -46,9 +46,8 @@ export const UpdateUser = () => {
     try {
       const token = getToken();
       setLoading(true);
-      const user = await updateUser(token, userDetails);
+      await updateUser(token, userDetails);
       setLoading(false);
-      console.log(user);
       navigate('/chats');
     } catch (err: any) {
       setLoading(false)
