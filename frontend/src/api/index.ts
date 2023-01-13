@@ -1,4 +1,4 @@
-import { User } from '../types';
+import { User, UserDetails } from '../types';
 import http from '../http';
 
 export async function loginUser(token: string): Promise<User> {
@@ -11,8 +11,11 @@ export async function loginUser(token: string): Promise<User> {
   return user;
 }
 
-export async function updateUser(token: string, userInfo: any): Promise<User> {
-  const res = await http.post('/updateUser', userInfo, {
+export async function updateUser(
+  token: string,
+  userDetails: UserDetails
+): Promise<User> {
+  const res = await http.post('/updateUser', userDetails, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

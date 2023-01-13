@@ -15,3 +15,10 @@ export type User = {
   faveEat?: string;
   interests?: string;
 };
+
+export type UserDetails = {
+  emojis: string;
+  faculty: Faculty;
+  faveEat: string;
+  interests: string;
+};

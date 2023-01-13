@@ -14,7 +14,6 @@ import { useEffect, useState } from 'react';
 import { requestMSAuthResult } from '../functions/requestMSAuthResult';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../api';
-import { persistToken } from '../localStorage';
 
 export const HomePage = () => {
   const { accounts, instance } = useMsal();
@@ -27,7 +26,6 @@ export const HomePage = () => {
   useEffect(() => {
     async function signInSignUp() {
       const response = await requestMSAuthResult(instance, accounts[0]);
-      persistToken(response.idToken);
       console.log('logging in', response.idToken);
 
       try {

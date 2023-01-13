@@ -14,18 +14,18 @@ import {
 } from '@mui/material';
 import TopAppBar from '../components/TopAppBar';
 import { useState } from 'react';
-import { Faculty } from '../types';
+import { Faculty, UserDetails } from '../types';
 import { updateUser } from '../api';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../localStorage';
 
 export const UpdateUser = () => {
-  const [userDetails, setUserDetails] = useState<{
-    emojis: string;
-    faculty: Faculty;
-    faveEat: string;
-    interests: string;
-  }>({ emojis: '', faculty: Faculty.Business, faveEat: '', interests: '' });
+  const [userDetails, setUserDetails] = useState<UserDetails>({
+    emojis: '',
+    faculty: Faculty.Business,
+    faveEat: '',
+    interests: '',
+  });
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [loginErrorMsg, setUpdateErrorMsg] = useState('');
@@ -51,6 +51,7 @@ export const UpdateUser = () => {
       console.log(user);
       navigate('/chats');
     } catch (err: any) {
+      setLoading(false)
       if (err.response) {
         setUpdateErrorMsg(err.response.data);
         setOpen(true);
