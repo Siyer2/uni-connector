@@ -4,6 +4,7 @@ import {
   IPublicClientApplication,
 } from '@azure/msal-browser';
 import { loginRequest } from '../authConfig';
+import { persistToken } from '../localStorage';
 
 export async function requestMSAuthResult(
   instance: IPublicClientApplication,
@@ -17,6 +18,7 @@ export async function requestMSAuthResult(
   // Silently acquires an access token which is then attached to a request for Microsoft Graph data
   try {
     const response = await instance.acquireTokenSilent(request);
+    persistToken(response.idToken);
     return response;
   } catch (error) {
     console.log('failed to login', error);
