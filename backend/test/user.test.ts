@@ -96,16 +96,25 @@ describe('/userLoginSignup tests', () => {
 
 describe('/updateUser tests', () => {
   beforeEach(() => jest.clearAllMocks());
-  it('invalid faculty should return error', async () => {
+  describe('invalid faculty should return error', () => {
     const updateUser = jest.spyOn(
       require('../src/user/index.ts'),
       'updateUser'
     );
     updateUser.mockImplementation(async () => {});
 
-    const res = await request.post('/updateUser').send({ faculty: '' });
-    expect(res.status).toEqual(400);
-    expect(updateUser).not.toHaveBeenCalled();
+    it('empty faculty', async () => {
+      const res = await request.post('/updateUser').send({ faculty: '' });
+      expect(res.status).toEqual(400);
+      expect(updateUser).not.toHaveBeenCalled();
+    });
+    it('invalid faculty', async () => {
+      const res = await request
+        .post('/updateUser')
+        .send({ faculty: 'ergbeigbrt' });
+      expect(res.status).toEqual(400);
+      expect(updateUser).not.toHaveBeenCalled();
+    });
   });
 
   it('user should be returned', async () => {
