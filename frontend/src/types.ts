@@ -1,13 +1,3 @@
-interface TuesHeyDBEntry {
-  primaryKey: string;
-  sortKey: string;
-}
-
-export interface User extends TuesHeyDBEntry {
-  faculty?: Faculty;
-  [key: string]: string;
-}
-
 export enum Faculty {
   ArtsDesignAndArchitecture = 'artsDesignAndArchitecture',
   MedicineAndHealth = 'medicineAndHealth',
@@ -16,3 +6,12 @@ export enum Faculty {
   Science = 'science',
   LawAndJustice = 'lawAndJustice',
 }
+
+export type User = {
+  primaryKey: string;
+  sortKey: string;
+  faculty?: Faculty;
+  emojis?: string;
+  faveEat?: string;
+  interests?: string;
+};

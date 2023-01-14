@@ -12,7 +12,7 @@ export async function updateUser(
   updatedUser: User
 ): Promise<void> {
   const params: DocumentClient.PutItemInput = {
-    TableName: 'User',
+    TableName: 'TuesHey',
     Item: updatedUser,
   };
 
@@ -27,9 +27,10 @@ export async function updateUser(
 export async function getUser(db: DocumentClient, id: string): Promise<User> {
   const response = await db
     .get({
-      TableName: 'User',
+      TableName: 'TuesHey',
       Key: {
-        id,
+        primaryKey: `USER#${id}`,
+        sortKey: `METADATA#${id}`,
       },
     })
     .promise();

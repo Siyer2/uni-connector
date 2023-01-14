@@ -1,48 +1,116 @@
-import { PageLayout } from '../components/PageLayout';
-import { AuthenticatedTemplate } from '@azure/msal-react';
-import { ProfileContent } from '../components/ProfileContent';
-import { Typography, Container, Box } from '@mui/material';
-//import { useTheme } from '@mui/material/styles';
+import {
+  Grid,
+  Typography,
+  Snackbar,
+  Alert,
+  CircularProgress,
+  Backdrop,
+} from '@mui/material';
+import beanWave from '../assets/bean-wave.gif';
+import { useIsAuthenticated, useMsal } from '@azure/msal-react';
+import { SignInButton } from '../components/SignInButton';
+import { SignOutButton } from '../components/SignOutButton';
+import { useEffect, useState } from 'react';
+import { requestMSAuthResult } from '../functions/requestMSAuthResult';
+import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../api';
 
 export const HomePage = () => {
-  //const theme = useTheme();
+  const { accounts, instance } = useMsal();
+  const isAuthenticated = useIsAuthenticated();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [loginErrorMsg, setLoginErrorMsg] = useState('');
 
-  // TODO: figure out how to use theme for backgroundColor of a Box rather
-  // than hard coding the value
+  useEffect(() => {
+    async function signInSignUp() {
+      const response = await requestMSAuthResult(instance, accounts[0]);
+      console.log('logging in', response.idToken);
 
-  // NOTE: border and spacing starts to go funny below 523px
+      try {
+        setLoading(true);
+        const user = await loginUser(response.idToken);
+        setLoading(false);
+        user.faculty ? navigate('/chats') : navigate('/update-user');
+      } catch (err: any) {
+        setLoading(false);
+        if (err.response) {
+          setLoginErrorMsg(err.response.data);
+          setOpen(true);
+        } else {
+          setLoginErrorMsg(`Error: ${err.message}`);
+          setOpen(true);
+        }
+      }
+
+    }
+
+    if (isAuthenticated) {
+      signInSignUp();
+    }
+  }, [accounts, instance, isAuthenticated, navigate]);
 
   return (
-    <Box bgcolor="#2185ef">
-      {/*background color should be set by theme*/}
-      <Container
-        maxWidth={'md'}
-        sx={{
-          height: '100vh',
+    <Grid
+      container
+      sx={{
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: 'background.default',
+      }}
+      textAlign={'center'}
+      display={'flex'}
+    >
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      <Grid
+        item
+        xs={12}
+        style={{
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          color: '#fff',
+          alignItems: 'center',
         }}
       >
+        <Typography variant="h4" gutterBottom textAlign={'center'} color="#fff">
+          <img src={beanWave} alt="bean" height="40" width="40" /> <br />
+          TuesHey
+        </Typography>
         <Typography
-          variant="h1"
+          variant="h6"
           textAlign={'center'}
-          gutterBottom
-          //sx={{ fontSize: { lg: '3em', sm: '10em' } }}
+          color="#fff"
+          mb={5}
+          mx={10}
         >
-          Lorem ipsum dolor sit amet consectetur.
+          Connect with a UNSW student/alumni not in your faculty!
+          <br />
+          <br />
+          Every Tuesday
         </Typography>
-        <Typography variant="h4" textAlign={'center'} mb={10}>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui neque
-          quos enim praese
-        </Typography>
-        <PageLayout>
-          <AuthenticatedTemplate>
-            <ProfileContent />
-          </AuthenticatedTemplate>
-        </PageLayout>
-      </Container>
-    </Box>
+
+        {isAuthenticated ? <SignOutButton /> : <SignInButton />}
+      </Grid>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={() => setOpen(false)}
+      >
+        <Alert
+          onClose={() => setOpen(false)}
+          severity="error"
+          sx={{ width: '100%' }}
+          variant="filled"
+        >
+          {loginErrorMsg}
+        </Alert>
+      </Snackbar>
+    </Grid>
   );
 };

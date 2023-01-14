@@ -1,0 +1,40 @@
+{
+    "configurations": [
+        {
+            "name": "Debug ConnectingAlgorithm", // User-provided name, shown in Debug dropdown.
+            "type": "aws-sam",
+            // direct-invoke is the "aws-sam" variation for debugging SAM Template resources and Lambda handlers
+            "request": "direct-invoke",
+            // Reference to the thing (Template or Code) being invoked
+            "invokeTarget": {
+                "target": "template", // template | code, influences fields expected by toolkit
+                "templatePath": "cloud/template.yml",
+                "logicalId": "ConnectingAlgorithmLambda" // Name of Template resource to debug
+            },
+            // Lambda Execution related arguments
+            "lambda": {
+                // Environment Variables accessible by Lambda handler
+                "environmentVariables": {
+                    "envvar1": "somevalue",
+                    "envvar2": "..."
+                },
+            },
+            // SAM Template and SAM CLI related arguments
+            "sam": {
+                "containerBuild": true,
+                "skipNewImageCheck": false,
+                // used when invokeTarget references a SAM Template
+                "template": {
+                    // SAM Template Parameter substitutions
+                    "parameters": {
+                        "ENVIRONMENT": "local"
+                    }
+                }
+            },
+            // AWS related arguments
+            "aws": {
+                "region": "us-west-2"
+            }
+        }
+    ]
+}

@@ -10,3 +10,5 @@ inputs:
     dist: build
   roleName: serverRole
   region: ap-southeast-2
+  env:
+    ENVIRONMENT: production

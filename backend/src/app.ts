@@ -1,9 +1,8 @@
-import * as express from 'express';
-import * as cors from 'cors';
-import * as dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
 import { middleware } from './middleware';
-import { DocumentClient } from 'aws-sdk/clients/dynamodb';
-import { User } from './user/types';
+import { Faculty, User } from './user/types';
 import { getUser, updateUser } from './user';
 
 dotenv.config({ path: __dirname + '/../.env.local' });
@@ -13,7 +12,7 @@ const app = express();
 const allowlist =
   process.env.ENVIRONMENT === 'local'
     ? ['http://localhost:3001']
-    : ['https://main.d2dflf7eo6e40g.amplifyapp.com/'];
+    : ['https://www.tueshey.com', 'https://tueshey.com'];
 const options: cors.CorsOptions = {
   origin: allowlist,
 };
@@ -21,24 +20,6 @@ app.use(cors(options));
 app.use(express.json());
 
 // Routes
-app.get(
-  '/',
-  [middleware.authenticateUser, middleware.getDB],
-  async (req: express.Request, res: express.Response) => {
-    const params: DocumentClient.QueryInput = {
-      TableName: 'User',
-      KeyConditionExpression: 'id = :value',
-      ExpressionAttributeValues: {
-        ':value': req.user.oid,
-      },
-    };
-
-    const userInDb = await req.db.query(params).promise();
-    console.log(userInDb);
-    res.send(`Request received: ${req.method} - ${req.path}`);
-  }
-);
-
 /**
  * Endpoint to update a user's profile
  */
@@ -46,17 +27,21 @@ app.post(
   '/updateUser',
   [middleware.authenticateUser, middleware.getDB],
   async (req: express.Request, res: express.Response) => {
-    // Ensure that faculty is provided
-    if (typeof req.body.faculty !== 'string') {
+    // Ensure that faculty is provided and is a valid faculty
+    if (
+      typeof req.body.faculty !== 'string' ||
+      !Object.values(Faculty).includes(req.body.faculty)
+    ) {
       return res.status(400).json({
-        error: 'MISSING_FACULTY',
+        error: 'INVALID_FACULTY',
         message: 'Faculty is required body param',
       });
     }
 
     // Construct the updated user
     const updatedUser: User = {
-      id: req.user.oid,
+      primaryKey: `USER#${req.user.oid}`,
+      sortKey: `METADATA#${req.user.oid}`,
       ...req.body,
     };
 
@@ -67,6 +52,31 @@ app.post(
     const user = await getUser(req.db, req.user.oid);
 
     // Return it
+    return res.json(user);
+  }
+);
+
+/**
+ * User sign up/sign in
+ */
+app.post(
+  '/userLoginSignup',
+  [middleware.authenticateUser, middleware.getDB],
+  async (req: express.Request, res: express.Response) => {
+    let user = await getUser(req.db, req.user.oid);
+
+    // create if not found
+    if (!user) {
+      const newUser: User = {
+        primaryKey: `USER#${req.user.oid}`,
+        sortKey: `METADATA#${req.user.oid}`,
+      };
+      await updateUser(req.db, newUser);
+
+      user = await getUser(req.db, req.user.oid);
+    }
+
+    // return user data
     return res.json(user);
   }
 );

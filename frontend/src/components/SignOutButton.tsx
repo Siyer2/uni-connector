@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 import { IPublicClientApplication } from '@azure/msal-browser';
 
 function handleLogout(instance: IPublicClientApplication) {
-  instance.logoutRedirect().catch((e) => {
+  instance.logoutRedirect({ postLogoutRedirectUri: '/' }).catch((e) => {
     console.error(e);
   });
 }

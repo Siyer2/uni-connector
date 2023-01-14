@@ -3,6 +3,7 @@ import { HomePage } from './pages/HomePage';
 import { UpdateUser } from './pages/UpdateUser';
 import { Chats } from './pages/Chats';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
@@ -10,8 +11,22 @@ function App() {
       <Box>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/update-user" element={<UpdateUser />} />
-          <Route path="/chats" element={<Chats />} />
+          <Route
+            path="/update-user"
+            element={
+              <PrivateRoute>
+                <UpdateUser />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/chats"
+            element={
+              <PrivateRoute>
+                <Chats />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </Box>
     </Router>
