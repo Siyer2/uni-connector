@@ -93,3 +93,44 @@ describe('/userLoginSignup tests', () => {
     expect(updateUser).not.toHaveBeenCalled();
   });
 });
+
+describe('/updateUser tests', () => {
+  beforeEach(() => jest.clearAllMocks());
+  describe('invalid faculty should return error', () => {
+    const updateUser = jest.spyOn(
+      require('../src/user/index.ts'),
+      'updateUser'
+    );
+    updateUser.mockImplementation(async () => {});
+
+    it('empty faculty', async () => {
+      const res = await request.post('/updateUser').send({ faculty: '' });
+      expect(res.status).toEqual(400);
+      expect(updateUser).not.toHaveBeenCalled();
+    });
+    it('invalid faculty', async () => {
+      const res = await request
+        .post('/updateUser')
+        .send({ faculty: 'ergbeigbrt' });
+      expect(res.status).toEqual(400);
+      expect(updateUser).not.toHaveBeenCalled();
+    });
+  });
+
+  it('user should be returned', async () => {
+    // Mock getUser to return the mockUser
+    const getUser = jest.spyOn(require('../src/user/index.ts'), 'getUser');
+    getUser.mockImplementation(async () => mockUser);
+    // Mock updateUser to return
+    const updateUser = jest.spyOn(
+      require('../src/user/index.ts'),
+      'updateUser'
+    );
+    updateUser.mockImplementation(async () => {});
+
+    const res = await request.post('/updateUser').send({ faculty: 'science' });
+    expect(res.status).toEqual(200);
+    expect(res.body).toEqual(mockUser);
+    expect(updateUser).toHaveBeenCalled();
+  });
+});
