@@ -17,7 +17,6 @@ import { useState } from 'react';
 import { Faculty, UserDetails } from '../types';
 import { updateUser } from '../api';
 import { useNavigate } from 'react-router-dom';
-import { getToken } from '../localStorage';
 
 export const UpdateUser = () => {
   const [userDetails, setUserDetails] = useState<UserDetails>({
@@ -44,13 +43,12 @@ export const UpdateUser = () => {
 
   const handleSubmit = async () => {
     try {
-      const token = getToken();
       setLoading(true);
-      await updateUser(token, userDetails);
+      await updateUser(userDetails);
       setLoading(false);
       navigate('/chats');
     } catch (err: any) {
-      setLoading(false)
+      setLoading(false);
       if (err.response) {
         setUpdateErrorMsg(err.response.data);
         setOpen(true);
