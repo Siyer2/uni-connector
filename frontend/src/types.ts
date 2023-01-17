@@ -10,15 +10,13 @@ export enum Faculty {
 export type User = {
   primaryKey: string;
   sortKey: string;
+  name: string;
   faculty?: Faculty;
-  emojis?: string;
-  faveEat?: string;
   interests?: string;
 };
 
 export type UserDetails = {
-  emojis: string;
+  name: string;
   faculty: Faculty;
-  faveEat: string;
   interests: string;
 };
