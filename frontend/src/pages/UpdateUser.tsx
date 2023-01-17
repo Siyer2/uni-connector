@@ -129,7 +129,7 @@ export const UpdateUser = () => {
         </Grid>
 
         <Grid item xs={12}>
-          <Button variant={'contained'} onClick={handleSubmit}>
+          <Button variant={'contained'} onClick={handleSubmit} disabled={!userDetails.name}>
             Submit!
           </Button>
         </Grid>
