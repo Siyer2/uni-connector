@@ -86,11 +86,12 @@ export const UpdateUser = () => {
         <Grid item xs={12}>
           <TextField
             onChange={handleChange}
-            value={userDetails.emojis}
-            placeholder={'😎 ⚽ 🍔'}
-            name="emojis"
-            label={'Describe yourself in 3 emojis!'}
+            value={userDetails.name}
+            placeholder={'John Smith'}
+            name="name"
+            label={"What's your name?"}
             fullWidth
+            required
           />
         </Grid>
         <Grid item xs={12}>
@@ -114,15 +115,6 @@ export const UpdateUser = () => {
               <MenuItem value={Faculty.Science}>Science</MenuItem>
             </Select>
           </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            label={"What's your favourite place to eat on campus?"}
-            value={userDetails.faveEat}
-            onChange={handleChange}
-            name="faveEat"
-            fullWidth
-          />
         </Grid>
         <Grid item xs={12}>
           <TextField
