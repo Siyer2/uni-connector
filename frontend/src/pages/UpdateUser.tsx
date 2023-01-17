@@ -16,13 +16,14 @@ import TopAppBar from '../components/TopAppBar';
 import { useState } from 'react';
 import { Faculty, UserDetails } from '../types';
 import { updateUser } from '../api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export const UpdateUser = () => {
+  const { state } = useLocation();
+  const { name } = state;
   const [userDetails, setUserDetails] = useState<UserDetails>({
-    emojis: '',
+    name: name,
     faculty: Faculty.Business,
-    faveEat: '',
     interests: '',
   });
   const [loading, setLoading] = useState(false);
