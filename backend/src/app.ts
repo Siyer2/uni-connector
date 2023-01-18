@@ -42,6 +42,7 @@ app.post(
     const updatedUser: User = {
       primaryKey: `USER#${req.user.oid}`,
       sortKey: `METADATA#${req.user.oid}`,
+      type: 'user',
       ...req.body,
     };
 
@@ -71,6 +72,7 @@ app.post(
         primaryKey: `USER#${req.user.oid}`,
         sortKey: `METADATA#${req.user.oid}`,
         name: req.user.name,
+        type: 'user',
       };
       await updateUser(req.db, newUser);
 
