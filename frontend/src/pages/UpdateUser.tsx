@@ -20,11 +20,11 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 export const UpdateUser = () => {
   const { state } = useLocation();
-  const { name } = state;
+  const { user } = state;
   const [userDetails, setUserDetails] = useState<UserDetails>({
-    name: name,
+    name: user.name,
     faculty: Faculty.Business,
-    interests: '',
+    interests: user.interests || '',
   });
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -125,11 +125,16 @@ export const UpdateUser = () => {
             onChange={handleChange}
             name="interests"
             fullWidth
+            required
           />
         </Grid>
 
         <Grid item xs={12}>
-          <Button variant={'contained'} onClick={handleSubmit} disabled={!userDetails.name}>
+          <Button
+            variant={'contained'}
+            onClick={handleSubmit}
+            disabled={!userDetails.name || !userDetails.interests}
+          >
             Submit!
           </Button>
         </Grid>

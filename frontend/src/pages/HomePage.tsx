@@ -34,7 +34,7 @@ export const HomePage = () => {
         setLoading(false);
         user.faculty
           ? navigate('/chats')
-          : navigate('/update-user', { state: { name: user.name } });
+          : navigate('/update-user', { state: { user: user } });
       } catch (err: any) {
         setLoading(false);
         if (err.response) {
