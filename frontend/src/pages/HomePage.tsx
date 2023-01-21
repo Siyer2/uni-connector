@@ -32,7 +32,9 @@ export const HomePage = () => {
         setLoading(true);
         const user = await loginUser(response.idToken);
         setLoading(false);
-        user.faculty ? navigate('/chats') : navigate('/update-user');
+        user.faculty
+          ? navigate('/chats')
+          : navigate('/update-user', { state: { user } });
       } catch (err: any) {
         setLoading(false);
         if (err.response) {

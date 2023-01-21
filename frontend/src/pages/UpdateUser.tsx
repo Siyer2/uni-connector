@@ -16,14 +16,15 @@ import TopAppBar from '../components/TopAppBar';
 import { useState } from 'react';
 import { Faculty, UserDetails } from '../types';
 import { updateUser } from '../api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export const UpdateUser = () => {
+  const { state } = useLocation();
+  const { user } = state;
   const [userDetails, setUserDetails] = useState<UserDetails>({
-    emojis: '',
+    name: user.name,
     faculty: Faculty.Business,
-    faveEat: '',
-    interests: '',
+    interests: user.interests || '',
   });
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -86,11 +87,12 @@ export const UpdateUser = () => {
         <Grid item xs={12}>
           <TextField
             onChange={handleChange}
-            value={userDetails.emojis}
-            placeholder={'😎 ⚽ 🍔'}
-            name="emojis"
-            label={'Describe yourself in 3 emojis!'}
+            value={userDetails.name}
+            placeholder={'John Smith'}
+            name="name"
+            label={"What's your name?"}
             fullWidth
+            required
           />
         </Grid>
         <Grid item xs={12}>
@@ -117,26 +119,22 @@ export const UpdateUser = () => {
         </Grid>
         <Grid item xs={12}>
           <TextField
-            label={"What's your favourite place to eat on campus?"}
-            value={userDetails.faveEat}
-            onChange={handleChange}
-            name="faveEat"
-            fullWidth
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
             label={"I'm into..."}
             value={userDetails.interests}
             placeholder={'hip-hop, Simpsons'}
             onChange={handleChange}
             name="interests"
             fullWidth
+            required
           />
         </Grid>
 
         <Grid item xs={12}>
-          <Button variant={'contained'} onClick={handleSubmit}>
+          <Button
+            variant={'contained'}
+            onClick={handleSubmit}
+            disabled={!userDetails.name || !userDetails.interests}
+          >
             Submit!
           </Button>
         </Grid>
