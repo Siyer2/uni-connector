@@ -5,6 +5,7 @@ import {
   Alert,
   CircularProgress,
   Backdrop,
+  AlertTitle,
 } from '@mui/material';
 import beanWave from '../assets/bean-wave.gif';
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';
@@ -22,28 +23,38 @@ export const HomePage = () => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [loginErrorMsg, setLoginErrorMsg] = useState('');
+  const name = accounts[0] && accounts[0].name;
 
   useEffect(() => {
     async function signInSignUp() {
-      const response = await requestMSAuthResult(instance, accounts[0]);
-      console.log('logging in', response.idToken);
+      const isValidEmail =
+        /^[A-Za-z0-9._%+-]+@(unsw.edu.au|unswalumni.com|ad.unsw.edu.au|zmail.unsw.edu.au|student.unsw.edu.au)$/.test(
+          accounts[0].username
+        );
 
-      try {
-        setLoading(true);
-        const user = await loginUser(response.idToken);
-        setLoading(false);
-        user.faculty ? navigate('/chats') : navigate('/update-user');
-      } catch (err: any) {
-        setLoading(false);
-        if (err.response) {
-          setLoginErrorMsg(err.response.data);
-          setOpen(true);
-        } else {
-          setLoginErrorMsg(`Error: ${err.message}`);
-          setOpen(true);
+      if (isValidEmail || process.env.REACT_APP_DEPLOYMENT === 'local') {
+        const response = await requestMSAuthResult(instance, accounts[0]);
+        console.log('logging in', response.idToken);
+
+        try {
+          setLoading(true);
+          const user = await loginUser(response.idToken);
+          setLoading(false);
+          user.faculty ? navigate('/chats') : navigate('/update-user');
+        } catch (err: any) {
+          setLoading(false);
+          if (err.response) {
+            setLoginErrorMsg(err.response.data);
+            setOpen(true);
+          } else {
+            setLoginErrorMsg(`Error: ${err.message}`);
+            setOpen(true);
+          }
         }
+      } else {
+        setLoginErrorMsg('Please input a valid UNSW email.');
+        setOpen(true);
       }
-
     }
 
     if (isAuthenticated) {
@@ -102,14 +113,19 @@ export const HomePage = () => {
         autoHideDuration={6000}
         onClose={() => setOpen(false)}
       >
-        <Alert
-          onClose={() => setOpen(false)}
-          severity="error"
-          sx={{ width: '100%' }}
-          variant="filled"
-        >
-          {loginErrorMsg}
-        </Alert>
+        {loginErrorMsg ? (
+          <Alert
+            onClose={() => setOpen(false)}
+            severity="error"
+            sx={{ width: '100%' }}
+            variant="filled"
+          >
+            <AlertTitle>Error</AlertTitle>
+            {loginErrorMsg}
+          </Alert>
+        ) : (
+          <></>
+        )}
       </Snackbar>
     </Grid>
   );
