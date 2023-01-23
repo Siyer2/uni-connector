@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { requestMSAuthResult } from '../functions/requestMSAuthResult';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../api';
+import { isValidEmail } from '../functions/emailValidation';
 
 export const HomePage = () => {
   const { accounts, instance } = useMsal();
@@ -23,16 +24,13 @@ export const HomePage = () => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [loginErrorMsg, setLoginErrorMsg] = useState('');
-  const name = accounts[0] && accounts[0].name;
 
   useEffect(() => {
     async function signInSignUp() {
-      const isValidEmail =
-        /^[A-Za-z0-9._%+-]+@(unsw.edu.au|unswalumni.com|ad.unsw.edu.au|zmail.unsw.edu.au|student.unsw.edu.au)$/.test(
-          accounts[0].username
-        );
-
-      if (isValidEmail || process.env.REACT_APP_DEPLOYMENT === 'local') {
+      if (
+        isValidEmail(accounts[0].username) ||
+        process.env.REACT_APP_DEPLOYMENT === 'local'
+      ) {
         const response = await requestMSAuthResult(instance, accounts[0]);
         console.log('logging in', response.idToken);
 
