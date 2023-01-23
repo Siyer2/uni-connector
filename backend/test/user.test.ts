@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import supertest from 'supertest';
 import { MicrosoftUser } from '../src/middleware/types';
-import { User } from '../src/user/types';
+import { Faculty, User } from '../src/user/types';
 const app = require('../src/app');
 
 const mockUserFromMiddleware: MicrosoftUser = {
@@ -23,6 +23,7 @@ const mockUser: User = {
   name: 'John Smith',
   sortKey: 'METADATA#81f3816a-edb5-4352-9f9a-953f23d2f7c1',
   primaryKey: 'USER#81f3816a-edb5-4352-9f9a-953f23d2f7c1',
+  type: 'user',
 };
 
 jest.mock('../src/middleware/index.ts', () => ({
@@ -120,7 +121,11 @@ describe('/updateUser tests', () => {
   it('user should be returned', async () => {
     // Mock getUser to return the mockUser
     const getUser = jest.spyOn(require('../src/user/index.ts'), 'getUser');
-    getUser.mockImplementation(async () => mockUser);
+    const updatedUser: User = {
+      ...mockUser,
+      faculty: Faculty.Science,
+    };
+    getUser.mockImplementation(async () => updatedUser);
     // Mock updateUser to return
     const updateUser = jest.spyOn(
       require('../src/user/index.ts'),
@@ -128,9 +133,12 @@ describe('/updateUser tests', () => {
     );
     updateUser.mockImplementation(async () => {});
 
-    const res = await request.post('/updateUser').send({ faculty: 'science' });
+    const res = await request
+      .post('/updateUser')
+      .send({ faculty: Faculty.Science });
     expect(res.status).toEqual(200);
-    expect(res.body).toEqual(mockUser);
+    expect(res.body).toEqual(updatedUser);
+    expect(res.body.faculty).toBe(Faculty.Science);
     expect(updateUser).toHaveBeenCalled();
   });
 });
