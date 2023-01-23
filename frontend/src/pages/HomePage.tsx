@@ -52,7 +52,6 @@ export const HomePage = () => {
             setLoginErrorMsg(`Error: ${err.message}`);
             setOpen(true);
           }
-        }
       } else {
         setLoginErrorMsg('Please input a valid UNSW email.');
         setOpen(true);
