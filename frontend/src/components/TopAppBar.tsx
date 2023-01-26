@@ -24,6 +24,7 @@ const TopAppBar = (props: { children: React.ReactNode }) => {
         sx={{
           width: '100vw',
           height: 'calc(100vh - 64px)',
+          display: 'inline',
         }}
         textAlign={'center'}
       >

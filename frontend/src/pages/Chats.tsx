@@ -15,8 +15,11 @@ import {
 } from 'stream-chat-react';
 
 import 'stream-chat-react/dist/css/index.css';
+import './Chats.css';
 
-const apiKey = 'ku3c9hm7ydd4';
+const apiKey = process.env.REACT_APP_STREAM_API_KEY
+  ? process.env.REACT_APP_STREAM_API_KEY
+  : '';
 
 const user = {
   id: 'john',
@@ -25,16 +28,16 @@ const user = {
 };
 
 const filters = { type: 'messaging', members: { $in: [user.id] } };
-const sort = { last_message_at: -1 };
+const sort = [{ last_message_at: -1 as const }];
 
 export const Chats = () => {
   const [client, setClient] = useState<any>(null);
+  const [channel, setChannel] = useState<any>(null);
 
   useEffect(() => {
     async function init() {
       const chatClient = StreamChat.getInstance(apiKey);
 
-      console.log(chatClient);
       // Dev Token for now, would need to use appSecret to create real userToken
       await chatClient.connectUser(user, chatClient.devToken(user.id));
 
@@ -46,9 +49,8 @@ export const Chats = () => {
 
       await channel.watch();
 
+      setChannel(channel);
       setClient(chatClient);
-
-      console.log('Client:', client);
     }
 
     init();
@@ -56,21 +58,18 @@ export const Chats = () => {
     if (client) return () => client.disconnectUser();
   }, []);
 
-  if (!client)
+  if (!channel || !client)
     return (
-      <>
-        <TopAppBar>
-          <div>No client</div>
-          <LoadingIndicator />
-        </TopAppBar>
-      </>
+      <TopAppBar>
+        <LoadingIndicator />
+      </TopAppBar>
     );
 
   return (
     <TopAppBar>
       <Chat client={client} theme="messaging light">
-        <ChannelList /* filters={filters} sort={sort} */ />
-        <Channel>
+        <ChannelList filters={filters} sort={sort} />
+        <Channel channel={channel}>
           <Window>
             <ChannelHeader />
             <MessageList />

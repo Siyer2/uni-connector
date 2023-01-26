@@ -6,8 +6,7 @@ type Props = {
 };
 
 const PrivateRoute = ({ children }: Props) => {
-  // const isAuthenticated = useIsAuthenticated();
-  const isAuthenticated = true;
+  const isAuthenticated = useIsAuthenticated();
   return <> {isAuthenticated ? children : <Navigate to="/" />}</>;
 };
 
