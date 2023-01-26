@@ -20,14 +20,6 @@ def get_client():
             # Windows
             endpoint_url = "http://docker.for.windows.localhost:8002/"
 
-    # # Create dynamo client based on environment
-    # client = boto3.client(
-    #     'dynamodb',
-    #     region_name='us-east-1' if isLocalEnvironment else 'ap-southeast-2',
-    #     endpoint_url=endpoint_url if isLocalEnvironment else None,
-    #     aws_access_key_id='localKey' if isLocalEnvironment else None,
-    #     aws_secret_access_key='localSecret' if isLocalEnvironment else None,
-    # )
     # Create dynamo client based on environment
     client = boto3.client(
         'dynamodb',
@@ -35,7 +27,6 @@ def get_client():
         endpoint_url=endpoint_url if isLocalEnvironment else None,
         aws_access_key_id='localKey' if isLocalEnvironment else None,
         aws_secret_access_key='localSecret' if isLocalEnvironment else None,
-        verify=False if isLocalEnvironment else None
     )
 
     return client
