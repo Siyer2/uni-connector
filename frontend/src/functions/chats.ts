@@ -1,6 +1,6 @@
 import { StreamChat, DefaultGenerics } from 'stream-chat';
 
-export function getChatClient() {
+export function getChatClient(): StreamChat<DefaultGenerics> {
   const apiKey = process.env.REACT_APP_STREAM_API_KEY
     ? process.env.REACT_APP_STREAM_API_KEY
     : '';
