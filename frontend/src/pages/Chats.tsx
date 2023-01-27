@@ -1,3 +1,4 @@
+import { Backdrop, CircularProgress } from '@mui/material';
 import TopAppBar from '../components/TopAppBar';
 import { useEffect, useState } from 'react';
 
@@ -60,8 +61,13 @@ export const Chats = () => {
 
   if (!channel || !client)
     return (
-      <TopAppBar>
-        <LoadingIndicator />
+      <TopAppBar display="inline">
+        <Backdrop
+          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={true}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
       </TopAppBar>
     );
 
