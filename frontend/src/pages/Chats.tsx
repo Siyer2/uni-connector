@@ -66,7 +66,7 @@ export const Chats = () => {
     );
 
   return (
-    <TopAppBar>
+    <TopAppBar display="inline">
       <Chat client={client} theme="messaging light">
         <ChannelList filters={filters} sort={sort} />
         <Channel channel={channel}>

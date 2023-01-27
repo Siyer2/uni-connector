@@ -2,7 +2,12 @@ import { Box, AppBar, Toolbar, IconButton, Grid } from '@mui/material';
 import { SignOutButton } from './SignOutButton';
 import beanWave from '../assets/bean-wave.gif';
 
-const TopAppBar = (props: { children: React.ReactNode }) => {
+interface TopAppBarProps {
+  children: React.ReactNode;
+  display?: string;
+}
+
+const TopAppBar = ({ children, display = 'flex' }: TopAppBarProps) => {
   return (
     <>
       <AppBar position="static">
@@ -24,11 +29,11 @@ const TopAppBar = (props: { children: React.ReactNode }) => {
         sx={{
           width: '100vw',
           height: 'calc(100vh - 64px)',
-          display: 'inline',
+          display: display,
         }}
         textAlign={'center'}
       >
-        {props.children}
+        {children}
       </Grid>
     </>
   );
