@@ -2,7 +2,7 @@ import { Backdrop, CircularProgress } from '@mui/material';
 import TopAppBar from '../components/TopAppBar';
 import { useEffect, useState } from 'react';
 
-import { StreamChat } from 'stream-chat';
+import { StreamChat, DefaultGenerics } from 'stream-chat';
 import {
   Chat,
   Channel,
@@ -11,42 +11,32 @@ import {
   MessageList,
   MessageInput,
   Thread,
-  LoadingIndicator,
   ChannelList,
 } from 'stream-chat-react';
 
 import 'stream-chat-react/dist/css/index.css';
 import './Chats.css';
 
-const apiKey = process.env.REACT_APP_STREAM_API_KEY
-  ? process.env.REACT_APP_STREAM_API_KEY
-  : '';
-
-const user = {
-  id: 'john',
-  name: 'John',
-  image: 'https://getstream.imgix.net/images/random_svg/FS.png',
-};
-
-const filters = { type: 'messaging', members: { $in: [user.id] } };
-const sort = [{ last_message_at: -1 as const }];
+import { getChatClient, getChannel } from '../functions/chats';
 
 export const Chats = () => {
   const [client, setClient] = useState<any>(null);
   const [channel, setChannel] = useState<any>(null);
 
+  const user = {
+    id: 'john',
+    name: 'John',
+    image: 'https://getstream.imgix.net/images/random_svg/FS.png',
+  };
+
   useEffect(() => {
     async function init() {
-      const chatClient = StreamChat.getInstance(apiKey);
+      const chatClient = getChatClient();
 
       // Dev Token for now, would need to use appSecret to create real userToken
       await chatClient.connectUser(user, chatClient.devToken(user.id));
 
-      const channel = chatClient.channel('messaging', 'react-talk', {
-        image: 'https://www.drupal.org/files/project-images/react.png',
-        name: 'Talk about React',
-        members: [user.id],
-      });
+      const channel = getChannel(chatClient, user.id);
 
       await channel.watch();
 
@@ -59,9 +49,12 @@ export const Chats = () => {
     if (client) return () => client.disconnectUser();
   }, []);
 
+  const filters = { type: 'messaging', members: { $in: [user.id] } };
+  const sort = [{ last_message_at: -1 as const }];
+
   if (!channel || !client)
     return (
-      <TopAppBar display="inline">
+      <TopAppBar>
         <Backdrop
           sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
           open={true}
