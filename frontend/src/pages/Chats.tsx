@@ -2,7 +2,11 @@ import { Backdrop, CircularProgress } from '@mui/material';
 import TopAppBar from '../components/TopAppBar';
 import { useEffect, useState } from 'react';
 
-import { StreamChat, DefaultGenerics } from 'stream-chat';
+import {
+  StreamChat,
+  Channel as StreamChannel,
+  DefaultGenerics,
+} from 'stream-chat';
 import {
   Chat,
   Channel,
@@ -20,8 +24,8 @@ import './Chats.css';
 import { getChatClient, getChannel } from '../functions/chats';
 
 export const Chats = () => {
-  const [client, setClient] = useState<any>(null);
-  const [channel, setChannel] = useState<any>(null);
+  const [client, setClient] = useState<StreamChat<DefaultGenerics>>();
+  const [channel, setChannel] = useState<StreamChannel<DefaultGenerics>>();
 
   const user = {
     id: 'john',
@@ -46,7 +50,11 @@ export const Chats = () => {
 
     init();
 
-    if (client) return () => client.disconnectUser();
+    if (client)
+      return () => {
+        const cleanup = async () => client.disconnectUser();
+        cleanup();
+      };
   }, []);
 
   const filters = { type: 'messaging', members: { $in: [user.id] } };
