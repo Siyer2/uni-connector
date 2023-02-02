@@ -45,9 +45,9 @@ export const UpdateUser = () => {
   const handleSubmit = async () => {
     try {
       setLoading(true);
-      await updateUser(userDetails);
+      const updatedUser = await updateUser(userDetails);
       setLoading(false);
-      navigate('/chats');
+      navigate('/chats', { state: { updatedUser } });
     } catch (err: any) {
       setLoading(false);
       if (err.response) {
