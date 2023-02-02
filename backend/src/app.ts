@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { middleware } from './middleware';
 import { Faculty, User } from './user/types';
 import { getUser, updateUser } from './user';
+import { getChatUserToken } from './chats';
 
 dotenv.config({ path: __dirname + '/../.env.local' });
 const app = express();
@@ -73,6 +74,7 @@ app.post(
         sortKey: `METADATA#${req.user.oid}`,
         name: req.user.name,
         type: 'user',
+        chatToken: getChatUserToken(req.user.oid),
       };
       await updateUser(req.db, newUser);
 
