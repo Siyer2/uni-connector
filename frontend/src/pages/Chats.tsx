@@ -1,6 +1,7 @@
 import { Backdrop, CircularProgress } from '@mui/material';
 import TopAppBar from '../components/TopAppBar';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import {
   StreamChat,
@@ -24,23 +25,27 @@ import './Chats.css';
 import { getChatClient, getChannel } from '../functions/chats';
 
 export const Chats = () => {
+  const { state } = useLocation();
+  const { user } = state;
+
   const [client, setClient] = useState<StreamChat<DefaultGenerics>>();
   const [channel, setChannel] = useState<StreamChannel<DefaultGenerics>>();
-
-  const user = {
-    id: 'john',
-    name: 'John',
-    image: 'https://getstream.imgix.net/images/random_svg/FS.png',
-  };
 
   useEffect(() => {
     async function init() {
       const chatClient = getChatClient();
 
-      // Dev Token for now, would need to use appSecret to create real userToken
-      await chatClient.connectUser(user, chatClient.devToken(user.id));
+      await chatClient.connectUser(
+        {
+          id: user.primaryKey,
+          name: user.name,
+          // image: '',
+        },
+        user.chatToken
+        // chatClient.devToken(user.primaryKey)
+      );
 
-      const channel = getChannel(chatClient, user.id);
+      const channel = getChannel(chatClient, user.primaryKey, user.name);
 
       await channel.watch();
 
@@ -57,7 +62,7 @@ export const Chats = () => {
       };
   }, []);
 
-  const filters = { type: 'messaging', members: { $in: [user.id] } };
+  const filters = { type: 'messaging', members: { $in: [user.primaryKey] } };
   const sort = [{ last_message_at: -1 as const }];
 
   if (!channel || !client)

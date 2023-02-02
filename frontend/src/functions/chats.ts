@@ -14,11 +14,11 @@ export function getChatClient(): StreamChat<DefaultGenerics> {
 
 export function getChannel(
   chatClient: StreamChat<DefaultGenerics>,
-  userID: string
+  userID: string,
+  userName: string
 ): StreamChannel<DefaultGenerics> {
-  return chatClient.channel('messaging', 'react-talk', {
-    image: 'https://www.drupal.org/files/project-images/react.png',
-    name: 'Talk about React',
+  return chatClient.channel('messaging', {
+    name: userName,
     members: [userID],
   });
 }
