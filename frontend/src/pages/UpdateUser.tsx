@@ -17,6 +17,7 @@ import { useState } from 'react';
 import { Faculty, UserDetails } from '../types';
 import { updateUser } from '../api';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 
 export const UpdateUser = () => {
   const { state } = useLocation();
@@ -26,11 +27,19 @@ export const UpdateUser = () => {
     faculty: Faculty.Business,
     interests: user.interests || '',
   });
-  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const [loginErrorMsg, setUpdateErrorMsg] = useState('');
+  const [updateErrorMsg, setUpdateErrorMsg] = useState('');
 
   const navigate = useNavigate();
+
+  const updateUserMutation = useMutation({
+    mutationFn: updateUser,
+    onSuccess: () => navigate('/chats'),
+    onError: (error: any) => {
+      setUpdateErrorMsg(error.message || error.response.data);
+      setOpen(true);
+    },
+  });
 
   // TODO:
   // Add appropriate type to event
@@ -42,32 +51,15 @@ export const UpdateUser = () => {
     });
   };
 
-  const handleSubmit = async () => {
-    try {
-      setLoading(true);
-      await updateUser(userDetails);
-      setLoading(false);
-      navigate('/chats');
-    } catch (err: any) {
-      setLoading(false);
-      if (err.response) {
-        setUpdateErrorMsg(err.response.data);
-        setOpen(true);
-      } else {
-        setUpdateErrorMsg(err.message);
-        setOpen(true);
-      }
-    }
-  };
-
   return (
     <TopAppBar>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={loading}
+        open={updateUserMutation.isLoading}
       >
         <CircularProgress color="inherit" />
       </Backdrop>
+
       <Grid
         item
         xs={12}
@@ -132,7 +124,7 @@ export const UpdateUser = () => {
         <Grid item xs={12}>
           <Button
             variant={'contained'}
-            onClick={handleSubmit}
+            onClick={() => updateUserMutation.mutate(userDetails)}
             disabled={!userDetails.name || !userDetails.interests}
           >
             Submit!
@@ -150,7 +142,7 @@ export const UpdateUser = () => {
           sx={{ width: '100%' }}
           variant="filled"
         >
-          {loginErrorMsg}
+          {updateErrorMsg}
         </Alert>
       </Snackbar>
     </TopAppBar>

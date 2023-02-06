@@ -20,5 +20,9 @@
     "cross-env": "^7.0.3",
     "prettier": "2.7.1",
     "ts-node": "^10.9.1"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^4.24.4",
+    "@tanstack/react-query-devtools": "^4.24.4"
   }
 }
