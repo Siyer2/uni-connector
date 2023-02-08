@@ -44,6 +44,7 @@ app.post(
       primaryKey: `USER#${req.user.oid}`,
       sortKey: `METADATA#${req.user.oid}`,
       type: 'user',
+      chatToken: getChatUserToken(req.user.oid),
       ...req.body,
     };
 

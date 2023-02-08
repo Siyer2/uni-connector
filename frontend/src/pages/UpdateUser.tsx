@@ -47,7 +47,7 @@ export const UpdateUser = () => {
       setLoading(true);
       const updatedUser = await updateUser(userDetails);
       setLoading(false);
-      navigate('/chats', { state: { updatedUser } });
+      navigate('/chats', { state: { user: updatedUser } });
     } catch (err: any) {
       setLoading(false);
       if (err.response) {

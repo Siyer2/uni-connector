@@ -9,6 +9,7 @@ interface TuesHeyDBEntry {
 export interface User extends TuesHeyDBEntry {
   name: string;
   faculty?: Faculty;
+  chatToken: string;
   [key: string]: string;
 }
 
