@@ -14,11 +14,11 @@ export function getChatClient(): StreamChat<DefaultGenerics> {
 
 export function getChannel(
   chatClient: StreamChat<DefaultGenerics>,
-  userID: string,
+  users: Array<string>,
   userName: string
 ): StreamChannel<DefaultGenerics> {
   return chatClient.channel('messaging', {
     name: userName,
-    members: [userID],
+    members: [...users],
   });
 }

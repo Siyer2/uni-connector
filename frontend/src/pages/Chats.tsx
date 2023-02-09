@@ -37,7 +37,7 @@ export const Chats = () => {
 
       await chatClient.connectUser(
         {
-          id: user.primaryKey,
+          id: user.primaryKey.slice(5), // removes USER# prefix
           name: user.name,
           // image: '',
         },
@@ -45,7 +45,8 @@ export const Chats = () => {
         // chatClient.devToken(user.primaryKey)
       );
 
-      const channel = getChannel(chatClient, user.primaryKey, user.name);
+      // Note that creating a channel using userIDs requires at least two
+      const channel = getChannel(chatClient, [user.primaryKey.slice(5), 'john'], user.name);
 
       await channel.watch();
 
