@@ -22,7 +22,7 @@ import {
 import 'stream-chat-react/dist/css/index.css';
 import './Chats.css';
 
-import { getChatClient, getChannel } from '../functions/chats';
+import { getChatClient } from '../functions/chats';
 
 export const Chats = () => {
   const { state } = useLocation();

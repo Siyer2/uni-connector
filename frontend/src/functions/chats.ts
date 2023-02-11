@@ -11,14 +11,3 @@ export function getChatClient(): StreamChat<DefaultGenerics> {
 
   return StreamChat.getInstance(apiKey);
 }
-
-export function getChannel(
-  chatClient: StreamChat<DefaultGenerics>,
-  users: Array<string>,
-  userName: string
-): StreamChannel<DefaultGenerics> {
-  return chatClient.channel('messaging', {
-    name: userName,
-    members: [...users],
-  });
-}
