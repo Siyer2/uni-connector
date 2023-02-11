@@ -2,7 +2,7 @@ import { StreamChat } from 'stream-chat';
 
 export function getChatUserToken(user_id: string): string {
   // Define values
-  const apiKey = process.env.REACT_APP_STREAM_API_KEY;
+  const apiKey = process.env.REACT_APP_STREAM_PUBLIC_KEY;
   const apiSecret = process.env.REACT_APP_STREAM_API_SECRET;
 
   // Initialize a Server Client

@@ -6,7 +6,7 @@ import { Faculty, User } from './user/types';
 import { getUser, updateUser } from './user';
 import { getChatUserToken } from './chats';
 
-dotenv.config({ path: __dirname + '/../.env.local' });
+dotenv.config({ path: __dirname + '/../.env' });
 const app = express();
 
 // CORS
