@@ -42,10 +42,8 @@ export const Chats = () => {
         {
           id: user.primaryKey.slice(5), // removes USER# prefix
           name: user.name,
-          // image: '',
         },
         user.chatToken
-        // chatClient.devToken(user.primaryKey)
       );
 
       // Get user's channels
