@@ -11,6 +11,7 @@ export type User = {
   primaryKey: string;
   sortKey: string;
   name: string;
+  chatToken: string;
   faculty?: Faculty;
   interests?: string;
 };

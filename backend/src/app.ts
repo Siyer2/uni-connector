@@ -4,8 +4,9 @@ import dotenv from 'dotenv';
 import { middleware } from './middleware';
 import { Faculty, User } from './user/types';
 import { getUser, updateUser } from './user';
+import { getChatUserToken } from './chats';
 
-dotenv.config({ path: __dirname + '/../.env.local' });
+dotenv.config({ path: __dirname + '/../.env' });
 const app = express();
 
 // CORS
@@ -43,6 +44,7 @@ app.post(
       primaryKey: `USER#${req.user.oid}`,
       sortKey: `METADATA#${req.user.oid}`,
       type: 'user',
+      chatToken: getChatUserToken(req.user.oid),
       ...req.body,
     };
 
@@ -73,6 +75,7 @@ app.post(
         sortKey: `METADATA#${req.user.oid}`,
         name: req.user.name,
         type: 'user',
+        chatToken: getChatUserToken(req.user.oid),
       };
       await updateUser(req.db, newUser);
 

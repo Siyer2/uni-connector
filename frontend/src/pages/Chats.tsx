@@ -1,6 +1,7 @@
-import { Backdrop, CircularProgress } from '@mui/material';
+import { Backdrop, CircularProgress, Grid, Typography } from '@mui/material';
 import TopAppBar from '../components/TopAppBar';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import {
   StreamChat,
@@ -21,30 +22,34 @@ import {
 import 'stream-chat-react/dist/css/index.css';
 import './Chats.css';
 
-import { getChatClient, getChannel } from '../functions/chats';
+import { getChatClient } from '../functions/chats';
 
 export const Chats = () => {
-  const [client, setClient] = useState<StreamChat<DefaultGenerics>>();
-  const [channel, setChannel] = useState<StreamChannel<DefaultGenerics>>();
+  const { state } = useLocation();
+  const { user } = state;
 
-  const user = {
-    id: 'john',
-    name: 'John',
-    image: 'https://getstream.imgix.net/images/random_svg/FS.png',
-  };
+  const filters = { type: 'messaging', members: { $in: [user.primaryKey.slice(5)] } };
+  const sort = [{ last_message_at: -1 as const }];
+
+  const [client, setClient] = useState<StreamChat<DefaultGenerics>>();
+  const [channels, setChannels] = useState<Array<StreamChannel<DefaultGenerics>>>();
 
   useEffect(() => {
     async function init() {
       const chatClient = getChatClient();
 
-      // Dev Token for now, would need to use appSecret to create real userToken
-      await chatClient.connectUser(user, chatClient.devToken(user.id));
+      await chatClient.connectUser(
+        {
+          id: user.primaryKey.slice(5), // removes USER# prefix
+          name: user.name,
+        },
+        user.chatToken
+      );
 
-      const channel = getChannel(chatClient, user.id);
+      // Get user's channels
+      const channels = await chatClient.queryChannels(filters, sort);
 
-      await channel.watch();
-
-      setChannel(channel);
+      setChannels(channels);
       setClient(chatClient);
     }
 
@@ -57,10 +62,7 @@ export const Chats = () => {
       };
   }, []);
 
-  const filters = { type: 'messaging', members: { $in: [user.id] } };
-  const sort = [{ last_message_at: -1 as const }];
-
-  if (!channel || !client)
+  if (!client)
     return (
       <TopAppBar>
         <Backdrop
@@ -72,11 +74,30 @@ export const Chats = () => {
       </TopAppBar>
     );
 
+  // User has no channels
+  if (channels?.length === 0)
+    return (
+      <TopAppBar>
+        <Grid
+          item
+          xs={12}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Typography variant={'h4'}>Come back on Tuesday to see your first match!</Typography>
+        </Grid>
+      </TopAppBar>
+    );
+
   return (
     <TopAppBar display="inline">
       <Chat client={client} theme="messaging light">
         <ChannelList filters={filters} sort={sort} />
-        <Channel channel={channel}>
+        <Channel>
           <Window>
             <ChannelHeader />
             <MessageList />

@@ -39,7 +39,7 @@ export const HomePage = () => {
           const user = await loginUser(response.idToken);
           setLoading(false);
           user.faculty
-            ? navigate('/chats')
+            ? navigate('/chats', { state: { user } })
             : navigate('/update-user', { state: { user } });
         } catch (err: any) {
           setLoading(false);
