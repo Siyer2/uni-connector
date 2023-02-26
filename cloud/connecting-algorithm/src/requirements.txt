@@ -1,3 +1,4 @@
 boto3
 requests
 ortools==9.5.2237
+stream-chat==4.6.0
