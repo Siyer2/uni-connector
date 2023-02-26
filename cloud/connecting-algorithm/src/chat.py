@@ -1,3 +1,5 @@
+# This file contains helper functions to use the stream chat client
+
 from stream_chat import StreamChat, Channel
 
 # Returns StreamChat chat client

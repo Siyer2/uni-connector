@@ -1,4 +1,4 @@
-# This file contains helper functions to get data from the database
+# This file contains helper functions to get data from and put data in the database
 
 import os
 import boto3
