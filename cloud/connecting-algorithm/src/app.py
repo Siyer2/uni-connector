@@ -37,6 +37,10 @@ def lambda_handler(event, context):
 
         matches = match_logic.generate_matches(users, prev_matches)
 
+        for match in matches:
+            database.add_match(match)
+            # TODO: send message to users using chat client
+
     except requests.RequestException as e:
         print(e)
 
