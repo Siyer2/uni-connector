@@ -67,3 +67,41 @@ def getUserMatchHistory(client, user, iso_date_match_limit):
     )   
 
     return matchHistoryQuery.get('Items')
+
+
+# TODO: change function names & variables to snake_case
+# TODO: update index.ts in backend/src/user to include 'entityType'
+
+# Put a singular match in the table 
+def add_match_entry(client, user1Id, user2Id, iso_date):
+    client.put_item(
+        TableName='TuesHey',
+        Item={
+            'primaryKey': {
+                'S': user1Id
+            },
+            'sortKey': {
+                'S': 'MATCH#' + iso_date
+            },
+            'entityType': {
+                'S': 'match'
+            },
+            'user2Id': {
+                'S': user2Id
+            },
+            'meetingLink': {
+                'S': ''
+            }
+        }
+    )
+
+# Put two entries for a match in the table
+# new_match = {
+#     'user1Id': users[i]['primaryKey']['S'],
+#     'user1Faculty': users[i]['faculty']['S'],
+#     'user2Id': users[j]['primaryKey']['S'],
+#     'user2Faculty': users[j]['faculty']['S']
+# }
+def add_match(client, match, iso_date):
+    add_match_entry(client, match['user1Id'], match['user2Id'], iso_date)
+    add_match_entry(client, match['user2Id'], match['user1Id'], iso_date)
