@@ -6,6 +6,7 @@ import os
 import constants
 import database
 import match_logic
+import chat
 
 def lambda_handler(event, context):
     print('Starting Connecting Algorithm on ' + os.environ['ENVIRONMENT'])
@@ -37,9 +38,13 @@ def lambda_handler(event, context):
 
         matches = match_logic.generate_matches(users, prev_matches)
 
+        # Add matches to db
+        database.add_matches(client, matches, datetime.date.today().isoformat())
+
+        chatClient = chat.get_chat_client()
+        # Create channel for each match
         for match in matches:
-            database.add_match(match)
-            # TODO: send message to users using chat client
+            chat.create_channel(chatClient, match['user1Id'], match['user2Id'])
 
     except requests.RequestException as e:
         print(e)
