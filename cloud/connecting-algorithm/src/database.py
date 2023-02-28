@@ -71,37 +71,44 @@ def getUserMatchHistory(client, user, iso_date_match_limit):
 
 # TODO: change function names & variables to snake_case
 # TODO: update index.ts in backend/src/user to include 'entityType'
+# TODO: generate meeting links
 
-# Put a singular match in the table 
-def add_match_entry(client, user1Id, user2Id, iso_date):
-    client.put_item(
-        TableName='TuesHey',
-        Item={
-            'primaryKey': {
-                'S': user1Id
-            },
-            'sortKey': {
-                'S': 'MATCH#' + iso_date
-            },
-            'entityType': {
-                'S': 'match'
-            },
-            'user2Id': {
-                'S': user2Id
-            },
-            'meetingLink': {
-                'S': ''
+# Formats match into an item that can be added to the database
+def format_matches_for_db(user1Id, user2Id, iso_date):
+    return {
+        'PutRequest': {
+            'Item': {
+                'primaryKey': {
+                    'S': user1Id
+                },
+                'sortKey': {
+                    'S': 'MATCH#' + iso_date
+                },
+                'entityType': {
+                    'S': 'match'
+                },
+                'user2Id': {
+                    'S': user2Id
+                },
+                'meetingLink': {
+                    'S': ''
+                }
             }
+        }
+    }
+
+# Batch writes matches to the database
+def add_matches(client, matches, iso_date):
+    items = []
+    for match in matches:
+        items.push(format_matches_for_db(match['user1Id'], match['user2Id'], iso_date))
+        items.push(format_matches_for_db(match['user2Id'], match['user1Id'], iso_date))
+    
+    # Ignore res (unprocessed items) for now
+    res = client.batch_write_item(
+        RequestItems={
+            'TuesHey': items
         }
     )
 
-# Put two entries for a match in the table
-# new_match = {
-#     'user1Id': users[i]['primaryKey']['S'],
-#     'user1Faculty': users[i]['faculty']['S'],
-#     'user2Id': users[j]['primaryKey']['S'],
-#     'user2Faculty': users[j]['faculty']['S']
-# }
-def add_match(client, match, iso_date):
-    add_match_entry(client, match['user1Id'], match['user2Id'], iso_date)
-    add_match_entry(client, match['user2Id'], match['user1Id'], iso_date)
+    return
