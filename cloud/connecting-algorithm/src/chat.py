@@ -10,12 +10,22 @@ def get_chat_client():
 
     return chat_client
 
-# TODO: what if create channel between same two users
+
+# TODO: check for case if existing channel between the matched users
+# TODO: add more info (e.g. hobbies) in opening message
+
 # Creates channel between two users
 def create_channel(client, user1Id, user2Id):
     channel = client.channel("messaging", None, custom_data=dict(members=[
         user1Id[5:],    # to get rid of #USER prefix
         user2Id[5:]
     ]))
-
     channel.create()
+
+    message = {
+        "text": f"Hi, we're connecting {user1Id} with {user2Id} this week!"
+    }
+    # Sent from one of the users for now
+    channel.send_message({"pinned": True, "text": message}, user1Id[5:])
+
+    return
