@@ -22,9 +22,8 @@ def create_channel(client, user1Id, user2Id):
     ]))
     channel.create()
 
-    message = {
-        "text": f"Hi, we're connecting {user1Id} with {user2Id} this week!"
-    }
+    message = f"Hi, we're connecting {user1Id} with {user2Id} this week!"
+
     # Sent from one of the users for now
     channel.send_message({"pinned": True, "text": message}, user1Id[5:])
 
